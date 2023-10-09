@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Responsive Sidebar</title>
+  <!-- Link Styles -->
+  <link rel="stylesheet" href="estilos/style.css">
+  
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ 
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!--Barra de navegacion lateral-->  
+  <div class="sidebar">
+    <div class="logo_details">
+      <!--<i class="bx bxl-audible icon"></i>-->
+      <div class="logo_name">SpotPlay</div>
+      <i class="bx bx-menu" id="btn"></i>
+    </div>
+    <ul class="nav-list">
+      <!--
+      <li>
+        <i class="bx bx-search"></i>
+        <input type="text" placeholder="Search...">
+         <span class="tooltip">Search</span>
+      </li>-->
+      <li>
+        <a href="#">
+          <i class="bx bx-home"></i>
+          <span class="link_name">Home</span>
+        </a>
+        <span class="tooltip">Home</span>
+      </li>
+      <li>
+        <a href="buscar/buscar.html">
+          <i class="bx bx-search-alt"></i>
+          <span class="link_name">Buscar</span>
+        </a>
+        <span class="tooltip">Buscar</span>
+      </li>  
+      <li>
+        <a href="#">
+          <i class="bx bx-plus-circle"></i>
+          <span class="link_name">Crear Lista</span>
+        </a>
+        <span class="tooltip">Crear Playlist</span>
+      </li>
+       <!-- 
+      <li>
+        <a href="#">
+          <i class="bx bx-cart-alt"></i>
+          <span class="link_name">Order</span>
+        </a>
+        <span class="tooltip">Order</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bx bx-cog"></i>
+          <span class="link_name">Settings</span>
+        </a>
+        <span class="tooltip">Settings</span>
+      </li>
+    <li class="profile">
+        <div class="profile_details">
+          <img src="profile.jpeg" alt="profile image">
+          <div class="profile_content">
+            <div class="name">Anna Jhon</div>
+            <div class="designation">Admin</div>
+          </div>
+        </div>
+        <i class="bx bx-log-out" id="log_out"></i>
+      </li>-->
+    </ul>
+  </div>
+<!--Fin de barra de navegacion-->
+  <section class="home-section">
+  <!--Inicio de Carrucel-->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active d-item">
+          <img src="img/chica.jpg" class="d-block w-100 d-img" alt="slider 1">
+          <div class="carousel-caption top-0 mt-4">
+            
+            <p class="mt-5 fs-3 text-capitalize">Bievenidos a</p>
+            <h1 class="display-1 fw-bolder text-capitalize">SpotPlay</h1>
+          <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Informacion</button>
+          </div>
+        </div>
+        <div class="carousel-item  d-item">
+          <img src="img/chica0.jpg" class="d-block w-100 d-img" alt="slider 2">
+          <div class="carousel-caption top-0 mt-4">
+            
+            <p class="mt-5 fs-3 text-capitalize"> Bienvenidos a</p>
+            <h1 class="display-1 fw-bolder text-capitalize">SpotPlay</h1>
+          <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Informacion</button>
+          </div>
+        </div>
+        <div class="carousel-item  d-item">
+          <img src="img/chica1.jpg" class="d-block w-100 d-img" alt="slider 3">
+          <div class="carousel-caption top-0 mt-4">
+            
+            <p class="mt-5 fs-3 text-capitalize">Bienvenidos a</p>
+            <h1 class="display-1 fw-bolder text-capitalize">SpotPlay</h1>
+          <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Informacion</button>
+          </div>
+        </div>
+       
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+<!--Fin de carrucel-->  
+  </section>
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+  <footer>
+   
+    <div class="footer-col">
+      <h4>Acerca de nosotros</h4>
+      <ul>
+        <li><a href="comp_inicio/AcercaDeNosotros.html">Nosotros</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Nuestra Politica</h4>
+      <ul>
+        <li><a href="comp_inicio/politicaDePrivacidad.html">Politica</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Ayuda</h4>
+      <ul>
+        <li><a href="comp_inicio/Ayuda.html">Ayuda</a></li>
+        
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Redes sociales</h4>
+      <div class="links">
+        <a href="#"><i class=""aria-hidden="true">F</i></a>
+        <a href="#"><i class="">T</i></a>
+        <a href="#"><i class="">I</i></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

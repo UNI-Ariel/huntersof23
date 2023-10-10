@@ -340,3 +340,31 @@ body {
         right: -20px;
     }
 }
+
+#resultadosNoEncontrados {
+  text-align: center; /* Centra el texto horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido verticalmente */
+  justify-content: center;
+  height: 100vh; /* Centra verticalmente en toda la altura del viewport */
+  font-size: 30px; 
+   font-family: sans-serif;
+}
+
+.mensaje-emergente {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  z-index: 1;
+  box-shadow: 0px 0px 5px 0px #ccc;
+}
+.mensaje-emergente button {
+  margin-top: 10px;
+}

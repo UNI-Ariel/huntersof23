@@ -210,8 +210,9 @@ function reproducirCancion(rutaCancion) {
     loadTrack(track_index);
     playTrack();
 }
- // JavaScript para la funcionalidad del buscador
- document.addEventListener("DOMContentLoaded", function () {
+  // JavaScript para la funcionalidad del buscador
+
+  document.addEventListener("DOMContentLoaded", function () {
     const inputBusqueda = document.getElementById("inputBusqueda");
     const botonBusqueda = document.getElementById("botonBusqueda");
     const tarjetas = document.querySelectorAll(".tarjeta");
@@ -221,13 +222,13 @@ function reproducirCancion(rutaCancion) {
 
     function realizarBusqueda() {
         const terminoBusqueda = inputBusqueda.value.trim().toLowerCase();
-
-        // Verificar que el término de búsqueda tenga al menos 2 caracteres alfanuméricos
+             // Verificar que el término de búsqueda tenga al menos 2 caracteres alfanuméricos
         if (terminoBusqueda.length < 2 || terminoBusqueda.length > 52) {
             alert("Ingrese entre 2 y 52 caracteres alfanuméricos para buscar.");
             return;
-        }
+        } 
 
+   
         // Ocultar mensaje de "resultados no encontrados"
         resultadosNoEncontrados.style.display = "none";
 
@@ -250,7 +251,15 @@ function reproducirCancion(rutaCancion) {
         if (resultadosEncontrados === 0) {
             resultadosNoEncontrados.style.display = "block";
         }
+
     }
+     // Función para cerrar el cuadro de mensaje al hacer clic en "Aceptar"
+     function cerrarMensajeEmergente() {
+        mensajeEmergente.style.display = "none"; // Ocultar el cuadro de mensaje
+    }
+
+    // Asociar la función de cierre al botón "Aceptar"
+    botonAceptar.addEventListener("click", cerrarMensajeEmergente);
 });
 function toggleMenu() {
     const menu = document.querySelector('.menu');

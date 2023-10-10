@@ -71,6 +71,14 @@ document.querySelectorAll(".titulo").forEach((titulo, index) => {
         playTrack(); // Reproduce la canción
     });
 });
+// Añade un evento click a las imágenes de las canciones para cargar y reproducir la canción correspondiente
+document.querySelectorAll(".imagen-musica").forEach((imagen, index) => {
+    imagen.addEventListener("click", () => {
+        loadTrack(index); // Carga la canción correspondiente al índice de la imagen
+        playTrack(); // Reproduce la canción
+    });
+});
+
 function random_bg_color(){
     let hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e'];
     let a;

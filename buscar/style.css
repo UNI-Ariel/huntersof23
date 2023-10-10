@@ -204,7 +204,6 @@ body {
   box-sizing: border-box;
   max-width:calc(100% - 350px); /*100%; /* Ajusta el ancho máximo según el dispositivo */
   margin: auto; /* Centra en la página */
-  
 }
 
 
@@ -218,9 +217,18 @@ body {
   width: 100%; /* Hacer que la tarjeta ocupe todo el ancho disponible */
   margin: 10px; /* Espaciado entre las tarjetas */
   box-sizing: border-box; /* Incluimos el relleno y el borde en el ancho total */
-
+  transition: 0.4s;
+  height: 265px;
 }
 
+.tarjeta:hover {
+  transform: scale(1.1);
+  box-shadow: #555;
+}
+
+.tarjeta:hover .artista {
+  white-space: inherit;
+}
 
   .imagen-musica {
       width: 100%;
@@ -234,6 +242,8 @@ body {
 
   .artista {
       color: #777;
+      white-space: nowrap;
+      overflow-x: hidden;
   }
 
   .buscador {

@@ -21,6 +21,18 @@ let isPlaying = false;
 let isRandom = false;
 let updateTimer;
 
+const inputBusqueda = document.getElementById('inputBusqueda');
+const mensaje0Advertencia = document.getElementById('mensajeAdvertencia');
+
+inputBusqueda.addEventListener('input', () => {
+    const longitudTexto = inputBusqueda.value.length;
+    if (longitudTexto >= 2 && longitudTexto <= 52) {
+        mensajeAdvertencia.style.display = 'none';
+    } else {
+        mensajeAdvertencia.style.display = 'block';
+    }
+});
+
 const music_list = [
     {
         img : 'images/stay.png',

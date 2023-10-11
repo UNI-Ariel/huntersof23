@@ -24,7 +24,7 @@
     <div class="sidebar">
         <div class="logo_details">
           <!--<i class="bx bxl-audible icon"></i>-->
-          <div class="logo_name">SpotPlay</div>
+          <div class="logo_name">SpottPlay</div>
           <i class="bx bx-menu" id="btn"></i>
         </div>
         <ul class="nav-list">
@@ -36,7 +36,7 @@
             <span class="tooltip">Home</span>
           </li>
           <li>
-            <a href="buscar/buscar.html">
+            <a href="buscar.html">
               <i class="bx bx-search-alt"></i>
               <span class="link_name">Buscar</span>
             </a>
@@ -52,34 +52,40 @@
         </ul>
       </div>
 
-    <div class="buscador">
+      <div class="buscador">
         <input type="text" id="inputBusqueda" placeholder="Buscar música..." maxlength="52">
         <button id="botonBusqueda" type="submit"><i class="fas fa-search"></i></button>
         
     </div>
+    
+    
+
     <div class="contenedor-tarjetas">
         <div class="tarjeta">
-            <img class="imagen-musica" src="stay.png" alt="Portada de la canción 1">
+            <img class="imagen-musica" src="stay.png" alt="Portada de la canción 1" style="cursor: pointer" >
             <div class="titulo">Stay</div>
             <div class="artista">The Kid LAROI, Justin Bieber</div>
             
         </div>
     
         <div class="tarjeta">
-            <img class="imagen-musica" src="fallingdown.jpg" alt="Portada de la canción 2">
+            <img class="imagen-musica" src="fallingdown.jpg" alt="Portada de la canción 2" style="cursor: pointer">
             <div class="titulo">Falling Down</div>
             <div class="artista">Wid Cards</div>
         </div>
         <div class="tarjeta">
-            <img class="imagen-musica" src="faded.png" alt="Portada de la canción 2">
+            <img class="imagen-musica" src="faded.png" alt="Portada de la canción 2" style="cursor: pointer">
             <div class="titulo">Faded</div>
             <div class="artista">Alan Walker</div>
         </div>
         <!-- Puedes agregar más tarjetas de música aquí -->
     
     </div>
-    <div id="resultadosNoEncontrados" style="display: none;">Resultados no encontrados.</div>
-
+    <div id="resultadosNoEncontrados" style="display: none;">
+      <i class="fas fa-empty-set"></i> Resultados no encontrados.
+  </div>
+  
+  
     <div class="card">
         <div class="player">
             <div class="wrapper">

@@ -24,6 +24,10 @@ let updateTimer;
 const inputBusqueda = document.getElementById('inputBusqueda');
 const mensaje0Advertencia = document.getElementById('mensajeAdvertencia');
 
+const botonBusqueda = document.getElementById('botonBusqueda');
+const resultadosNoEncontrados = document.getElementById('resultadosNoEncontrados');
+const tarjetas = document.querySelectorAll('.tarjeta');
+
 inputBusqueda.addEventListener('input', () => {
     const longitudTexto = inputBusqueda.value.length;
     if (longitudTexto >= 2 && longitudTexto <= 52) {
@@ -35,22 +39,34 @@ inputBusqueda.addEventListener('input', () => {
 
 const music_list = [
     {
-        img : 'images/stay.png',
+        img : 'stay.png',
         name : 'Stay',
         artist : 'The Kid LAROI, Justin Bieber',
         music : 'music/stay.mp3'
     },
     {
-        img : 'images/fallingdown.jpg',
+        img : 'fallingdown.jpg',
         name : 'Falling Down',
         artist : 'Wid Cards',
         music : 'music/fallingdown.mp3'
     },
     {
-        img : 'images/faded.png',
+        img : 'faded.png',
         name : 'Faded',
         artist : 'Alan Walker',
         music : 'music/Faded.mp3'
+    },
+    {
+        img : 'ratherbe.jpg',
+        name : 'Rather Be-12',
+        artist : 'Clean Bandit ft Jess Glynne',
+        music : 'music/Rather Be-12.mp3'
+    },
+    {
+        img : 'bloodymary.jpg',
+        name : 'bloody mary',
+        artist : 'Lady gaga',
+        music : 'music/Bloody Mary.mp3'
     }
 ];
 
@@ -65,7 +81,15 @@ function loadTrack(track_index){
     curr_track.src = music_list[track_index].music;
     curr_track.load();
 
-    track_art.style.backgroundImage = "url(" + music_list[track_index].img + ")";
+    let imgPath = `images/${music_list[track_index].img}`;
+    track_art.style.backgroundImage = `url(${imgPath})`;
+
+    /*track_art.style.backgroundImage = "url(" + music_list[track_index].img + ")";
+
+    track_art.style.backgroundSize = "cover";  // Ajustar tamaño de la imagen
+    track_art.style.backgroundRepeat = "no-repeat";  // Evitar repetición de la imagen
+*/
+    
     track_name.textContent = music_list[track_index].name;
     track_artist.textContent = music_list[track_index].artist;
    // now_playing.textContent = "Playing music " + (track_index + 1) + " of " + music_list.length;
@@ -234,11 +258,12 @@ function reproducirCancion(rutaCancion) {
 
     function realizarBusqueda() {
         const terminoBusqueda = inputBusqueda.value.trim().toLowerCase();
-             // Verificar que el término de búsqueda tenga al menos 2 caracteres alfanuméricos
-        if (terminoBusqueda.length < 2 || terminoBusqueda.length > 52) {
-            alert("Ingrese entre 2 y 52 caracteres alfanuméricos para buscar.");
+        //inputBusqueda.addEventListener();
+        //Verificar que el término de búsqueda tenga al menos 2 caracteres alfanuméricos
+       /*if (terminoBusqueda.length < 2 || terminoBusqueda.length > 52) {
+           // alert("Ingrese entre 2 y 52 caracteres alfanuméricos para buscar.");
             return;
-        } 
+        } */
 
    
         // Ocultar mensaje de "resultados no encontrados"

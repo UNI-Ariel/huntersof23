@@ -100,8 +100,6 @@ body {
         color: black;
     }
     
-    
-   
     .playpause-track,
     .prev-track,
     .next-track {
@@ -252,6 +250,7 @@ body {
     padding: 10px;
     width: 100%;
     box-sizing: border-box;  
+    position: relative;
   }
 
 .buscador input[type="text"] {
@@ -345,11 +344,23 @@ body {
     transform: scale(0.6);
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 800px) {
+  .player {
+      transform: scale(0.6);
+      right: -60px;
+  }
+}
+@media screen and (min-width: 1250px) {
     .player {
-        transform: scale(0.8);
-        right: -20px;
+        transform: scale(0.6);
+        right: -60px;
     }
+}
+@media screen and (min-width: 1450px) {
+  .player {
+      transform: scale(0.7);
+      right: -40px;
+  }
 }
 
 #resultadosNoEncontrados {
@@ -380,8 +391,16 @@ body {
   margin-top: 10px;
 }*/
 #mensajeAdvertencia {
-  color: rgb(5, 5, 5);
-  font-size: 12px;
+  position: absolute;
+  background-color: rgba(223, 221, 221, 0.822);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: rgb(226, 17, 17);
+  font-weight: 600;
+  font-size: 17px;
   margin-top: 5px; /* Puedes ajustar este valor según tu diseño */
   display: none;
+  text-wrap: nowrap;
 }

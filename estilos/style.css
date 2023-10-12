@@ -101,7 +101,7 @@ tad{
   color:var(--color-white);
   height: 60px;
   line-height: 60px;
-  min-width: 50px;
+  min-width: 25px;
   font-size: 25px;
   text-align: center;
 }

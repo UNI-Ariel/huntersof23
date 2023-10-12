@@ -11,13 +11,25 @@
 
 *{
   padding: 0%;
-  margin: 0%;
+  margin: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial;
 }
 
 body{
   min-height: 100vh;
+  margin: 0;
+}
+.home-section{
+  height: 100%;
+  margin: 0;
+  margin-bottom: 0;
+  position: fixed;
+  background-color: #4d4f55;
+}
+.carousel-inner{
+  height: 560px;
+  bottom: 0;
 }
 
 .sidebar{
@@ -30,10 +42,12 @@ body{
   position: fixed;
   top:0;
   left: 0;
+  
 }
 
 .sidebar.open{
   width: 280px;
+  
 }
 
 .sidebar .logo_details{
@@ -278,11 +292,12 @@ body{
 
 .home-section{
   position: relative;
-  background-color: var(--color-body);
+  background-color: #2d2e33;
   min-height: 100vh;
   top:0;
   left:78px;
   width: calc(100% - 78px);
+  height: 100%;
   transition: all .5s ease;
   z-index: 2;
 }
@@ -303,8 +318,12 @@ footer{
   display: flex;
   flex-wrap: wrap;
   margin-top: auto;
+  margin-bottom: 0%;
   background-color: #2d2e33;
-  padding: 40px 10%;
+  padding: 7px 10%;
+  padding-bottom: 0px;
+  position: absolute;
+  width: 100%;
 
 }
 ul{
@@ -365,6 +384,14 @@ ul li a:hover{
   color: #4d4f55;
   background-color: white;
 }
+
+@media(max-width:555px){
+  .footer-col{
+    width: 100%;
+  }
+
+}
+
 @media(max-width:740px){
   .footer-col{
     width: 50%;
@@ -373,11 +400,6 @@ ul li a:hover{
   }
   .footer-col h4::before{
     all: unset;
-  }
-}
-@media(max-width:555px){
-  .footer-col{
-    width: 100%;
   }
 }
 

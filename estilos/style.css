@@ -91,12 +91,16 @@ body{
   text-align: right;
 }
 
+.mf {
+  margin-left: -40px;
+}
+
 .sidebar i{
   color:var(--color-white);
   height: 60px;
   line-height: 60px;
   min-width: 50px;
-  font-size: 25px;
+  font-size: 25px !important;
   text-align: center;
 }
 

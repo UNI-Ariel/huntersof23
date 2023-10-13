@@ -360,8 +360,7 @@ body {
   justify-content: center;
   height: 100vh; /* Centra verticalmente en toda la altura del viewport */
   font-size: 30px; 
-  font-family: sans-serif;
-  
+   font-family: sans-serif;
 }
 
 /*.mensaje-emergente {

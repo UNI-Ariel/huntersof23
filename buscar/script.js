@@ -28,6 +28,7 @@ const botonBusqueda = document.getElementById('botonBusqueda');
 const resultadosNoEncontrados = document.getElementById('resultadosNoEncontrados');
 const tarjetas = document.querySelectorAll('.tarjeta');
 
+
 inputBusqueda.addEventListener('input', () => {
     const longitudTexto = inputBusqueda.value.length;
     if (longitudTexto >= 2 && longitudTexto <= 52) {
@@ -36,6 +37,7 @@ inputBusqueda.addEventListener('input', () => {
         mensajeAdvertencia.style.display = 'block';
     }
 });
+
 
 const music_list = [
     {
@@ -260,12 +262,11 @@ function reproducirCancion(rutaCancion) {
         const terminoBusqueda = inputBusqueda.value.trim().toLowerCase();
         //inputBusqueda.addEventListener();
         //Verificar que el término de búsqueda tenga al menos 2 caracteres alfanuméricos
-       /*if (terminoBusqueda.length < 2 || terminoBusqueda.length > 52) {
+        if (terminoBusqueda.length < 2 || terminoBusqueda.length > 52) {
            // alert("Ingrese entre 2 y 52 caracteres alfanuméricos para buscar.");
             return;
-        } */
+        } 
 
-   
         // Ocultar mensaje de "resultados no encontrados"
         resultadosNoEncontrados.style.display = "none";
 

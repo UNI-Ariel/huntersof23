@@ -1,6 +1,6 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #6ba3c4; /* Cambia el color de fondo aquí */
+    background-color: #6ba3c4; /* Cambia el color de fondo aquí aqui */
     color: #333;
     font-size: 1.2rem;
     line-height: 1.6em;
@@ -10,6 +10,7 @@ body{
 h1 {
     font-size: 2rem;
     line-height: 1.3em;
+
 }
 
 p {

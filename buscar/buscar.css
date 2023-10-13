@@ -363,16 +363,31 @@ body {
   }
 }
 
-#resultadosNoEncontrados {
-  text-align: center; /* Centra el texto horizontalmente */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra el contenido verticalmente */
-  justify-content: center;
-  height: 100vh; /* Centra verticalmente en toda la altura del viewport */
-  font-size: 30px; 
-   font-family: sans-serif;
-}
+#resultadosNoEncontrados { 
+  text-align: center; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  height: 5cm; /* Establece la altura en 5 centímetros */ 
+  font-size: 40px; 
+  font-family: sans-serif;
+   padding: 20px; max-width: 100%; /* Ancho máximo del 100% para que se ajuste al ancho de la pantalla */ 
+   margin: 0 auto; color: white; 
+  } 
+   #icono { 
+    font-size: 80px; color: #ff5733; 
+  }
+    #texto { 
+      margin-top: 10px; color: white; 
+   } /* Media query para ajustar estilos en pantallas pequeñas */
+   @media (max-width: 768px) { 
+    #resultadosNoEncontrados { 
+     font-size: 30px; /* Disminuye el tamaño del texto en pantallas pequeñas si es necesario */ 
+     padding: 10px; /* Reduce el espacio interno en pantallas pequeñas si es necesario */ } 
+     #icono { 
+      font-size: 60px; /* Disminuye el tamaño del icono en pantallas pequeñas si es necesario */ }
+     }
 
 /*.mensaje-emergente {
   display: none;

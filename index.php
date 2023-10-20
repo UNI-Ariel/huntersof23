@@ -1,12 +1,12 @@
 <?php
-include("./utils/getUrl.php");
-include("./utils/dbConnection.php");
-include("./auth/auth.php");
+include("./utils/getUrl.php");  // Incluye un archivo de utilidad para obtener la URL actual.
+include("./utils/dbConnection.php");  // Incluye un archivo de utilidad para establecer la conexión a la base de datos.
+include("./auth/auth.php");  // Incluye un archivo relacionado con la autenticación de usuarios.
 
 function redirect($url)
 {
-    echo "<script type='text/javascript'>document.location.href='{$url}';</script>";
-    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $url . '">';
+    echo "<script type='text/javascript'>document.location.href='{$url}';</script>";  // Redirige a una URL mediante JavaScript.
+    echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $url . '">';  // También redirige mediante una etiqueta META.
 }
 
 $getAllSongsQuery = "SELECT songs.id, songs.title title,
@@ -14,22 +14,22 @@ $getAllSongsQuery = "SELECT songs.id, songs.title title,
                             singers.name singerName, singers.id singerID
                     FROM songs 
                     LEFT JOIN singers on singers.id = songs.singerID
-                    ORDER BY songs.dateAdded DESC";
+                    ORDER BY songs.dateAdded DESC";  // Consulta SQL para obtener información de canciones.
 
-$result = mysqli_query($conn, $getAllSongsQuery);
-$songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$result = mysqli_query($conn, $getAllSongsQuery);  // Ejecuta la consulta en la base de datos.
+$songs = mysqli_fetch_all($result, MYSQLI_ASSOC);  // Obtiene un arreglo asociativo con los resultados.
 
-// Generate random songs
+// Genera claves aleatorias para seleccionar canciones al azar.
 $randomKeys = (count($songs) >= 3) ? array_rand($songs, 3) : $songs;
 
 $formatSongs = array();
 
 foreach ($songs as $song) {
-    $formatSongs[$song["id"]] = $song;
+    $formatSongs[$song["id"]] = $song;  // Formatea las canciones en un arreglo asociativo.
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -47,55 +47,55 @@ foreach ($songs as $song) {
 
 <body>
     <div class="login-modal">
-        <div class="login-modal__logo">
+    <div class="login-modal__logo">
             <i class="fab fa-spotify"></i>
             <h2>SpottPlay</h2>
         </div>
         <div class="login-modal__info">
-            <p>You have to login to use this feature.</p>
-            <a href="./auth/login.php" class="login">Login</a>
-            <a href="./auth/signup.php" class="signup">Haven't create an account yet?</a>
+            <p>Tienes que iniciar sesión para utilizar esta función.</p>
+            <a href="./auth/login.php" class="login">Acceso</a>
+            <a href="./auth/signup.php" class "signup">¿Aún no has creado una cuenta?</a>
             <div class="close">+</div>
         </div>
     </div>
     <div class="container">
         <div class="content">
             <!-- Sidebar -->
-            <?php include("./components/sidebar.php"); ?>
+            <?php include("./components/sidebar.php"); ?>  <!-- Incluye un componente de barra lateral. -->
             <!-- End sidebar -->
 
             <!-- Music UI -->
             <div class="musicContainer" id="home">
-                <?php include("./pages/homeContent.php"); ?>
+                <?php include("./pages/homeContent.php"); ?>  <!-- Incluye el contenido de la página de inicio. -->
             </div>
             <div class="musicContainer hide" id="favourites">
                 <?php if ($authenticated) : ?>
-                    <?php include("./pages/favContent.php"); ?>
+                    <?php include("./pages/favContent.php"); ?>  <!-- Incluye el contenido de la página de favoritos si el usuario está autenticado. -->
                 <?php endif; ?>
             </div>
             <div class="musicContainer hide" id="search">
-                <?php include("./pages/searchContent.php"); ?>
+                <?php include("./pages/searchContent.php"); ?>  <!-- Incluye el contenido de la página de búsqueda. -->
             </div>
             <div class="musicContainer hide" id="singer">
-                <?php include("./pages/singerContent.php"); ?>
+                <?php include("./pages/singerContent.php"); ?>  <!-- Incluye el contenido de la página de cantantes. -->
             </div>
             <!-- End Music UI -->
         </div>
         <!-- Music Player -->
-        <?php include("./components/musicPlayer.php"); ?>
+        <?php include("./components/musicPlayer.php"); ?>  <!-- Incluye un componente de reproductor de música. -->
     </div>
 </body>
 <script>
-    let songDetails = JSON.parse('<?php echo json_encode($formatSongs); ?>');
-    let authenticated = JSON.parse('<?php echo json_encode($authenticated); ?>');
+    let songDetails = JSON.parse('<?php echo json_encode($formatSongs); ?>');  // Convierte los detalles de la canción en un objeto JavaScript.
+    let authenticated = JSON.parse('<?php echo json_encode($authenticated); ?>');  // Convierte el estado de autenticación en un valor JavaScript.
 </script>
 <script src="./js/songTile.js"></script>
 <script src="./js/playingQueue.js"></script>
 <script src="./js/loginRequired.js"></script>
 <script src="./js/main.js"></script>
 <?php if ($authenticated) : ?>
-    <script src="./js/favourite.js"></script>
+    <script src="./js/favourite.js"></script>  <!-- Incluye un script JavaScript si el usuario está autenticado. -->
 <?php endif; ?>
-<?php include("./utils/changePageJs.php"); ?>
+<?php include("./utils/changePageJs.php"); ?>  <!-- Incluye un archivo de utilidad para cambiar la página en JavaScript. -->
 
 </html>

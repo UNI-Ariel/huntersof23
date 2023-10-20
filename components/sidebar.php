@@ -30,5 +30,4 @@
         </li>
     </ul>
 
-    <div class="breakLine"></div>
 </div>

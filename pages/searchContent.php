@@ -43,3 +43,4 @@ if (isset($_GET['search'])) {
         <?php endforeach; ?>
     </div>
 </section>
+

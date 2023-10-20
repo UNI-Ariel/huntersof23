@@ -407,8 +407,8 @@ li.playing .stroke:nth-child(3) {
 .musicContainer {
     flex: 9;
     height: 100%;
-    background-image: linear-gradient(180deg, rgb(33, 66, 82), rgb(12, 12, 12));
-    display: flex;
+    background: #214252;
+        display: flex;
     flex-direction: column;
     overflow-y: scroll;
 }

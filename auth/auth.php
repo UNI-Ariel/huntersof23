@@ -2,7 +2,7 @@
 session_start();
 
 $uid = $name = '';
-$username = 'Guest';
+$username = 'Invitado';
 $authenticated = $admin = false;
 if (isset($_SESSION['id'])) {
     $uid = $_SESSION['id'];

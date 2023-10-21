@@ -465,7 +465,7 @@ nav {
     left: 0;
     width: 400%;
     transform: translate(-75%, 100%);
-    background-color: black;
+    background-color: #161616;
     text-align: center;
     opacity: 0;
     pointer-events: none;
@@ -482,7 +482,7 @@ nav {
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
     padding: .5rem 0; 
-    color: #1DB954;
+    color: #0799B6;
 }
 
 .logo-links li {

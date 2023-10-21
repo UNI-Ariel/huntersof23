@@ -9,6 +9,16 @@
     </div>
     <div class="logo-container">
         <img src="./images/users/default.png" alt="" class="logo">
-        
+        <ul class="logo-links">
+            <h3><?php echo $username; ?></h3>
+            <?php if ($authenticated) : ?>
+                <li><a href="./auth/logout.php">Cerrar Sesión</a></li>
+                <?php if ($admin) : ?>
+                    <li><a href="./auth/adminDashboard.php">Admin Dashboard</a></li>
+                <?php endif; ?>
+            <?php else : ?>
+                <li><a href="./auth/login.php">Iniciar Sesión</a></li>
+            <?php endif; ?>
+        </ul>
     </div>
 </nav>

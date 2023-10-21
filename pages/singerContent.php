@@ -1,20 +1,27 @@
 <?php
+// Inicializar variables
 $singerName = $singerInfo = $singerImg = "";
+
+// Verificar si se ha proporcionado un parámetro 'singerID' en la URL
 if (isset($_GET['singerID'])) {
     $singerID = $_GET['singerID'];
 
+    // Consulta para obtener información del cantante con el ID proporcionado
     $singerFilterQuery = "SELECT *
                     FROM singers 
                     WHERE id=$singerID";
 
+    // Ejecutar la consulta en la conexión a la base de datos
     $result = mysqli_query($conn, $singerFilterQuery);
     $singer = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+    // Verificar si se encontró información del cantante
     if (count($singer) > 0) {
         $singerName = $singer[0]["name"];
         $singerInfo = $singer[0]["info"];
         $singerImg = $singer[0]["image"];
 
+        // Consulta para obtener todas las canciones del cantante
         $songsQuery =  "SELECT songs.id, songs.title title,
                         songs.filePath audio, songs.imgPath img,
                         singers.name singerName, singers.id singerID
@@ -23,9 +30,11 @@ if (isset($_GET['singerID'])) {
                     WHERE singers.id = $singerID
                     ORDER BY songs.dateAdded DESC";
 
+        // Ejecutar la consulta para obtener las canciones del cantante
         $result2 = mysqli_query($conn, $songsQuery);
         $songs = mysqli_fetch_all($result2, MYSQLI_ASSOC);
     } else {
+        // Redirigir a la página de error 404 si no se encontró el cantante
         redirect("404.php");
     }
 }
@@ -59,7 +68,7 @@ if (isset($_GET['singerID'])) {
         </div>
     <?php endforeach; ?>
 </div>
-<div class="description">
+<div class "description">
     <h2 class="title">Introduction</h2>
     <div class="desDetail">
         <img src="<?php echo $singerImg; ?>" alt="" />

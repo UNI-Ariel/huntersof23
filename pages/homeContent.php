@@ -53,26 +53,49 @@
 
 </section>
 <section>
-    <h1 class="sectionTitle" style="color: white">Nuevas Canciones</h1>
-    <div class="cards">
-        <div class="card" data="<?php echo $songs[0]["id"]; ?>">
-            <div class="imgContainer">
-                <img src="<?php echo $songs[0]["img"]; ?>" alt="">
-            </div>
-            <div class="cardInfo">
-                <h3><?php echo $songs[0]["title"]; ?></h3>
-                <h5><?php echo $songs[0]["singerName"]; ?></h5>
-            </div>
-        </div>
-        <div class="card" data="<?php echo $songs[1]["id"]; ?>">
-            <div class="imgContainer">
-                <img src="<?php echo $songs[1]["img"]; ?>" alt="">
-            </div>
-            <div class="cardInfo">
-                <h3><?php echo $songs[1]["title"]; ?></h3>
-                <h5><?php echo $songs[1]["singerName"]; ?></h5>
-            </div>
-        </div>
+    <div class="sectionRecent">
+        <h1 class="sectionTitle" style="color: white">Canciones Recientes</h1>
+        <button class="btn-refresh" onclick="refrescar();">
+            <i class="fa fa-sync-alt fa-2x"></i>
+        </button>
     </div>
+
+    <div class="cards">
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            refrescar();
+        });
+
+        function refrescar(){
+            $.ajax({
+                url: "./utils/getRecentSongs.php",
+                type: "GET",
+
+            success: function(response) {
+                console.log(response);
+                var songs = JSON.parse(response);
+                var cardsHTML = "";
+
+                songs.forEach(function(song) {
+                cardsHTML += `
+                    <div class="card" data="${song.id}">
+                        <div class="imgContainer"><img src="${song.img}" alt=""></div>
+                        <div class="cardInfo">
+                            <h3>${song.title}</h3>
+                            <h5>${song.singerName}</h5>
+                        </div>
+                    </div>`;
+                });
+                $(".cards").html(cardsHTML);
+            },
+            error: function() {
+                alert("Hubo un error al refrescar las canciones");
+            }
+        });
+        }
+    </script>
+
 </section>
 <script src="./js/slider.js"></script>

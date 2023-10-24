@@ -42,6 +42,9 @@ foreach ($songs as $song) {
     <link rel="stylesheet" href="./css/searchPage.css">
     <link rel="stylesheet" href="./css/favourite.css">
     <link href='https://css.gg/home.css' rel='stylesheet'>
+
+    <!-- Librería jQuery para utilizar AJAX que permite actualizar dinámicamente porciones de HTML -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>SpottPlay</title>
 </head>
 

@@ -89,6 +89,8 @@
                     </div>`;
                 });
                 $(".cards").html(cardsHTML);
+
+                addClickEventToCards();
             },
             error: function() {
                 alert("Hubo un error al refrescar las canciones");

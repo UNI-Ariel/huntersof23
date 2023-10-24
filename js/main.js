@@ -239,13 +239,16 @@ function search(e) {
 }
 
 // Event listeners section
-cards.forEach((card) => {
-    card.addEventListener("click", () => {
-        const songID = card.getAttribute("data");
-        const song = songDetails[songID];
-        playImmediate(song);
+function addClickEventToCards() {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            const songID = card.getAttribute("data");
+            const song = songDetails[songID];
+            playImmediate(song);
+        });
     });
-});
+}
 
 songsTile.forEach((tile) => {
     let info = tile.querySelector(".info h4");

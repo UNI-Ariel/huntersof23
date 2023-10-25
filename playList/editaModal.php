@@ -7,15 +7,16 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="guarda.php" method="post" enctype="multipart/form-data">
+            <form action="actualiza.php" method="post" enctype="multipart/form-data">
+
                 <input type="hidden" id="id" name="id">
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <label for="nombre" class="form-label">Nombre:</label>
                         <input type="text" name="nombre" id="nombre" class="form-control" required>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <label for="descripcion" class="form-label">Descripción:</label>
                         <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
                     </div>

@@ -7,7 +7,7 @@ $sqlPlaylists = "SELECT id, nombre, descripcion FROM playlists AS p";
 $playlists = $conn->query($sqlPlaylists);
 $dir = "imagen/";
 ?>
-
+<?php include('./components/navbar.php'); ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
@@ -26,7 +26,12 @@ $dir = "imagen/";
             background-color: #f2e6cf; /* Cambia el color de fondo a azul */
 
         }
-
+        .modal-content {
+        background-color: #214252; /* Cambia el color de fondo del modal a azul */
+        }
+        .modal-content .modal-body {
+        color: white; /* Cambia el color del texto a blanco */
+        }
         .card-img-top {
             height: 150px;
             object-fit: cover;

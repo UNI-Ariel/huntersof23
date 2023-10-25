@@ -1,6 +1,6 @@
 <?php
 // Database connection 
-$conn = mysqli_connect('localhost', 'root', '', 'spottplay321');
+$conn = mysqli_connect('localhost', 'root', '', 'spottplay');
 
 mysqli_set_charset($conn, "utf8");
 

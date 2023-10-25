@@ -252,7 +252,7 @@ function addClickEventToCards() {
 
 songsTile.forEach((tile) => {
     let info = tile.querySelector(".info h4");
-    const queueIcon = tile.querySelector("i.fa-list-ul");
+    const queueIcon = tile.querySelector("i.fa-plus");
     const favIcon = tile.querySelector("i.fa-heart");
     const trashIcon = tile.querySelector("i.fa-trash");
     const songID = tile.getAttribute("data");

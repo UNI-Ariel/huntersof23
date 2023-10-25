@@ -37,7 +37,7 @@ if (isset($_GET['search'])) {
                 </div>
                 <div class="func" style="color: white">
                     <?php echo $heartIcon; ?>
-                    <i class="fas fa-list-ul"></i>
+                    <i class="fas fa-plus"></i>
                 </div>
             </div>
         <?php endforeach; ?>

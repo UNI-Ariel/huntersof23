@@ -63,12 +63,12 @@ if (isset($_GET['singerID'])) {
             </div>
             <div class="func">
                 <i class="far fa-heart"></i>
-                <i class="fas fa-list-ul"></i>
+                <i class="fas fa-plus"></i>
             </div>
         </div>
     <?php endforeach; ?>
 </div>
-<div class "description">
+<div class= "description">
     <h2 class="title">Introduction</h2>
     <div class="desDetail">
         <img src="<?php echo $singerImg; ?>" alt="" />

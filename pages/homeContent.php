@@ -54,7 +54,7 @@
 </section>
 <section>
     <div class="sectionRecent">
-        <h1 class="sectionTitle" style="color: white">Canciones Recientes</h1>
+        <h1 class="sectionTitle" style="color:#0799B6">Canciones Recientes</h1>
         <button class="btn-refresh" onclick="refrescar();">
             <i class="fa fa-sync-alt fa-2x"></i>
         </button>
@@ -84,7 +84,7 @@
                         <div class="imgContainer"><img src="${song.img}" alt=""></div>
                         <div class="cardInfo">
                             <h3>${song.title}</h3>
-                            <h5>${song.singerName}</h5>
+                            <h5 class="sectionTitle" style="color:#0799B6">${song.singerName}</h5>
                         </div>
                     </div>`;
                 });

@@ -60,16 +60,16 @@ const makeSongTitle = (index, song) => {
                 <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
             </div>
         </div>
-        <div class="func">
+        <div class="func" style="color: white">
             ${heartIcon}
-            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-plus"></i>
         </div>
     `;
 
     // Agrega oyentes de eventos a los botones de reproducción, favoritos y cola
     const playButton = titleContainer.querySelector("h4");
     const favIcon = titleContainer.querySelector("i.fa-heart");
-    const queueIcon = titleContainer.querySelector("i.fa-list-ul");
+    const queueIcon = titleContainer.querySelector("i.fa-plus");
 
     playButton.addEventListener("click", () => {
         playImmediate(song); // Reproduce la canción de inmediato
@@ -106,16 +106,16 @@ const makeSongTitleForFav = (index, song) => {
                 <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
             </div>
         </div>
-        <div class="func">
+        <div class="func" style="color: white">
             <i class="fas fa-trash"></i>
-            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-plus"></i>
         </div>
     `;
 
     // Agrega oyentes de eventos a los botones de reproducción, eliminar de favoritos y cola
     const playButton = titleContainer.querySelector("h4");
     const trashIcon = titleContainer.querySelector("i.fa-trash");
-    const queueIcon = titleContainer.querySelector("i.fa-list-ul");
+    const queueIcon = titleContainer.querySelector("i.fa-plus");
 
     playButton.addEventListener("click", () => {
         playImmediate(song); // Reproduce la canción de inmediato

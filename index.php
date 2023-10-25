@@ -57,7 +57,7 @@ foreach ($songs as $song) {
         <div class="login-modal__info">
             <p>Tienes que iniciar sesión para utilizar esta función.</p>
             <a href="./auth/login.php" class="login">Acceso</a>
-            <a href="./auth/signup.php" class "signup">¿Aún no has creado una cuenta?</a>
+            <a href="./auth/signup.php" class="signup">¿Aún no has creado una cuenta?</a>
             <div class="close">+</div>
         </div>
     </div>

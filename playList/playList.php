@@ -7,7 +7,6 @@ $sqlPlaylists = "SELECT id, nombre, descripcion FROM playlists AS p";
 $playlists = $conn->query($sqlPlaylists);
 $dir = "imagen/";
 ?>
-<?php include('./components/navbar.php'); ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
@@ -20,6 +19,11 @@ $dir = "imagen/";
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/all.min.css" rel="stylesheet">
     <style>
+        .btn-primary {
+    bs-btn-color: #fff;
+    bs-btn-bg: while; 
+    bs-btn-border-color: while;
+        }
         /* Estilo personalizado para las tarjetas */
         .card {
             height: 345px;
@@ -52,7 +56,7 @@ $dir = "imagen/";
 <body class="d-flex flex-column h-100">
 
     <div class="container py-3">
-        <h2 class="text-left">Mi Biblioteca</h2>
+        <h2 class="text-left" style="color: white;" >Mi Biblioteca</h2>
         <hr>
 
         <?php if (isset($_SESSION['msg']) && isset($_SESSION['color'])) { ?>
@@ -66,6 +70,7 @@ $dir = "imagen/";
 
         <div class="row justify-content-end">
             <div class="col-auto">
+                <br>
                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoModal"><i class="fa-solid fa-circle-plus"></i>Crear PlayList</a>
             </div>
         </div>

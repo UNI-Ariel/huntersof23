@@ -11,7 +11,7 @@ $sql = "UPDATE playlists SET nombre ='$nombre', descripcion = '$descripcion' WHE
 if ($conn->query($sql)) {
 
     $_SESSION['color'] = "success";
-    $_SESSION['msg'] = "Registro actualizado";
+    $_SESSION['msg'] = "PlayList actualizado";
 
     if ($_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
         $permitidos = array("image/jpg", "image/jpeg","image/png");
@@ -38,7 +38,7 @@ if ($conn->query($sql)) {
     }
 } else {
     $_SESSION['color'] = "danger";
-    $_SESSION['msg'] = "Error al actualizar registro";
+    $_SESSION['msg'] = "Error al actualizar playList";
 }
 
 

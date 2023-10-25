@@ -18,6 +18,7 @@
                         <label for="descripcion" class="form-label">Descripción:</label>
                         <textarea name="descripcion" id="descripcion" class="form-control" rows="3" required></textarea>
                     </div>
+                    
                     <div class="mb-3">
                         <label for="imagen" class="form-label">Imagen:</label>
                         <input type="file" name="imagen" id="imagen" class="form-control" accept="image/jpeg">

@@ -15,7 +15,7 @@ body {
 
 form {
   width: 500px;
-  border: 2px solic #ccc;
+  border: 2px solid #ccc;
   padding: 30px;
   background: #fff;
   border-radius: 15px;
@@ -163,37 +163,7 @@ input[type="checkbox"]{
   cursor: pointer;
 }
 
-input[type="checkbox"] {
-  position: relative;
-  background: #c6c6c6;
-  width: 50px;
-  outline: none;
-  border-radius: 20px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  transition: 0.5s;
-}
 
-input:checked[type="checkbox"] {
-  background: #3e4249;
-}
-
-input[type="checkbox"]:before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-  top: 0;
-  left: 0;
-  background: #fff;
-  transform: scale(1.15);
-  box-shadow: 0 2px 5 rgba(0, 0);
-  transition: 0.5s;
-}
-
-input:checked[type="checkbox"]:before {
-  left: 26px;
-}
 
 .link {
   display: flex;
@@ -205,4 +175,75 @@ table{
   width:600px; 
   line-height:40px; 
   color: #fff; 
+}
+
+
+
+
+
+
+
+
+
+
+/* Estilo para el cuadro del checkbox */
+.custom-checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinear al lado izquierdo */
+    margin-top: 10px;
+}
+
+.custom-checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.custom-checkbox input {
+     
+display: none;
+}
+
+.custom-checkbox-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius:5px;
+    border: 2px solid #444;
+    cursor: pointer;
+}
+
+.custom-checkbox-label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.custom-checkbox input:checked + .custom-checkbox-label:after {
+  opacity: 1;
+}
+
+.custom-checkbox-label::before {
+  content: '✖'; 
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px; 
+  color: #444; 
+  opacity: 0;
+}
+
+.custom-checkbox input:checked + .custom-checkbox-label::before {
+  opacity: 1;
 }

@@ -7,7 +7,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Se eliminara de tu biblioteca?
+                Se eliminara de tu biblioteca
             </div>
 
             <div class="modal-footer">

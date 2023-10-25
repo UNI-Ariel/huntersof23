@@ -33,19 +33,22 @@ if ($conn->query($sql)) {
 
             $dir = "imagen";
 
-            $info_img = pathinfo($_FILES['imagen']['name']);
-            $info_img['extension'];
+            $dir = "imagen";
 
-            $imagen = $dir . '/' . $id . '.jpg';
+$info_img = pathinfo($_FILES['imagen']['name']);
+$extension = $info_img['extension'];
 
-            if (!file_exists($dir)) {
-                mkdir($dir, 0777);
-            }
+$imagen = $dir . '/' . $id . '.' . $extension; // Utiliza la extensión para construir el nombre del archivo
 
-            if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
-                $_SESSION['color'] = "danger";
-                $_SESSION['msg'] .= "<br>Error al guardar imagen";
-            }
+if (!file_exists($dir)) {
+    mkdir($dir, 0777);
+}
+
+if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+    $_SESSION['color'] = "danger";
+    $_SESSION['msg'] .= "<br>Error al guardar imagen";
+}
+
         } else {
             $_SESSION['color'] = "danger";
             $_SESSION['msg'] .= "<br>Formato de imágen no permitido";

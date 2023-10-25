@@ -14,20 +14,22 @@ if ($conn->query($sql)) {
     $_SESSION['msg'] = "PlayList actualizado";
 
     if ($_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
-        $permitidos = array("image/jpg", "image/jpeg","image/png");
-        if (in_array($_FILES['poster']['type'], $permitidos)) {
-
+        $permitidos = array("image/jpg", "image/jpeg", "image/png");
+        if (in_array($_FILES['imagen']['type'], $permitidos)) {
+    
             $dir = "imagen";
             $info_img = pathinfo($_FILES['imagen']['name']);
             $info_img['extension'];
-
+    
             $imagen = $dir . '/' . $id . '.jpg';
-
+    
             if (!file_exists($dir)) {
                 mkdir($dir, 0777);
             }
-
-            if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+    
+            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
+                // La imagen se movió exitosamente, no es necesario mostrar un mensaje.
+            } else {
                 $_SESSION['color'] = "danger";
                 $_SESSION['msg'] .= "<br>Error al guardar imagen";
             }
@@ -36,7 +38,7 @@ if ($conn->query($sql)) {
             $_SESSION['msg'] .= "<br>Formato de imágen no permitido";
         }
     }
-} else {
+    } else {
     $_SESSION['color'] = "danger";
     $_SESSION['msg'] = "Error al actualizar playList";
 }

@@ -28,7 +28,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="imagen" class="form-label">Imagen:</label>
-                        <input type="file" name="imagen" id="imagen" class="form-control" accept="image/jpeg">
+                        <input type="file" name="imagen" id="imagen" class="form-control" accept="image/jpeg, image/png, image/jpg">
                     </div>
 
                     <div class="d-flex justify-content-end pt-2">

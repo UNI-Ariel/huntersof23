@@ -82,7 +82,7 @@ $favSongs = array_map("reformData", $queryResult);
                     <div class="dropdown">
                    <i class="fa fa-ellipsis-v" id="btn" style="color: white" aria-hidden="true"></i>
                         <div class="dropdown-content">
-                            <a href="#">Eliminar</a>
+                            <a href="#">Eliminar </a>
                             <a href="#">Agregar una lista</a>
                         </div>
                     </div>

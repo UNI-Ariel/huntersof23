@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <img id="img_imagen" width="380" class="img-thumbnail">
+                        <img id="img_imagen" width="300" class="img-thumbnail">
                     </div>
                     <div class="mb-3">
                         <label for="imagen" class="form-label">Imagen:</label>

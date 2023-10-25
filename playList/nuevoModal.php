@@ -24,7 +24,9 @@
 
                     <div class="mb-3">
                         <label for="imagen" class="form-label">Imagen:</label>
-                        <input type="file" name="imagen" id="imagen" class="form-control" accept="image/jpeg">
+                        <input type="file" name="imagen" id="imagen" class="form-control" accept="image/jpeg, image/png, image/jpg">
+                        <img id="imagenPreview" src="playlist.png" width="353" height="199" />
+
                     </div>
 
                     <div class="">

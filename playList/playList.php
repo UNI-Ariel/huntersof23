@@ -8,7 +8,7 @@ $playlists = $conn->query($sqlPlaylists);
 $dir = "imagen/";
 ?>
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="es" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -21,7 +21,8 @@ $dir = "imagen/";
     <style>
         /* Estilo personalizado para las tarjetas */
         .card {
-            height: 320px;
+            height: 280px;
+            width: 320px; /* Ajusta el ancho de las tarjetas */
             background-color: #214252; /* Cambia el color de fondo a azul */
         }
         .modal-content {
@@ -31,17 +32,17 @@ $dir = "imagen/";
             color: white; /* Cambia el color del texto a blanco */
         }
         .card-img-top {
-            height: 150px;
+            height: 120px;
             object-fit: cover;
         }
         /* Estilo personalizado para los botones */
         .btn-editar {
             background-color: #0799b6;
-            color: white;
+            color: #9cd2d3;
         }
         .btn-eliminar {
             background-color: #056496;
-            color: white;
+            color: #9cd2d3;
         }
     </style>
 </head>
@@ -50,8 +51,6 @@ $dir = "imagen/";
 
     <div class="container py-3">
         <h2 class="text-left" style="color: white;">Mi Biblioteca</h2>
-        <hr>
-
         <?php if (isset($_SESSION['msg']) && isset($_SESSION['color'])) { ?>
             <div class="alert alert-<?= $_SESSION['color']; ?> alert-dismissible fade show" role="alert">
                 <?= $_SESSION['msg']; ?>
@@ -68,11 +67,11 @@ $dir = "imagen/";
             </div>
         </div>
 
-          <div class="row">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
     <?php while ($row = $playlists->fetch_assoc()) { ?>
-        <div class="col-md-4 mb-4">
+        <div class="col mb-4"> <!-- Ajusta el número de columnas a 4 -->
         <div class="card" style="background-color: #214252; color: white;">
-                <td><img src="<?= $dir . $row['id'] . '.jpg?n=' . time(); ?>" width="300" style="height: 200px; width: 100%;"></td>
+                <td><img src="<?= $dir . $row['id'] . '.jpg?n=' . time(); ?>" width="200" style="height: 200px; width: 100%;"></td>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;"><?= $row['nombre']; ?></h5>

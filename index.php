@@ -41,6 +41,7 @@ foreach ($songs as $song) {
     <link rel="stylesheet" href="./css/singerPage.css">
     <link rel="stylesheet" href="./css/searchPage.css">
     <link rel="stylesheet" href="./css/favourite.css">
+    <link rel="icon" href="./favicon.png">
     <link href='https://css.gg/home.css' rel='stylesheet'>
 
     <!-- Librería jQuery para utilizar AJAX que permite actualizar dinámicamente porciones de HTML -->
@@ -51,13 +52,13 @@ foreach ($songs as $song) {
 <body>
     <div class="login-modal">
     <div class="login-modal__logo">
-            <i class="fab fa-spotify"></i>
+            <img src="./favicon.png" alt="..." width="125", height="150">
             <h2>SpottPlay</h2>
         </div>
         <div class="login-modal__info">
             <p>Tienes que iniciar sesión para utilizar esta función.</p>
             <a href="./auth/login.php" class="login">Acceso</a>
-            <a href="./auth/signup.php" class "signup">¿Aún no has creado una cuenta?</a>
+            <a href="./auth/signup.php" class="signup">¿Aún no has creado una cuenta?</a>
             <div class="close">+</div>
         </div>
     </div>

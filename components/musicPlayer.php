@@ -3,7 +3,7 @@
         <img id="imgCover" src="./images/logo.png" alt="">
         <div class="musicDetail">
             <h4 id="title"></h4> <!-- Título de la canción -->
-            <h5 id="singerName"></h5> <!-- Nombre del cantante -->
+            <h5 id="singerName" style="color:white"></h5> <!-- Nombre del cantante -->
         </div>
         <!-- Icono para agregar a favoritos (comentado) -->
         <!-- <i class="far fa-heart"></i> -->
@@ -16,7 +16,7 @@
             <button id="play" class="action-btn action-btn-big">
                 <i class="fas fa-play"></i> <!-- Botón de reproducción/pausa -->
             </button>
-            <button id="next" class="action-btn">
+            <button id="next" class ="action-btn">
                 <i class="fas fa-forward"></i> <!-- Botón de reproducción siguiente -->
             </button>
         </div>

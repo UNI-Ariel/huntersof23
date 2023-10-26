@@ -103,11 +103,12 @@
     transition: all 0.3s ease-in;
 }
 
-.info::before {
+.info::before  {
     content: "\f04b";
+    color: #fff;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    font-size: 0.5em;
+    font-size: 16px;
     background: #0799B6;
     display: grid;
     place-items: center;

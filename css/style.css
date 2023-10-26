@@ -87,6 +87,32 @@ body {
     height: 35%;
     /* background: lightblue; */
 }
+button {
+    margin-left: 10%;
+    margin-right: 10%;
+    background: #161616;
+    padding: 10px 15px;
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: none;
+  }
+  
+  button:hover {
+    opacity: 0.7;
+  }
+  button a{
+    color: #fff;
+    text-decoration: none;
+    font-size: medium;
+  }
+ .textreg{
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    color: #3f3f3f;
+    font-size: small;
+  }
 
 .buttonContainer {
     font-family: 'Poppins', sans-serif;

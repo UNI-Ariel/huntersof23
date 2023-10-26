@@ -64,23 +64,56 @@ if (isset($_POST['submit'])) {
 <body>
     <form action="login.php" method="post">
         <h2>INICIAR SESIÓN</h2>
-        <label>Nombre de Usuario</label>
+    
+        <div class="form-group">
+        <label for="username">Nombre de Usuario</label>
         <input class="<?php if ($errors['username'] != '') {
                         echo 'error1';
                         } ?>" 
         type="text" name="username" placeholder="Ejemplo : Noel" value="<?php echo $username; ?>">
         <p class="error-container"><?php echo $errors['username']; ?></p>
-
-        <label>Contraseña</label>
-        <input class="<?php if ($errors['password'] != '') {
+        
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            
+            <input class="<?php if ($errors['password'] != '') {
                         echo 'error1';
                         } ?>"
-         type="password" name="password" placeholder="Contraseña">
-        <p class="error-container"><?php echo $errors['password']; ?></p>
+        type="password" name="password" placeholder="Contraseña">
 
+        <p class="error-container"><?php echo $errors['password']; ?></p>
+        
+    </div>
+    <!-- Checkbox para mostrar contraseña -->
+        <div class="form-group custom-checkbox-container">
+        <label for="showPasswordCheckbox">Mostrar Contraseña</label>
+        <div class="custom-checkbox">
+        <input type="checkbox" id="showPasswordCheckbox">
+        <label for="showPasswordCheckbox" class="custom-checkbox-label"></label>
+        
+        </div>
+    </div>
+        <div class="form-group">
         <button type="submit" name="submit">Iniciar Sesión</button>
+        </div>
+        <div class="form-group">
         <a href="signup.php" class="ca">Crear cuenta</a>
+        
     </form>
+    <script>
+        const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+       
+        const passwordInput = document.querySelector('input[name="password"]'); // Seleccionar el campo de contraseña
+
+        showPasswordCheckbox.addEventListener('change', function () {
+            if (this.checked) {
+                passwordInput.type = 'text'; // Mostrar la contraseña
+            } else {
+                passwordInput.type = 'password'; // Ocultar la contraseña
+            }
+    });
+    </script>
 </body>
 
 </html>

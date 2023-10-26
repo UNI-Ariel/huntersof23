@@ -66,11 +66,17 @@ if (isset($_POST['submit'])) {
         $errors['existUser'] = "El usuario ya existe";
     }
 
+    $sql = "SELECT * FROM users WHERE email = '$email' ";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $errors['email'] = "El correo ya existe";
+    }
+
     if (array_filter($errors)) {
         echo "";
     } else {
         $password = md5($password);
-        $sql2 = "INSERT INTO users(username, password, groupID) VALUE('$username', '$password', 2)";
+        $sql2 = "INSERT INTO users(username, email, password, groupID) VALUE('$username', '$email', '$password', 2)";
         $result2 = mysqli_query($conn, $sql2);
         if ($result2) header("Location: login.php");
     }

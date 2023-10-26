@@ -8,10 +8,13 @@
 <!--SECTION 1-->        
         <section class="testimony_body testimony_body--show" data-id="1">
             <div class="testimony_texts">
-                <h2 class="subtitle" > SpottPlay (aniadir texto de prefefrencia devs),  </h2>
-                <p class="testimony_review"> aqui hagan full publicidad respecto al tema
-
+                <h2 class="subtitle" >Bienvenidos a Spottplay</h2>
+                <p class="testimony_review"> Comienza tu aventura musical
                 </p>
+                <p>
+                <button><a href="./auth/login.php" class="login">Iniciar Sesión</a></button>
+                <p>
+                <a  id="txtreg" href="./auth/signup.php" class="ca">¿No tienes una cuenta? Registrate</a>
             </div>
             <figure class="testimony_picture">
                 <img src="./images/chica.jpg" class="testimony_img">

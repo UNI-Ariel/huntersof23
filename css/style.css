@@ -5,9 +5,13 @@
 :root {
     --sidebar-color: #28324b;
     --body-color: #181c29;
-    --player-color: #29293a;
+    --player-color: #e4e5de;
+    --primary-letter-color: rgb(7, 153, 182);
+    --letter-color: white;
+    --secondary-letter-color: lightgray;
+    --hover-bg-color: rgb(127 36 37);
+    /* --hover-bg-color: rgb(87, 86, 86); */
 }
-
 
 * {
     box-sizing: border-box;
@@ -16,7 +20,7 @@
 }
 
 body {
-    color: rgb(7, 153, 182);
+    color: var(--primary-letter-color);
     font-family: 'Poppins', sans-serif;
     background: rgb(0, 79, 131);
     overflow: hidden;
@@ -210,6 +214,7 @@ button {
     padding: 5px;
     display: flex;
     align-items: center;
+    color: var(--primary-letter-color);
 }
 
 /* Music Info */
@@ -238,9 +243,9 @@ button {
     margin-top: 8px;
 }
 
-.musicDetail h5 {
+/* .musicDetail h5 {
     color: rgba(0, 0, 0, 0.521);
-}
+} */
 
 .musicInfo i {
     cursor: pointer;
@@ -263,7 +268,6 @@ button {
 }
 
 .action-btn {
-    color: rgb(7, 153, 182);
     background: none;
     border: 0;
     font-size: 15px;

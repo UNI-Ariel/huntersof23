@@ -71,11 +71,10 @@
 
 .card h5 {
     font-size: 12px;
-    color: gray;
 }
 
 .card:hover {
-    background: rgb(80, 79, 79);
+    background: var(--hover-bg-color);
 }
 
 .card:hover img {

@@ -3,7 +3,7 @@
         <img id="imgCover" src="./images/logo.png" alt="">
         <div class="musicDetail">
             <h4 id="title"></h4> <!-- Título de la canción -->
-            <h5 id="singerName" style="color:white"></h5> <!-- Nombre del cantante -->
+            <h5 id="singerName"></h5> <!-- Nombre del cantante -->
         </div>
         <!-- Icono para agregar a favoritos (comentado) -->
         <!-- <i class="far fa-heart"></i> -->
@@ -34,7 +34,7 @@
     </div>
     <div class="queue">
         <div class="queue-title">
-            <h3 style="color: white">Reproduciendo</h3> <!-- Título de la lista de reproducción actual -->
+            <h3>Reproduciendo</h3> <!-- Título de la lista de reproducción actual -->
             <i class="fas fa-chevron-up"></i> <!-- Icono para ocultar la lista de reproducción -->
         </div>
         <ul class="playing-songs">

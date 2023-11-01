@@ -7,6 +7,10 @@
     line-height: 200%;
 }
 
+.text-color {
+    color: var(--letter-color);
+}
+
 .searchContainer {
     width: 50%;
     /* background: lightgreen; */
@@ -64,7 +68,7 @@
 }
 
 .song:hover {
-    background: rgb(87, 86, 86);
+    background: var(--hover-bg-color);
 }
 
 .song h5 {
@@ -133,7 +137,7 @@
 }
 
 .detail .singerPage {
-    color: lightgray;
+    color: var(--secondary-letter-color);
     text-decoration: none;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
@@ -146,7 +150,7 @@
 .detail h4,
 .detail h5 {
     font-family: "Roboto", sans-serif;
-    color: lightgray;
+    color: var(--letter-color);
     margin: 2px 15px;
 }
 

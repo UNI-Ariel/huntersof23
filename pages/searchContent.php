@@ -14,8 +14,8 @@ if (isset($_GET['search'])) {
 
 ?>
 <?php include('./components/navbar.php'); ?>
-<section>
-    <h3 class="sectionTitle" style="color: white">Canciones</h3>
+<section class="text-color">
+    <h3 class="sectionTitle" >Canciones</h3>
     <div class="songsContain">
         <?php foreach ($songs as $index => $song) : ?>
             <?php
@@ -28,14 +28,14 @@ if (isset($_GET['search'])) {
             ?>
             <div class="song" data="<?php echo $song['id']; ?>">
                 <div class="info">
-                    <h4 style="color: white"><?php echo $index + 1; ?> </h4>
+                    <h4><?php echo $index + 1; ?> </h4>
                     <img src="<?php echo $song['img']; ?>">
                     <div class="detail">
-                        <h4 style="color: white"><?php echo $song['title']; ?></h4>
+                        <h4><?php echo $song['title']; ?></h4>
                         <h5 class="singerPage" data-singer="<?php echo $song["singerID"]; ?>"><?php echo $song['singerName']; ?></h5>
                     </div>
                 </div>
-                <div class="func" style="color: white">
+                <div class="func" >
                     <?php echo $heartIcon; ?>
                     <i class="fas fa-plus"></i>
                 </div>

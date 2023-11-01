@@ -9,7 +9,8 @@
     --primary-letter-color: rgb(7, 153, 182);
     --letter-color: white;
     --secondary-letter-color: lightgray;
-    --hover-bg-color: rgb(127 36 37);
+    --hover-bg-color: rgb(53 127 147);
+    /* --hover-bg-color: rgb(87, 86, 86); */
     /* --hover-bg-color: rgb(87, 86, 86); */
 }
 

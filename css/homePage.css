@@ -74,6 +74,7 @@
 }
 
 .card:hover {
+    color: var(--letter-color);
     background: var(--hover-bg-color);
 }
 

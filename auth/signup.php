@@ -125,11 +125,17 @@ if (isset($_POST['submit'])) {
                         } ?>" 
         type="password" name="re_password" placeholder="(Confirmar Contraseña)">
         <p class="error-container"><?php echo $errors['re_password']; ?></p>
-        
+        <div class="show-pass-container">
+            <div class="show-pass-checkbox">
+                <input type="checkbox" id="show-pass">    
+                Mostrar Contraseña
+            </div>
+        </div>
 
         <button type="submit" name="submit">Registrarse</button>
-        <a href="login.php" class="ca">Cancelar</a>
+        <a href="login.php" class="ca">Iniciar Sesión</a>
     </form>
+    <script src="./js/auth.js"></script>
 </body>
 
 </html>

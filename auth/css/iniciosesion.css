@@ -236,3 +236,21 @@ display: none;
 .custom-checkbox input:checked + .custom-checkbox-label::before {
   opacity: 1;
 }
+
+.show-pass-container {
+    display: flex;
+    flex-direction: row;
+    text-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.show-pass-container * {
+    margin: 0;
+}
+
+.show-pass-checkbox {
+    display: flex;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    gap: 2px;
+}

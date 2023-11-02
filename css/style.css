@@ -9,7 +9,7 @@
     --primary-letter-color: rgb(7, 153, 182);
     --letter-color: white;
     --secondary-letter-color: lightgray;
-    --hover-bg-color: rgb(53 127 147);
+    --hover-bg-color: rgb(76 116 143);
     /* --hover-bg-color: rgb(87, 86, 86); */
     /* --hover-bg-color: rgb(87, 86, 86); */
 }
@@ -327,12 +327,17 @@ button {
     height: 4px;
     padding: 0;
     background-color:#0799B6;
+    transform: scaleY(2);
 }
 
 #playtist {
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+
+#mute {
+    transform: scale(1.2);
 }
 
 .queue {

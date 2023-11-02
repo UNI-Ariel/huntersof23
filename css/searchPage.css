@@ -99,7 +99,7 @@
     left: 0;
     width: 40px;
     height: 40px;
-    transform: translate(-50%, -20%);
+    transform: translate(-30%, -20%);
     position: absolute;
     border-radius: 50%;
     opacity: 0;
@@ -121,7 +121,7 @@
 
 .info:hover::before {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(-30%, -50%);
 }
 
 .info img {

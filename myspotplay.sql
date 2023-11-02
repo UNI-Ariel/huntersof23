@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2023 at 03:58 AM
+-- Generation Time: Nov 02, 2023 at 02:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -62,6 +62,19 @@ INSERT INTO `groups` (`id`, `groupName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `playlists`
+--
+
+CREATE TABLE `playlists` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` text NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `singers`
 --
 
@@ -77,13 +90,15 @@ CREATE TABLE `singers` (
 --
 
 INSERT INTO `singers` (`id`, `name`, `info`, `image`) VALUES
-(1, 'Sơn Tùng MTP', 'Nguyễn Thanh Tùng, thường được biết đến với nghệ danh Sơn Tùng M-TP, là một nam ca sĩ kiêm sáng tác nhạc, rapper và diễn viên người Việt Nam.', 'images/singers/mtp.png'),
-(2, 'Đức Phúc', 'Nguyễn Đức Phúc là một nam ca sĩ người Việt Nam được biết đến rộng rãi với tư cách quán quân của The Voice Vietnam 2015.', 'images/singers/ducphuc.png'),
-(3, 'Hoài Lâm', 'Hoài Lâm, tên thật là Nguyễn Tuấn Lộc, là một nam ca sĩ, rapper kiêm diễn viên người Việt Nam. Anh từng giành 1 giải Cống hiến và được công chúng Việt Nam đặc biệt chú ý sau khi giành giải quán quân chương trình truyền hình thực tế Gương mặt thân quen.', 'images/singers/hoailam.png'),
-(4, 'Hương Tràm', 'Hương Tràm có tên đầy đủ là Phạm Thị Hương Tràm là một nữ ca sĩ người Việt Nam. Cô là quán quân cuộc thi Giọng hát Việt mùa đầu tiên 2012.', 'images/singers/huongtram.png'),
-(5, 'Chế Linh', 'Chế Linh là nam ca sĩ người Chăm nổi tiếng, đồng thời là nhạc sĩ với bút hiệu Tú Nhi và Lưu Trần Lê. Ông nổi danh từ thập niên 60 và được xem như là một trong bốn giọng nam nổi tiếng nhất của nhạc vàng thời kỳ đầu.', 'images/singers/chelinh.png'),
-(8, 'Min', 'Nguyễn Minh Hằng, được biết đến với nghệ danh MIN, là một nữ ca sĩ, vũ công và nhà sản xuất âm nhạc người Việt Nam.', 'images/singers/cec.jpg'),
-(9, 'Unknown', 'Random Beatiful Songs', 'images/singers/lofi.jpg');
+(1, 'Lady Gaga', 'Descripción de la Artista.', 'images/singers/mtp.png'),
+(2, 'Jess Glynne', 'Descripción de la Artista.', 'images/singers/ducphuc.png'),
+(3, 'Alan Walker', 'Descripción del Artista.', 'images/singers/hoailam.png'),
+(4, 'LP', 'Descripción del Artista.', 'images/singers/huongtram.png'),
+(5, 'Justin Bieber', 'Descripción del Artista.', 'images/singers/chelinh.png'),
+(8, 'James Delaney', 'Descripción del Artista.', 'images/singers/cec.jpg'),
+(9, 'Unknown', 'Random Beatiful Songs', 'images/singers/lofi.jpg'),
+(10, 'Imagine Dragons', 'Descripción del artista.', 'images/singers/lofi.jpg'),
+(11, 'Coldplay', 'Descripción del artista.', 'images/singers/lofi.jpg');
 
 -- --------------------------------------------------------
 
@@ -108,12 +123,14 @@ INSERT INTO `songs` (`id`, `title`, `filePath`, `imgPath`, `dateAdded`, `singerI
 (14, 'Pixabay', 'music/pixabay.mp3', 'images/piano.jpg', '2021-06-03 14:38:34', 9),
 (15, 'Midnight', 'music/midnight.mp3', 'images/Midnight_Mist.jpg', '2021-06-03 14:38:58', 9),
 (16, 'Electronica', 'music/electronica.mp3', 'images/lofi.jpg', '2021-06-03 14:39:21', 9),
-(17, 'Bloody Mary', 'music/Bloody Mary.mp3', 'images/bloodymary.jpg', '2023-10-26 01:40:40', 9),
-(18, 'Faded', 'music/faded.mp3', 'images/faded.png', '2023-10-26 01:45:42', 9),
-(19, 'Lost On You', 'music/Lost On You.mp3', 'images/lostonyou.jpg', '2023-10-26 01:51:57', 9),
-(20, 'Rather Be-12', 'music/Rather Be-12.mp3', 'images/ratherbe.jpg', '2023-10-26 01:55:03', 9),
-(21, 'Fallingdown', 'music/fallingdown.mp3', 'images/fallingdown.jpg', '2023-10-26 01:56:07', 9),
-(22, 'Stay', 'music/stay.mp3', 'images/stay.png', '2023-10-26 01:57:33', 9);
+(17, 'Bloody Mary', 'music/Bloody Mary.mp3', 'images/bloodymary.jpg', '2023-10-26 01:40:40', 1),
+(18, 'Faded', 'music/faded.mp3', 'images/faded.png', '2023-10-26 01:45:42', 3),
+(19, 'Lost On You', 'music/Lost On You.mp3', 'images/lostonyou.jpg', '2023-10-26 01:51:57', 4),
+(20, 'Rather Be-12', 'music/Rather Be-12.mp3', 'images/ratherbe.jpg', '2023-10-26 01:55:03', 2),
+(21, 'Fallingdown', 'music/fallingdown.mp3', 'images/fallingdown.jpg', '2023-10-26 01:56:07', 8),
+(22, 'Stay', 'music/stay.mp3', 'images/stay.png', '2023-10-26 01:57:33', 5),
+(23, 'Bones', 'music/bones.mp3', 'images/bones.jpg', '2023-10-31 06:49:22', 10),
+(24, 'Magic', 'music/magic.mp3', 'images/magic.jpg', '2023-10-31 06:54:53', 11);
 
 -- --------------------------------------------------------
 
@@ -158,6 +175,12 @@ ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `playlists`
+--
+ALTER TABLE `playlists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `singers`
 --
 ALTER TABLE `singers`
@@ -188,16 +211,22 @@ ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `playlists`
+--
+ALTER TABLE `playlists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT for table `singers`
 --
 ALTER TABLE `singers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`

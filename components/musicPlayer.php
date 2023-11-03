@@ -26,7 +26,7 @@
         <audio id="audio" src="#"></audio> <!-- Elemento de audio para reproducir la canción -->
     </div>
     <div class="funcContainer">
-        <img id="playtist" src="./images/icons/queue.png" alt="" /> <!-- Icono de lista de reproducción -->
+       <!--  <img id="playtist" src="./images/icons/queue.png" alt="" /> <!-- Icono de lista de reproducción -->
         <i class="fas fa-volume-up" id="mute"></i> <!-- Icono para silenciar -->
         <div class="volumeInfo">
             <div class="volume"></div> <!-- Barra de volumen -->

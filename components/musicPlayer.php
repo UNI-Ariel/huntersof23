@@ -27,8 +27,9 @@
     </div>
     <div class="funcContainer">
        <!--  <img id="playtist" src="./images/icons/queue.png" alt="" /> <!-- Icono de lista de reproducción -->
-        <i class="fas fa-volume-up" id="mute"></i> <!-- Icono para silenciar -->
+       <i class="fas fa-volume-up" id="mute" style="cursor: pointer;"></i> <!-- Icono para silenciar -->
         <div class="volumeInfo">
+
             <div class="volume"></div> <!-- Barra de volumen -->
         </div>
     </div>

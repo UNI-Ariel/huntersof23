@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
         
 
         <button type="submit" name="submit">Registrarse</button>
-        <a href="login.php" class="ca">Cancelar</a>
+        <a href="..\index.php" class="ca">Cancelar</a>
     </form>
 </body>
 

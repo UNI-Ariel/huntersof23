@@ -69,7 +69,11 @@ if (isset($_POST['submit'])) {
         $password = md5($password);
         $sql2 = "INSERT INTO users(username, email, password, groupID) VALUE('$username', '$email', '$password', 2)";
         $result2 = mysqli_query($conn, $sql2);
-        if ($result2) header("Location: login.php");
+        if ($result2) {
+            /* header("Location: login.php"); */
+            echo "<script> alert('Se registro exitosamente.') </script>";
+            echo '<meta http-equiv="refresh" content="0;URL=\'login.php\'">';
+        }
     }
 }
 ?>

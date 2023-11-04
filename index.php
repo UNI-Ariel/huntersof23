@@ -51,7 +51,7 @@ foreach ($songs as $song) {
 
 <body>
     <div class="login-modal">
-    <div class="login-modal__logo">
+        <div class="login-modal__logo">
             <img src="./favicon.png" alt="..." width="125", height="150">
             <h2>SpottPlay</h2>
         </div>

@@ -1,4 +1,3 @@
-
 <?php
 // Función para reformatear los datos del resultado de la consulta
 function reformData($queryResult)
@@ -9,7 +8,7 @@ function reformData($queryResult)
 // Consulta para obtener los IDs de las canciones favoritas del usuario
 $favSongsQuery = "SELECT favourites.songID
                      FROM favourites
-                    WHERE favourites.uid = $uid";
+                    WHERE favourites.uid=0";
 
 // Ejecutar la consulta en la conexión a la base de datos
 $result = mysqli_query($conn, $favSongsQuery);

@@ -3,9 +3,15 @@
     border: 0;
 	outline: none;
 	color: #8b7d77;
-    font-size: 15px;
     line-height: 200%;
 }
+
+.sectionTitle{
+    padding-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
 
 .text-color {
     color: var(--letter-color);
@@ -20,6 +26,7 @@
     position: relative;
     width: 100%;
     height: 35px;
+    margin-left: 50%;
 }
 
 

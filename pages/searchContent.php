@@ -15,7 +15,7 @@ if (isset($_GET['search'])) {
 ?>
 <?php include('./components/navbar.php'); ?>
 <section class="text-color">
-    <h3 class="sectionTitle" >Canciones</h3>
+    <h1 class="sectionTitle" >Canciones</h1>
     <div class="songsContain">
         <?php foreach ($songs as $index => $song) : ?>
             <?php

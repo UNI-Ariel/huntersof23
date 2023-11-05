@@ -16,10 +16,10 @@ if ($conn->query($sql)) {
     }
 
     $_SESSION['color'] = "success";
-    $_SESSION['msg'] = "PlayList eliminado";
+    $_SESSION['msg'] = "Lista de reproduccion eliminada";
 } else {
     $_SESSION['color'] = "danger";
-    $_SESSION['msg'] = "Error al eliminar playList";
+    $_SESSION['msg'] = "Error al eliminar lista de reproduccion";
 }
 
 header('Location: playList.php');

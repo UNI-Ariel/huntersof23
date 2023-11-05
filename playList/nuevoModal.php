@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="nuevoModalLabel" style="color: white;">Crear PlayList</h1>
+                <h1 class="modal-title fs-5" id="nuevoModalLabel" style="color: white;">Crear Lista De Reproduccion</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -25,7 +25,7 @@
                     <div class="mb-3">
                         <label for="imagen" class="form-label">Imagen:</label>
                         <input type="file" name="imagen" id="imagen" class="form-control" accept="image/jpeg, image/png, image/jpg">
-                        <img id="imagenPreview" src="playlist.png" width="353" height="199" />
+                        <img id="imagenPreview" src="-playList-.png" width="353" height="199" />
 
                     </div>
 

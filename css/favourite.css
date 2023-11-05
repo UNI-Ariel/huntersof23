@@ -1,0 +1,26 @@
+.fav h1 {
+    padding: 20px 0;
+    text-align: center;
+    color: var(--letter-color);
+}
+
+.tileContainer {
+    width: 100%;
+}
+
+.playAllFav {
+    position: relative;
+    margin: 0;
+    left: 3%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid white; 
+}
+
+.playAllFav p{
+    margin-left: 10px;
+    font-family: 'Poppins';
+}

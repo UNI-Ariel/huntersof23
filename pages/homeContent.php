@@ -62,6 +62,10 @@
 <div>
     <div class="sectionRecent">
         <h1 class="sectionTitle" style="color: white">Canciones Recientes</h1>
+        <button class="playAllRecent">
+            <i class="fas fa-play"></i>
+            <p>Reproducir</p>
+        </button>
         <button class="btn-refresh" onclick="refrescar();">
             <i class="fa fa-sync-alt fa-2x"></i>
         </button>

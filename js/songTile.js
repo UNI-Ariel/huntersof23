@@ -1,7 +1,18 @@
-// Agregar o eliminar una canción de favoritos
+// Función para agregar una canción a la cola de reproducción
+const insertToQueue = (song) => {
+    // Verifica si la canción ya está en la cola de reproducción
+    if (!playingQueue.includes(song)) {
+        playingQueue.push(song); // Agrega la canción a la cola de reproducción
+        alert(`Song "${song["title"]}" is added to the queue!!`); // Muestra una alerta
+        resetPlayingQueue(); // Restablece la cola de reproducción
+    } else {
+        alert(`Song "${song["title"]}" is already in the playing queue!!`); // Muestra una alerta si la canción ya está en la cola
+    }
+};
+
+// Función para agregar o eliminar una canción de favoritos
 const addToFav = (song, isFav) => {
     if (!authenticated) {
-        console.log("nada");
         loginPopup(); // Muestra un formulario de inicio de sesión si el usuario no está autenticado
     } else {
         const ajaxFile = isFav ? "delFromFav" : "addToFav"; // Determina el archivo AJAX a utilizar
@@ -20,9 +31,6 @@ const addToFav = (song, isFav) => {
         } else {
             favSongIDs.push(song.id); // Agrega la canción a la lista de favoritos
             makeSongTitleForFav(favSongIDs.length - 1, song); // Actualiza la interfaz de favoritos
-            const favContent = document.querySelector(".fav .tileContainer");
-            favContent.innerHTML = "";
-            favorit();
         }
     }
 };
@@ -52,23 +60,19 @@ const makeSongTitle = (index, song) => {
                 <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
             </div>
         </div>
-        <div class="func">
+        <div class="func" style="color: white">
             ${heartIcon}
-            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-plus"></i>
         </div>
     `;
 
     // Agrega oyentes de eventos a los botones de reproducción, favoritos y cola
     const playButton = titleContainer.querySelector("h4");
     const favIcon = titleContainer.querySelector("i.fa-heart");
-    const queueIcon = titleContainer.querySelector("i.fa-list-ul");
+    const queueIcon = titleContainer.querySelector("i.fa-plus");
 
     playButton.addEventListener("click", () => {
-        listSongs = listSearch;
-        idActual = listSongs.findIndex(function(music) {
-            return music.id === song["id"];
-        });
-        playSong(song["id"]);
+        playImmediate(song); // Reproduce la canción de inmediato
     });
 
     favIcon.addEventListener("click", () => {
@@ -104,21 +108,17 @@ const makeSongTitleForFav = (index, song) => {
         </div>
         <div class="func">
             <i class="fas fa-trash"></i>
-            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-plus"></i>
         </div>
     `;
 
     // Agrega oyentes de eventos a los botones de reproducción, eliminar de favoritos y cola
     const playButton = titleContainer.querySelector("h4");
     const trashIcon = titleContainer.querySelector("i.fa-trash");
-    const queueIcon = titleContainer.querySelector("i.fa-list-ul");
+    const queueIcon = titleContainer.querySelector("i.fa-plus");
 
     playButton.addEventListener("click", () => {
-        listSongs = listFavourites;
-        idActual = listSongs.findIndex(function(music) {
-            return music.id === song["id"];
-        });
-        playSong(song["id"]);    
+        playImmediate(song); // Reproduce la canción de inmediato
     });
 
     trashIcon.addEventListener("click", () => {
@@ -145,5 +145,42 @@ const makeSongTitleForFav = (index, song) => {
 const removeTileFromFav = () => {
     const favContent = document.querySelector(".fav .tileContainer");
     favContent.innerHTML = "";
-    favorit();
+    favSongIDs.forEach((id, index) => {
+        makeSongTitleForFav(index, songDetails[id]);
+    });
 };
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    refrescar();
+});
+
+// Actualizar canciones recientes
+function refrescar() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload= function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            let listRecent = JSON.parse(xhr.responseText);
+            recentPlay = [];
+            let cardsHTML = "";
+
+            listRecent.forEach(function(song) {
+                recentPlay.push(song.id);
+                cardsHTML += `
+                    <div class="card" data="${song.id}">
+                        <div class="imgContainer"><img src="${song.img}" alt=""></div>
+                        <div class="cardInfo">
+                            <h3>${song.title}</h3>
+                            <h5>${song.singerName}</h5>
+                        </div>
+                    </div>`;
+            });
+            document.querySelector(".cards").innerHTML = cardsHTML;
+            addClickEventToCards();
+        };
+    };
+
+    xhr.open("GET", "./utils/getRecentSongs.php", true);
+    xhr.send();
+}

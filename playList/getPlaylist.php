@@ -1,6 +1,6 @@
 <?php
 
-require 'config/dbConnection.php';
+require '../utils/dbConnection.php';
 
 $id = $conn->real_escape_string($_POST['id']);
 

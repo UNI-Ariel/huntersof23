@@ -1,34 +1,37 @@
+// Función para agregar una canción a la cola de reproducción
 const insertToQueue = (song) => {
+    // Verifica si la canción ya está en la cola de reproducción
     if (!playingQueue.includes(song)) {
-        playingQueue.push(song);
-        alert(`Songs ${song["title"]} is added to queue!!`);
-        resetPlayingQueue();
+        playingQueue.push(song); // Agrega la canción a la cola de reproducción
+        alert(`Song "${song["title"]}" is added to the queue!!`); // Muestra una alerta
+        resetPlayingQueue(); // Restablece la cola de reproducción
     } else {
-        alert(`Songs ${song["title"]} is already in playing queue!!`);
+        alert(`Song "${song["title"]}" is already in the playing queue!!`); // Muestra una alerta si la canción ya está en la cola
     }
 };
 
+// Función para agregar o eliminar una canción de favoritos
 const addToFav = (song, isFav) => {
     if (!authenticated) {
-        loginPopup();
+        loginPopup(); // Muestra un formulario de inicio de sesión si el usuario no está autenticado
     } else {
-        const ajaxFile = isFav ? "delFromFav" : "addToFav";
+        const ajaxFile = isFav ? "delFromFav" : "addToFav"; // Determina el archivo AJAX a utilizar
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", `./utils/${ajaxFile}.php?songID=${song.id}`, true);
         xmlhttp.send();
 
+        // Actualiza la lista de canciones favoritas y la interfaz de usuario
         if (isFav) {
             const index = favSongIDs.indexOf(song.id);
             if (index > -1) {
-                favSongIDs.splice(index, 1);
+                favSongIDs.splice(index, 1); // Elimina la canción de la lista de favoritos
             }
-            removeTileFromFav();
+            removeTileFromFav(); // Actualiza la interfaz de favoritos
         } else {
-            favSongIDs.push(song.id);
-            makeSongTitleForFav(favSongIDs.length - 1, song);
+            favSongIDs.push(song.id); // Agrega la canción a la lista de favoritos
+            makeSongTitleForFav(favSongIDs.length - 1, song); // Actualiza la interfaz de favoritos
         }
-        favorit();
     }
 };
 
@@ -57,23 +60,19 @@ const makeSongTitle = (index, song) => {
                 <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
             </div>
         </div>
-        <div class="func">
+        <div class="func" style="color: white">
             ${heartIcon}
-            <i class="fas fa-list-ul"></i>
+            <i class="fas fa-plus"></i>
         </div>
     `;
 
     // Agrega oyentes de eventos a los botones de reproducción, favoritos y cola
     const playButton = titleContainer.querySelector("h4");
     const favIcon = titleContainer.querySelector("i.fa-heart");
-    const queueIcon = titleContainer.querySelector("i.fa-list-ul");
+    const queueIcon = titleContainer.querySelector("i.fa-plus");
 
     playButton.addEventListener("click", () => {
-        listSongs = listSearch;
-        idActual = listSongs.findIndex(function(music) {
-            return music.id === song["id"];
-        });
-        playSong(song["id"]);
+        playImmediate(song); // Reproduce la canción de inmediato
     });
 
     favIcon.addEventListener("click", () => {
@@ -90,62 +89,59 @@ const makeSongTitle = (index, song) => {
     return titleContainer; // Devuelve el elemento de título de canción
 };
 
-
+// Función para crear un elemento de título de canción en la sección de favoritos
 const makeSongTitleForFav = (index, song) => {
     const favContent = document.querySelector(".fav .tileContainer");
     const titleContainer = document.createElement("div");
     titleContainer.classList.add("song");
     titleContainer.setAttribute("data", song["id"]);
 
+    // Configura el contenido HTML del elemento de título de canción
     titleContainer.innerHTML = `
-    <div class="info">
-        <h4>${index + 1}</h4>
-        <img src="${song["img"]}">
-        <div class="detail">
-            <h4>${song["title"]}</h4>
-            <h5 class="singerPage" data-singer="${song["singerID"]}">${
-        song["singerName"]
-    }</h5>
+        <div class="info">
+            <h4>${index + 1}</h4>
+            <img src="${song["img"]}">
+            <div class="detail">
+                <h4>${song["title"]}</h4>
+                <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
+            </div>
         </div>
-    </div>
-    <div class="func">
-        <i class="fas fa-trash"></i>
-        <i class="fas fa-list-ul"></i>
-    </div>
+        <div class="func" style="color: white">
+            <i class="fas fa-trash"></i>
+            <i class="fas fa-plus"></i>
+        </div>
     `;
 
+    // Agrega oyentes de eventos a los botones de reproducción, eliminar de favoritos y cola
     const playButton = titleContainer.querySelector("h4");
     const trashIcon = titleContainer.querySelector("i.fa-trash");
-    const queueIcon = titleContainer.querySelector("i.fa-list-ul");
+    const queueIcon = titleContainer.querySelector("i.fa-plus");
 
     playButton.addEventListener("click", () => {
-        listSongs = listFavourites;
-        idActual = listSongs.findIndex(function(music) {
-            return music.id === song["id"];
-        });
-        playSong(song["id"]);
+        playImmediate(song); // Reproduce la canción de inmediato
     });
 
     trashIcon.addEventListener("click", () => {
+        // Elimina de favoritos y actualiza la interfaz de búsqueda
         const searchSongTiles = document.querySelectorAll("#search .song");
         searchSongTiles.forEach((tile) => {
             const songID = tile.getAttribute("data");
-
             if (songID == song.id) {
                 const heartIcon = tile.querySelector(".func .fa-heart");
                 heartIcon.className = "far fa-heart";
             }
         });
-        addToFav(song, true);
+        addToFav(song, true); // Elimina de favoritos
     });
 
     queueIcon.addEventListener("click", () => {
-        insertToQueue(song);
+        insertToQueue(song); // Agrega la canción a la cola de reproducción
     });
 
-    favContent.appendChild(titleContainer);
+    favContent.appendChild(titleContainer); // Agrega el elemento de título de canción a la sección de favoritos
 };
 
+// Función para eliminar un título de canción de la sección de favoritos
 const removeTileFromFav = () => {
     const favContent = document.querySelector(".fav .tileContainer");
     favContent.innerHTML = "";

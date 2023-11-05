@@ -57,28 +57,52 @@
 
 
 </section>
-
-<!-- Sección canciones recientes -->
-<div>
+<section>
     <div class="sectionRecent">
-        <h1 class="sectionTitle" style="color: white">Canciones Recientes</h1>
+        <h1 class="sectionTitle">Canciones Recientes</h1>
         <button class="btn-refresh" onclick="refrescar();">
             <i class="fa fa-sync-alt fa-2x"></i>
         </button>
     </div>
 
     <div class="cards">
-        <?php foreach ($randomKeys as $key) : ?>
-            <div class="card" data="<?php echo $songs[$key]["id"]; ?>">
-                <div class="imgContainer">
-                    <img src="<?php echo $songs[$key]["img"]; ?>" alt="">
-                </div>
-                <div class="cardInfo">
-                    <h3><?php echo $songs[$key]["title"]; ?></h3>
-                    <h5><?php echo $songs[$key]["singerName"]; ?></h5>
-                </div>
-            </div>
-        <?php endforeach; ?>
     </div>
-</div>
+
+    <script>
+        $(document).ready(function() {
+            refrescar();
+        });
+
+        function refrescar(){
+            $.ajax({
+                url: "./utils/getRecentSongs.php",
+                type: "GET",
+
+            success: function(response) {
+                console.log(response);
+                var songs = JSON.parse(response);
+                var cardsHTML = "";
+
+                songs.forEach(function(song) {
+                cardsHTML += `
+                    <div class="card" data="${song.id}">
+                        <div class="imgContainer"><img src="${song.img}" alt=""></div>
+                        <div class="cardInfo">
+                            <h3>${song.title}</h3>
+                            <h5 class="sectionTitle">${song.singerName}</h5>
+                        </div>
+                    </div>`;
+                });
+                $(".cards").html(cardsHTML);
+
+                addClickEventToCards();
+            },
+            error: function() {
+                alert("Hubo un error al refrescar las canciones");
+            }
+        });
+        }
+    </script>
+
+</section>
 <script src="./js/slider.js"></script>

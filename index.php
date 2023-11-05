@@ -44,6 +44,8 @@ foreach ($songs as $song) {
     <link rel="icon" href="./favicon.png">
     <link href='https://css.gg/home.css' rel='stylesheet'>
 
+    <!-- Librería jQuery para utilizar AJAX que permite actualizar dinámicamente porciones de HTML -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>SpottPlay</title>
 </head>
 
@@ -91,12 +93,10 @@ foreach ($songs as $song) {
     let songDetails = JSON.parse('<?php echo json_encode($formatSongs); ?>');  // Convierte los detalles de la canción en un objeto JavaScript.
     let authenticated = JSON.parse('<?php echo json_encode($authenticated); ?>');  // Convierte el estado de autenticación en un valor JavaScript.
 </script>
-<script src="./js/main.js"></script>
-<script src="./js/init.js"></script>
 <script src="./js/songTile.js"></script>
+<script src="./js/playingQueue.js"></script>
 <script src="./js/loginRequired.js"></script>
-
-
+<script src="./js/main.js"></script>
 <?php if ($authenticated) : ?>
     <script src="./js/favourite.js"></script>  <!-- Incluye un script JavaScript si el usuario está autenticado. -->
 <?php endif; ?>

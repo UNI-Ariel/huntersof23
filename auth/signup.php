@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
     }
     
     if ($password !== $re_password) {
-        $errors['matchPass'] = "La contraseña no coincide";
+        $errors['re_password'] = "La contraseña no coincide";
     }
 
     if (array_filter($errors)) {

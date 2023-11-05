@@ -91,11 +91,13 @@ foreach ($songs as $song) {
 </body>
 <script>
     let songDetails = JSON.parse('<?php echo json_encode($formatSongs); ?>');  // Convierte los detalles de la canción en un objeto JavaScript.
+    console.log(songDetails);
     let authenticated = JSON.parse('<?php echo json_encode($authenticated); ?>');  // Convierte el estado de autenticación en un valor JavaScript.
 </script>
 <script src="./js/songTile.js"></script>
 <script src="./js/playingQueue.js"></script>
 <script src="./js/loginRequired.js"></script>
+<script src="./js/recentPlaylist.js"></script>
 <script src="./js/main.js"></script>
 <?php if ($authenticated) : ?>
     <script src="./js/favourite.js"></script>  <!-- Incluye un script JavaScript si el usuario está autenticado. -->

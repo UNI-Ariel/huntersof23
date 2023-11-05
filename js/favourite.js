@@ -5,6 +5,7 @@ playFavButton.addEventListener("click", () => {
     if (favSongIDs.length > 0) {
         // Si hay canciones favoritas, crea una lista de reproducción con las canciones favoritas
         let favouriteSongs = [];
+        console.log(favSongIDs);
         favSongIDs.forEach((id) => {
             favouriteSongs.push(songDetails[id]);
         });

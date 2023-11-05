@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'config/dbConnection.php';
+require '../utils/dbConnection.php';
 
 $sqlPlaylists = "SELECT id, nombre, descripcion FROM playlists AS p";
 $playlists = $conn->query($sqlPlaylists);
@@ -50,7 +50,7 @@ $dir = "imagen/";
 <body class="d-flex flex-column h-100">
 
     <div class="container py-3">
-        <h2 class="text-left" style="color: white;">Mi Biblioteca</h2>
+        <h2 class="text-left" style="color: white; font-family: 'Poppins', sans-serif;" >Mi Biblioteca</h2>
         <?php if (isset($_SESSION['msg']) && isset($_SESSION['color'])) { ?>
             <div class="alert alert-<?= $_SESSION['color']; ?> alert-dismissible fade show" role="alert">
                 <?= $_SESSION['msg']; ?>
@@ -157,7 +157,7 @@ $dir = "imagen/";
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
-            background-color: #214252;
+            background-color: #181c29;
         }
 
         table {

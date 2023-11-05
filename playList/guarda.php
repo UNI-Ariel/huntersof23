@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'config/dbConnection.php';
+require '../utils/dbConnection.php';
 
 $nombre = $conn->real_escape_string($_POST['nombre']);
 $descripcion = $conn->real_escape_string($_POST['descripcion']);
@@ -58,4 +58,6 @@ if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
     $_SESSION['color'] = "danger";
     $_SESSION['msg'] = "Error al guardar imágen";
 }
+
+
 header('Location: playList.php');

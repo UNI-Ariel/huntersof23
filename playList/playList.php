@@ -64,7 +64,7 @@ $dir = "imagen/";
             <div class="col-auto">
                 <br>
                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoModal"><i class="fa-solid fa-circle-plus"></i>Crear Lista De Reproduccion</a>
-                <a href="https://spotdeploy.000webhostapp.com/" class="btn btn-primary" >Volver atras</a>
+                <a href="../index.php" class="btn btn-primary" >Volver atras</a>
             </div>
         </div>
 

@@ -98,6 +98,7 @@
 .info > h4 {
     cursor: pointer;
     padding: 5px;
+    color: white;
 }
 
 .info::before {
@@ -168,5 +169,6 @@
 
 .func > * {
     cursor: pointer;
+    color: #fff;
 }
 

@@ -19,9 +19,6 @@ const progress = document.querySelector(".progress");
 const volumeInfo = document.querySelector(".volumeInfo");
 const volume = document.querySelector(".volume");
 
-// Entrada de búsqueda
-
-
 // Variables de revisión
 let listSongs = 0;
 let searchSongs = 0;
@@ -44,15 +41,11 @@ profilePics.forEach((pic) => {
 
 // Reproducir canción
 function playSong(id) {
-    fetch('utils/getSong.php?filter='+id)
-    .then(response => response.json()) 
-    .then(data => {
-        loadSong(data);
-        audio.play();
-    })
-    .catch(error => {
-        console.error('Error:', error);
+    idActual = listSongs.findIndex(function(music) {
+        return music.id === id;
     });
+    loadSong(listSongs[idActual]);
+    audio.play();
 
     playBtn.querySelector("i.fas").classList.remove("fa-play");
     playBtn.querySelector("i.fas").classList.add("fa-pause");
@@ -61,10 +54,10 @@ function playSong(id) {
 
 // Cargar información de canción
 function loadSong(song) {
-    audio.src = song[0].audio;
-    coverImg.src = song[0].img;
-    title.innerText = song[0].title;
-    singerName.innerText = song[0].singerName;
+    audio.src = song.audio;
+    coverImg.src = song.img;
+    title.innerText = song.title;
+    singerName.innerText = song.singerName;
 }
 
 // Pausar canción

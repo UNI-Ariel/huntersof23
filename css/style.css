@@ -133,6 +133,7 @@ button {
     width: 90%;
     display: flex;
     padding: 5px;
+    margin-left: 20px;
     align-items: center;
     outline: none;
     border: none;
@@ -143,7 +144,7 @@ button {
 
 .buttonContainer i {
     margin: 10px;
-    font-size: 15px;
+    font-size: 20px;
     transition: all 0.2s ease-out;
 }
 
@@ -320,7 +321,7 @@ button {
 }
 
 .volumeInfo {
-    width: 40%;
+    width: 70%;
     height: 4px;
     padding: 0;
 }
@@ -496,6 +497,7 @@ nav {
 }
 
 .logo-links {
+    border-radius: 20px;
     background: white;
     padding: 1rem 0;
     position: absolute;
@@ -578,12 +580,12 @@ nav {
 
 .login-modal__info {
     position: relative;
+    margin-right: 5%;
 }
 
 .login-modal__logo i {
     font-size: 150px;
     color: #1DB954;
-    margin: 20px 0;
 }
 
 .testimony_body .login,
@@ -606,9 +608,9 @@ nav {
 .login-modal .close {
     position: absolute;
     cursor: pointer;
-    top: 0;
+    top: 10px;
     right: 0;
-    padding: 0 10px;
+    padding: 0 0;
     font-size: 30px;
     transform: rotate(45deg);
 }
@@ -616,6 +618,7 @@ nav {
 
 .testimony{
     background-color: #ffffff;
+    border-radius: 20px;
 }
 
 .testimony_container{

@@ -2,6 +2,8 @@ let ListRecent = 0;
 let listSearch = 0;
 let listFavourites = 0;
 
+
+// Entrada de búsqueda
 const inputSearchs = document.querySelectorAll(".search");
 inputSearchs.forEach((inputSearch) => {
     inputSearch.addEventListener("input", search);
@@ -81,7 +83,9 @@ function favorit() {
     xhrm.onload= function() {
         if (xhrm.status >= 200 && xhrm.status < 300) {
             listFavourites = JSON.parse(xhrm.responseText);
-            console.log(listFavourites);  
+
+            const favContent = document.querySelector(".tileContainer");
+            favContent.innerHTML = "";
             listFavourites.forEach((song, index) => {
                 makeSongTitleForFav(index, song);
             });

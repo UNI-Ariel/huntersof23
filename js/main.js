@@ -24,6 +24,7 @@ const inputSearchs = document.querySelectorAll(".search");
 let isPlaying = false;
 let currentVol = 1;
 let playingQueue = [];
+let recentPlay = [];
 let songIndex = 0;
 
 // Profile Logo
@@ -127,6 +128,7 @@ function playSong() {
 
 // Play all songs in queue
 function playQueue() {
+    songIndex = 0;
     loadSong(playingQueue[songIndex]);
     playSong();
     resetPlayingQueue();

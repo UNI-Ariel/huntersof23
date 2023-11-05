@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
         </div>
 
         <button type="submit" name="submit">Registrarse</button>
-        <a href="login.php" class="ca">Iniciar Sesión</a>
+        <a href="..\index.php" class="ca">Cancelar</a>
     </form>
     <script src="./js/auth.js"></script>
 </body>

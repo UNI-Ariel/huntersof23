@@ -34,5 +34,19 @@
             </button> 
         </li>
     </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="footer">
+        <a href="./components/AcercaDeNosotros.html" >Acerca De Nosotros</a>&nbsp;
+       <br>
+        <a href="./components/politicaDePrivacidad.html"  >Politica De Privacidad</a><br>
+        <a href="./components/Ayuda.html" >Centro De Ayuda</a>
+
+    </div>
+
 
 </div>

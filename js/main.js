@@ -144,8 +144,15 @@ function addClickEventToCards() {
 
 //Asignación Event Listener botones de reproducción
 playBtn.addEventListener("click", () => {
-    if (isPlaying) { pauseSong(); } 
-    else { playSong(); }
+    if (isPlaying) { 
+        pauseSong();
+    } 
+    else { 
+        playBtn.querySelector("i.fas").classList.remove("fa-play");
+        playBtn.querySelector("i.fas").classList.add("fa-pause");
+        audio.play();
+        isPlaying = true;
+    }
 })
 
 nextBtn.addEventListener("click", () => {

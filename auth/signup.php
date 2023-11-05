@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
     }
     
     if ($password !== $re_password) {
-        $errors['matchPass'] = "La contraseña no coincide";
+        $errors['re_password'] = "La contraseña no coincide";
     }
 
     if (array_filter($errors)) {
@@ -128,7 +128,7 @@ if (isset($_POST['submit'])) {
         </div>
 
         <button type="submit" name="submit">Registrarse</button>
-        <a href="login.php" class="ca">Iniciar Sesión</a>
+        <a href="..\index.php" class="ca">Cancelar</a>
     </form>
     <script src="./js/auth.js"></script>
 </body>

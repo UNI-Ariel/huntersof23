@@ -85,7 +85,10 @@ body {
     font-size: 20px;
     padding: 5px;
 }
-
+.footer a {
+    text-align: justify;
+    color: #929191;
+}
 /* Buttons */
 .links {
     width: 100%;

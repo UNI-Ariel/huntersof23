@@ -106,7 +106,7 @@ const makeSongTitleForFav = (index, song) => {
                 <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
             </div>
         </div>
-        <div class="func" style="color: white">
+        <div class="func">
             <i class="fas fa-trash"></i>
             <i class="fas fa-plus"></i>
         </div>

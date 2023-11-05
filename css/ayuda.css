@@ -22,11 +22,6 @@ p {
     max-width: 950px;
     margin: 0 auto;
 }
-.faq {
-    text-align: center; /* Centra el contenido de la sección */
-    margin: 0 auto; /* Centra la sección en el contenedor */
-    max-width: 800px; /* Ajusta el ancho máximo de la sección según tus preferencias */
-}
 
 .header {
     background: #333;

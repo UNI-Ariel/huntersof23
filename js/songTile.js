@@ -51,13 +51,14 @@ const makeSongTitle = (index, song) => {
     }
 
     // Configura el contenido HTML del elemento de título de canción
+    //Agregar de vuelta class="singerPage" al h5 si se desea ver la pagina del artista
     titleContainer.innerHTML = `
         <div class="info">
             <h4>${index + 1}</h4>
             <img src="${song["img"]}">
             <div class="detail">
                 <h4>${song["title"]}</h4>
-                <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
+                <h5 data-singer="${song["singerID"]}">${song["singerName"]}</h5>
             </div>
         </div>
         <div class="func" style="color: white">

@@ -32,7 +32,8 @@ if (isset($_GET['search'])) {
                     <img src="<?php echo $song['img']; ?>">
                     <div class="detail">
                         <h4><?php echo $song['title']; ?></h4>
-                        <h5 class="singerPage" data-singer="<?php echo $song["singerID"]; ?>"><?php echo $song['singerName']; ?></h5>
+                        <!-- <h5 class="singerPage" data-singer="<?php echo $song["singerID"]; ?>"><?php echo $song['singerName']; ?></h5> -->
+                        <h5 data-singer="<?php echo $song["singerID"]; ?>"><?php echo $song['singerName']; ?></h5>
                     </div>
                 </div>
                 <div class="func" >

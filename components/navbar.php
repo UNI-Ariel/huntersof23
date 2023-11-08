@@ -14,7 +14,7 @@
             <?php if ($authenticated) : ?>
                 <li><a href="./auth/logout.php">Cerrar Sesión</a></li>
                 <?php if ($admin) : ?>
-                    <li><a href="./auth/adminDashboard.php">Admin Dashboard</a></li>
+                    <li><a href="./auth/adminDashboard.php">Panel De Administración</a></li>
                 <?php endif; ?>
             <?php else : ?>
                 <li><a href="./auth/login.php">Iniciar Sesión</a></li>

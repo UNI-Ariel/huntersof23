@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'config/dbConnection.php';
+require '../utils/dbConnection.php';
 
 $id = $conn->real_escape_string($_POST['id']);
 $nombre = $conn->real_escape_string($_POST['nombre']);
@@ -11,7 +11,7 @@ $sql = "UPDATE playlists SET nombre ='$nombre', descripcion = '$descripcion' WHE
 if ($conn->query($sql)) {
 
     $_SESSION['color'] = "success";
-    $_SESSION['msg'] = "PlayList actualizado";
+    $_SESSION['msg'] = "Lista de reproduccion actualizada";
 
     if ($_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
         $permitidos = array("image/jpg", "image/jpeg", "image/png");
@@ -40,7 +40,7 @@ if ($conn->query($sql)) {
     }
     } else {
     $_SESSION['color'] = "danger";
-    $_SESSION['msg'] = "Error al actualizar playList";
+    $_SESSION['msg'] = "Error al actualizar lista";
 }
 
 

@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(#c6c6c6, #0799b6);
+  background: linear-gradient(#29293a,#181c29 );
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ form {
 h2 {
   text-align: center;
   margin-bottom: 40px;
-  color: #3b3b3b;
+  color: #0799B6;
 }
 
 input {
@@ -58,7 +58,7 @@ label {
 
 button {
   float: right;
-  background: #161616;
+  background: #0799B6;
   padding: 10px 15px;
   color: #fff;
   border-radius: 5px;
@@ -163,8 +163,6 @@ input[type="checkbox"]{
   cursor: pointer;
 }
 
-
-
 .link {
   display: flex;
   justify-content: space-between;
@@ -176,15 +174,6 @@ table{
   line-height:40px; 
   color: #fff; 
 }
-
-
-
-
-
-
-
-
-
 
 /* Estilo para el cuadro del checkbox */
 .custom-checkbox-container {
@@ -246,4 +235,22 @@ display: none;
 
 .custom-checkbox input:checked + .custom-checkbox-label::before {
   opacity: 1;
+}
+
+.show-pass-container {
+    display: flex;
+    flex-direction: row;
+    text-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.show-pass-container * {
+    margin: 0;
+}
+
+.show-pass-checkbox {
+    display: flex;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    gap: 2px;
 }

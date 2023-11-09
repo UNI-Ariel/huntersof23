@@ -21,34 +21,38 @@ if (isset($_POST['submit'])) {
     $email = cleanData($_POST['email']);
     $re_password = cleanData($_POST['re_password']);
 
-
-    if (empty($username)) {
-        $errors['username'] = "El nombre esta vacio";
-    }
-    
+    //Verificaciones del nombre de usuario
     if(strlen($username) < 3 or strlen($username) > 20) {
         $errors['username'] = "El nombre debe tener entre 3 y 20 caracteres";
     }
-    
-    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $username))
+    elseif (!ctype_alnum($username))
     {
-        $errors['username'] = "El nombre no puede contener caracteres especiales";
+        $errors['username'] = "El nombre no puede contener caracteres especiales ni espacios";
+    }
+    else
+    {
+        $sql = "SELECT * FROM users WHERE username = '$username' ";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $errors['username'] = "El usuario ya existe";
+        }
     }
     
-    if (empty($password)) {
-        $errors['password'] = "Introduzca una contraseña";
-    }
-    
-    if(strlen($password) < 8 or strlen($password) > 20) {
-        $errors['password'] = "La contraseña debe tener entre 8 y 20 caracteres";
-    }
-    
-    if (empty($email)) {
-        $errors['email'] = "El correo esta vacio";
-    }
-    
+    //Verificaciones del correo
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "EL correo es invalido";
+    }
+    else
+    {
+        $sql = "SELECT * FROM users WHERE email = '$email' ";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $errors['email'] = "El correo ya existe";
+        }
+    }
+    //Verificaciones de contraseña
+    if(strlen($password) < 8 or strlen($password) > 20) {
+        $errors['password'] = "La contraseña debe tener entre 8 y 20 caracteres";
     }
     
     if (empty($re_password)) {
@@ -56,20 +60,7 @@ if (isset($_POST['submit'])) {
     }
     
     if ($password !== $re_password) {
-        $errors['matchPass'] = "La contraseña no coincide";
-    }
-
-
-    $sql = "SELECT * FROM users WHERE username = '$username' ";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        $errors['existUser'] = "El usuario ya existe";
-    }
-
-    $sql = "SELECT * FROM users WHERE email = '$email' ";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        $errors['email'] = "El correo ya existe";
+        $errors['re_password'] = "La contraseña no coincide";
     }
 
     if (array_filter($errors)) {
@@ -78,7 +69,11 @@ if (isset($_POST['submit'])) {
         $password = md5($password);
         $sql2 = "INSERT INTO users(username, email, password, groupID) VALUE('$username', '$email', '$password', 2)";
         $result2 = mysqli_query($conn, $sql2);
-        if ($result2) header("Location: login.php");
+        if ($result2) {
+            /* header("Location: login.php"); */
+            echo "<script> alert('Se registro exitosamente.') </script>";
+            echo '<meta http-equiv="refresh" content="0;URL=\'login.php\'">';
+        }
     }
 }
 ?>
@@ -109,7 +104,7 @@ if (isset($_POST['submit'])) {
         <input class="<?php if ($errors['email'] != '') {
                         echo 'error1';
                         } ?>" 
-        type="text" name="email" placeholder="(ejemplo@gmail.com)" value="<?php echo $email; ?>">
+        type="text" name="email" placeholder="(Ejemplo: john@gmail.com)" value="<?php echo $email; ?>">
         <p class="error-container"><?php echo $errors['email']; ?></p>
 
         <label>Contraseña</label>
@@ -125,11 +120,17 @@ if (isset($_POST['submit'])) {
                         } ?>" 
         type="password" name="re_password" placeholder="(Confirmar Contraseña)">
         <p class="error-container"><?php echo $errors['re_password']; ?></p>
-        
+        <div class="show-pass-container">
+            <div class="show-pass-checkbox">
+                <input type="checkbox" id="show-pass">    
+                Mostrar Contraseña
+            </div>
+        </div>
 
         <button type="submit" name="submit">Registrarse</button>
         <a href="..\index.php" class="ca">Cancelar</a>
     </form>
+    <script src="./js/auth.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'config/dbConnection.php';
+require '../utils/dbConnection.php';
 
 $nombre = $conn->real_escape_string($_POST['nombre']);
 $descripcion = $conn->real_escape_string($_POST['descripcion']);
@@ -13,7 +13,7 @@ $result = $conn->query($sqlCheckName);
 if ($result->num_rows > 0) {
     // El nombre de la playlist ya existe, muestra un mensaje de error.
     $_SESSION['color'] = "danger";
-    $_SESSION['msg'] = "El nombre de la playlist ya existe. Por favor, elige un nombre diferente.";
+    $_SESSION['msg'] = "El nombre de la lista ya existe. Por favor, elige un nombre diferente.";
     header('Location: playList.php'); // Redirecciona de vuelta a la página de lista de playlists.
     exit;
 }
@@ -25,7 +25,7 @@ $sql = "INSERT INTO playlists (nombre, descripcion)
 if ($conn->query($sql)) {
     $id = $conn->insert_id;
     $_SESSION['color'] = "success";
-    $_SESSION['msg'] = "PlayList guardado";
+    $_SESSION['msg'] = "Lista de reproduccion guardado";
 
     if ($_FILES['imagen']['error'] == UPLOAD_ERR_OK) {
         $permitidos = array("image/jpg", "image/jpeg", "image/png");
@@ -58,4 +58,6 @@ if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $imagen)) {
     $_SESSION['color'] = "danger";
     $_SESSION['msg'] = "Error al guardar imágen";
 }
+
+
 header('Location: playList.php');

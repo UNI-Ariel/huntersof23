@@ -1,50 +1,54 @@
 .sectionRecent{
     display: flex;
-    justify-content: space-between;
+    margin-top: 2%;
+    margin-left: 5%;
     align-items: center;
+    position: relative;
 }
 
 .btn-refresh{
+    position: absolute;
     cursor: pointer;
     background-color: transparent;
     border: 0;
+    margin: 0;
+    right: 5%;
     color: white;
     width: 50px;
     height: 50px;
 }
 
 .cards {
-    width: 100%;
+    width: 95%;
     display: flex;
+    margin-left: 5%;
+    margin-bottom: 5%;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: start;
 }
 
 .card {
-    height: 100%;
+    height: 50%;
     padding: 10px;
     margin-right: 30px;
     margin-top: 30px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
     cursor: pointer;
-    transition: background 1s ease;
-    background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+    background: rgb(255, 255, 255);
 }
 
 .imgContainer {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 5px;
     overflow: hidden;
 }
 
 .card img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin-bottom: 5px;
     box-shadow: 0 30px 30px -6px black;
     transition: all 0.5s ease;
@@ -71,13 +75,29 @@
 
 .card h5 {
     font-size: 12px;
-    color: gray;
 }
 
 .card:hover {
-    background: rgb(80, 79, 79);
+    color: var(--letter-color);
+    background: var(--hover-bg-color);
 }
 
 .card:hover img {
     transform: scale(1.1);
+}
+
+.playAllRecent {
+    position: absolute;
+    margin: 0;
+    right: 13%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid white; 
+}
+
+.playAllRecent p{
+    margin-left: 10px;
+    font-family: 'Poppins';
 }

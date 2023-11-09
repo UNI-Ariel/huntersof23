@@ -106,7 +106,7 @@ const makeSongTitleForFav = (index, song) => {
                 <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
             </div>
         </div>
-        <div class="func" style="color: white">
+        <div class="func">
             <i class="fas fa-trash"></i>
             <i class="fas fa-plus"></i>
         </div>
@@ -149,3 +149,38 @@ const removeTileFromFav = () => {
         makeSongTitleForFav(index, songDetails[id]);
     });
 };
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    refrescar();
+});
+
+// Actualizar canciones recientes
+function refrescar() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload= function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            let listRecent = JSON.parse(xhr.responseText);
+            recentPlay = [];
+            let cardsHTML = "";
+
+            listRecent.forEach(function(song) {
+                recentPlay.push(song.id);
+                cardsHTML += `
+                    <div class="card" data="${song.id}">
+                        <div class="imgContainer"><img src="${song.img}" alt=""></div>
+                        <div class="cardInfo">
+                            <h3>${song.title}</h3>
+                            <h5>${song.singerName}</h5>
+                        </div>
+                    </div>`;
+            });
+            document.querySelector(".cards").innerHTML = cardsHTML;
+            addClickEventToCards();
+        };
+    };
+
+    xhr.open("GET", "./utils/getRecentSongs.php", true);
+    xhr.send();
+}

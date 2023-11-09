@@ -2,15 +2,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 
+:root {
+    --sidebar-color: #28324b;
+    --body-color: #181c29;
+    --player-color: #e4e5de;
+    --primary-letter-color: rgb(7, 153, 182);
+    --letter-color: white;
+    --secondary-letter-color: lightgray;
+    --hover-bg-color: rgb(76 116 143);
+    /* --hover-bg-color: rgb(87, 86, 86); */
+    /* --hover-bg-color: rgb(87, 86, 86); */
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
 }
 
 body {
-    color: rgb(7, 153, 182);
+    color: var(--primary-letter-color);
     font-family: 'Poppins', sans-serif;
     background: rgb(0, 79, 131);
     overflow: hidden;
@@ -46,7 +57,7 @@ body {
 }
 .sidebar {
     height: 100%;
-    background: rgb(0, 79, 131);
+    background: var(--sidebar-color);
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -54,9 +65,6 @@ body {
 }
 
 /* Sidebar */
-
-
-
 .header {
     /* padding: 10px 5px; */
     /* margin: 15px auto; */
@@ -126,6 +134,7 @@ button {
     width: 90%;
     display: flex;
     padding: 5px;
+    margin-left: 20px;
     align-items: center;
     outline: none;
     border: none;
@@ -136,7 +145,7 @@ button {
 
 .buttonContainer i {
     margin: 10px;
-    font-size: 15px;
+    font-size: 20px;
     transition: all 0.2s ease-out;
 }
 
@@ -200,7 +209,7 @@ button {
 .musicPlayerContainer {
     width: 100%;
     height: 15vh;
-    background: rgb(255, 255, 255);
+    background: var(--player-color);
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -211,6 +220,7 @@ button {
     padding: 5px;
     display: flex;
     align-items: center;
+    color: var(--primary-letter-color);
 }
 
 /* Music Info */
@@ -239,14 +249,13 @@ button {
     margin-top: 8px;
 }
 
-.musicDetail h5 {
+/* .musicDetail h5 {
     color: rgba(0, 0, 0, 0.521);
-}
+} */
 
 .musicInfo i {
     cursor: pointer;
 }
-
 
 /* Music Player */
 .musicPlayer {
@@ -265,7 +274,6 @@ button {
 }
 
 .action-btn {
-    color: rgb(7, 153, 182);
     background: none;
     border: 0;
     font-size: 15px;
@@ -314,7 +322,7 @@ button {
 }
 
 .volumeInfo {
-    width: 40%;
+    width: 70%;
     height: 4px;
     padding: 0;
 }
@@ -324,12 +332,17 @@ button {
     height: 4px;
     padding: 0;
     background-color:#0799B6;
+    transform: scaleY(2);
 }
 
 #playtist {
     width: 30px;
     height: 30px;
     cursor: pointer;
+}
+
+#mute {
+    transform: scale(1.2);
 }
 
 .queue {
@@ -437,7 +450,7 @@ li.playing .stroke:nth-child(3) {
 .musicContainer {
     flex: 9;
     height: 100%;
-    background: #214252;
+    background: var(--body-color);
         display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -456,9 +469,6 @@ li.playing .stroke:nth-child(3) {
 .sectonTitle {
     font-weight: 500;
 }
-
-
-
 /* Nav bar */
 nav {
     padding: 2rem 2rem;
@@ -488,6 +498,7 @@ nav {
 }
 
 .logo-links {
+    border-radius: 20px;
     background: white;
     padding: 1rem 0;
     position: absolute;
@@ -570,23 +581,25 @@ nav {
 
 .login-modal__info {
     position: relative;
+    margin-right: 5%;
 }
 
 .login-modal__logo i {
     font-size: 150px;
     color: #1DB954;
-    margin: 20px 0;
 }
 
+.testimony_body .login,
 .login-modal__info .login {
     padding: 5px 20px;
     border-radius: 20px;
     text-decoration: none;
     color: white;
     margin-top: 20px;
-    background-color: #1DB954;
+    background-color: #0799B6;
 }
 
+.testimony_body .signup,
 .login-modal__info .signup {
     color: white;
     margin-top: 20px;
@@ -596,9 +609,9 @@ nav {
 .login-modal .close {
     position: absolute;
     cursor: pointer;
-    top: 0;
+    top: 10px;
     right: 0;
-    padding: 0 10px;
+    padding: 0 0;
     font-size: 30px;
     transform: rotate(45deg);
 }
@@ -606,6 +619,7 @@ nav {
 
 .testimony{
     background-color: #ffffff;
+    border-radius: 20px;
 }
 
 .testimony_container{
@@ -644,6 +658,9 @@ nav {
 
 .testimony_texts{
     max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
 .testimony_course{

@@ -25,7 +25,9 @@ if (isset($_POST['submit'])) {
 
     if (empty($password)) {
         $errors['password'] = "Contraseña vacia";
-    } else {
+    }
+    
+    if($password!=="" && $username!==""){
         $password = md5($password);
         $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
         $result = mysqli_query($conn, $sql);

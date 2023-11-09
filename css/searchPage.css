@@ -3,8 +3,18 @@
     border: 0;
 	outline: none;
 	color: #8b7d77;
-    font-size: 15px;
     line-height: 200%;
+}
+
+.sectionTitle{
+    padding-bottom: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+.text-color {
+    color: var(--letter-color);
 }
 
 .searchContainer {
@@ -16,6 +26,7 @@
     position: relative;
     width: 100%;
     height: 35px;
+    margin-left: 50%;
 }
 
 
@@ -64,7 +75,7 @@
 }
 
 .song:hover {
-    background: rgb(87, 86, 86);
+    background: var(--hover-bg-color);
 }
 
 .song h5 {
@@ -87,6 +98,7 @@
 .info > h4 {
     cursor: pointer;
     padding: 5px;
+    color: white;
 }
 
 .info::before {
@@ -95,7 +107,7 @@
     left: 0;
     width: 40px;
     height: 40px;
-    transform: translate(-50%, -20%);
+    transform: translate(-30%, -20%);
     position: absolute;
     border-radius: 50%;
     opacity: 0;
@@ -117,7 +129,7 @@
 
 .info:hover::before {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translate(-30%, -50%);
 }
 
 .info img {
@@ -133,7 +145,7 @@
 }
 
 .detail .singerPage {
-    color: lightgray;
+    color: var(--secondary-letter-color);
     text-decoration: none;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
@@ -146,7 +158,7 @@
 .detail h4,
 .detail h5 {
     font-family: "Roboto", sans-serif;
-    color: lightgray;
+    color: var(--letter-color);
     margin: 2px 15px;
 }
 
@@ -157,5 +169,5 @@
 
 .func > * {
     cursor: pointer;
+    color: #fff;
 }
-

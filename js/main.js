@@ -24,6 +24,7 @@ const inputSearchs = document.querySelectorAll(".search");
 let isPlaying = false;
 let currentVol = 1;
 let playingQueue = [];
+let recentPlay = [];
 let songIndex = 0;
 
 // Profile Logo
@@ -127,6 +128,7 @@ function playSong() {
 
 // Play all songs in queue
 function playQueue() {
+    songIndex = 0;
     loadSong(playingQueue[songIndex]);
     playSong();
     resetPlayingQueue();
@@ -317,7 +319,7 @@ mute.addEventListener("click", () => {
     } else {
         mute.classList.add("fa-volume-up");
         mute.classList.remove("fa-volume-mute");
-        mute.style.color = "lightgreen";
+        mute.style.color = "#0799B6";
         audio.volume = currentVol;
 
         const volPercent = (currentVol / 1) * 100;

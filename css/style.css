@@ -89,6 +89,7 @@ body {
     text-align: justify;
     color: #929191;
 }
+
 /* Buttons */
 .links {
     width: 100%;
@@ -101,7 +102,7 @@ body {
 button {
     margin-left: 10%;
     margin-right: 10%;
-    background: #161616;
+    background: #0a54aa;
     padding: 10px 15px;
     color: #fff;
     border-radius: 5px;

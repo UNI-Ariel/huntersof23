@@ -96,7 +96,8 @@ if (isset($_POST['submit'])) {
             <input type="file" name="mp3" accept="audio/*">
             <label>Subir Imagen</label>
             <input type="file" name="image" accept="image/*"><br>
-            
+            <a href="editSong.php" class="ca">Cancelar</a> <!-- Enlace para volver cancelar -->
+            <button type="submit" name="submit">Guardar</button> <!-- Botón para guardar el formulario -->
 
         </form>
     </div>

@@ -17,7 +17,6 @@
                 <i class="fas fa-search"></i>
                 <h3>Buscar</h3>
             </button>
-
             <button class="buttonContainer" page-data="home" onclick= "window.location.href='./playList/playList.php' ">
                 <i class="fas fa-star"></i>
                 <h3>Biblioteca</h3>
@@ -42,6 +41,4 @@
         <a href="./components/Ayuda.html" >Centro De Ayuda</a>
 
     </div>
-
-
 </div>

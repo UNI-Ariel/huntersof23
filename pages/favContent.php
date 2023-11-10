@@ -32,7 +32,7 @@ $favSongs = array_map("reformData", $queryResult);
                     <img src="<?php echo $formatSongs[$songID]['img']; ?>">
                     <div class="detail">
                         <h4><?php echo $formatSongs[$songID]['title']; ?></h4>
-                        <h5 data-singer="<?php echo $formatSongs[$songID]['singerID']; ?>"><?php echo $formatSongs[$songID]['singerName'];?></h5>
+                        <h5 class="singerPage" data-singer="<?php echo $formatSongs[$songID]['singerID']; ?>"><?php echo $formatSongs[$songID]['singerName'];?></h5>
                     </div>
                 </div>
                 <div class="func">

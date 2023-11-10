@@ -34,7 +34,7 @@ body {
 .form-insert {
     width: 500px; /* Ancho del formulario */
     border: 2px solid #ccc; /* Borde del formulario */
-    background-color: #28324b; /*  */
+    background-color: #e4e5de; /*  */
     border-radius: 15px; /* Borde redondeado */
     padding: 30px; /* Relleno interno del formulario */
 }
@@ -51,7 +51,7 @@ body {
 
 /* Estilos para las etiquetas en el formulario */
 .form-insert label {
-    color: #888; /* Color del texto */
+    color: #0799b6; /* Color del texto */
     font-size: 18px; /* Tamaño de fuente */
     padding: 5px; /* Relleno alrededor de la etiqueta */
 }
@@ -69,7 +69,7 @@ body {
 /* Estilos para el botón en el formulario */
 .form-insert button {
     float: right; /* Posicionamiento del botón a la derecha */
-    background: #555; /* Color de fondo del botón */
+    background: #0799B6; /* Color de fondo del botón */
     padding: 10px 15px; /* Relleno del botón */
     color: #fff; /* Color del texto */
     border-radius: 5px; /* Borde redondeado */

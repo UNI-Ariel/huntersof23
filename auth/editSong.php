@@ -38,6 +38,10 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="link">
             <a class="ca2" href="adminDashboard.php">Atrás</a>
         </div>
+
+        <div style="float: right; margin-right: 20px;">
+        <a style="padding: 10px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php">Registrar Música</a>
+        </div>
         <h2>Lista De Musicas</h2>
         <table align="center" border="1"  class="displaySong">
             <tr>

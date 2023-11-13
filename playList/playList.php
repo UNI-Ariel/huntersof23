@@ -3,7 +3,8 @@ session_start();
 
 require '../utils/dbConnection.php';
 
-$sqlPlaylists = "SELECT id, nombre, descripcion FROM playlists AS p";
+//TODO: Modificar valor hardcodeado user_id = 10 a $uid despues de unir con app principal
+$sqlPlaylists = "SELECT id, nombre, descripcion FROM playlists AS p WHERE user_id=10";
 $playlists = $conn->query($sqlPlaylists);
 $dir = "imagen/";
 ?>

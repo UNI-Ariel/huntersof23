@@ -25,7 +25,44 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <title>Registrar Musica</title>
     <link rel="stylesheet" href="./css/editSong.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+    <style>
+        /* Add your additional styles here */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -62,49 +99,16 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <?php endforeach; ?>
         </table>
         <div class="paginationButton">
-           
+        <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
+                <li onclick="pagination(this.value);" style="padding: 10px;" value="1"> 1</li>
+                <li onclick="pagination(this.value);" style="padding: 10px;" value="2"> 2</li>
+                <li onclick="pagination(this.value);" style="padding: 10px;" value="3"> 3</li>
+            </ul>  
         </div>
     </div>
+
 </body>
 
 
-<script type="text/javascript">
-    function pagination(value) {
-        let header = `<tr>
-            <th colspan="6">Lista de Musica</th>
-        </tr>
-        <tr>
-            <th>No</th>
-            <th>Imagenes</th>
-            <th>Nombre</th>
-            <th>Archivo de Musica</th>
-            <th colspan="3">Acciones</th>
-        </tr>`
-        let displaySong = document.getElementsByClassName("displaySong")[0];
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                let results = JSON.parse(this.responseText);;
-
-                let html = '';
-                displaySong.innerHTML = header;
-
-                results.map((value, index) => {
-                    html +=
-                        ` <tr>
-                    <td> ${index + 1}</td>
-                    <td><img style="width: 50px; height: 50px;" src='../${value['imgPath']}'></td>
-                    <td>${value['title']}</td>
-                    <td>${value['filePath']}</td>
-                   
-                    </tr>`
-                })
-                displaySong.innerHTML += html;
-            }
-        };
-        xhttp.open("GET", "paginationSong.php?page=" + value, true);
-        xhttp.send();
-    }
-</script>
 
 </html>

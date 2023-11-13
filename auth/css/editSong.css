@@ -235,10 +235,10 @@ body {
   table{
     width:1000px; 
     line-height:40px; 
+    background-color:#e4e5de;
   }
   
   li:hover{
     cursor: pointer;
-    background-color: #1DB954;
   }
   

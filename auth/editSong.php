@@ -25,23 +25,21 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <title>Registrar Musica</title>
     <link rel="stylesheet" href="./css/editSong.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .blue-table {
-            background-color: #28324b; /* Cambiar a tu color azul deseado */
-            color: #fff; /* Cambiar a tu color de texto deseado */
-        }
-    </style>
+    
 </head>
 
 <body>
     <div class="container">
         <div class="link">
             <a class="ca2" href="adminDashboard.php">Atrás</a>
+
         </div>
 
-        <div style="float: right; margin-right: 20px;">
-        <a style="padding: 10px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php">Registrar Música</a>
-        </div>
+        <div style="float: right; margin-right: 20px; margin-top: -70px;">
+    <a style="padding: 10px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php">Registrar Música</a>
+         </div>
+
+        
         <h2>Lista De Musicas</h2>
         <table align="center" border="1"  class="displaySong">
             <tr>
@@ -52,13 +50,13 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <th colspan="3">Acciones</th>
             </tr>
 
-            <?php foreach ($songs as $index => $song) : if ($index == 6) break; ?>
+            <?php foreach ($songs as $index => $song) : if ($index == 7) break; ?>
                 <tr>
                     <td><?php echo $index + 1; ?></td>
                     <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $song['imgPath'] ?>"></td>
                     <td><?php echo $song['title']; ?></td>
                     <td><?php echo $song['filePath']; ?></td>
-                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=<?php echo $song['id'] ?>">Editar</a></td>
+                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px;text-decoration: none;" href="insertSong.php?id=<?php echo $song['id'] ?>">Editar</a></td>
                     <td><a style="padding: 5px; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=<?php echo $song['id'] ?>">Eliminar</a></td>
                 </tr>
             <?php endforeach; ?>

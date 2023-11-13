@@ -32,6 +32,20 @@ $title = $mp3 = $img = $singerID = '';  // Variables para título, archivos y ID
 function saveFile($fileInfo)
 {
     // Lógica para guardar el archivo en el servidor
+    $filename = $fileInfo['name'];
+    $type = $fileInfo['type'];
+    $folder = (strpos($type, "image") !== false) ? 'images/' : 'music/';
+
+    $tmpPath = $fileInfo['tmp_name'];
+    $destinationPath = $folder . $filename;
+
+    if (move_uploaded_file($tmpPath, '../' . $destinationPath)) {
+        echo "Successfully uploaded";
+    } else {
+        echo "Upload fail";
+    }
+
+    return $destinationPath;
 }
 
 // Manejo del formulario al enviar los datos
@@ -39,23 +53,47 @@ if (isset($_POST['submit'])) {
     // Validación de los campos del formulario
 
     // Validación del campo de título
+    if (empty($_POST['title'])) {
+        $errors['title'] = "Title cannot be empty";
+    } else {
+        $title = $_POST['title'];
+    }
     // Validación del campo de cantante
+    $singerID = $_POST['singer'];
     // Validación del archivo de música
+    if (empty($_FILES["mp3"]["name"])) {
+        $errors['mp3'] = "Music File cannot be empty";
+    } else {
+        $mp3 = $_FILES['mp3'];
+    }
     // Validación del archivo de imagen
-
+    if (empty($_FILES["image"]["name"])) {
+        $errors['image'] = "Image file cannot be empty";
+    } else {
+        $img = $_FILES['image'];
+    }
     // Comprobación de errores
     if (array_filter($errors)) {
         echo 'Formulario no válido';
     } else {
         // Insertar o actualizar en la base de datos
-
-        // Guardar la ruta del archivo de música
-        // Guardar la ruta del archivo de imagen
+        $mp3Path = saveFile($mp3);         // Guardar la ruta del archivo de música
+        $imgPath = saveFile($img);                // Guardar la ruta del archivo de imagen
 
         if (isset($_GET['id'])) {
             // Actualizar la canción en la base de datos
+            $updateSong = "UPDATE songs SET title = '$title', filePath = '$mp3Path', imgPath = '$imgPath', singerID = '$singerID' WHERE id =$id";
+            $res3 = mysqli_query($conn, $updateSong);
+            header("Location: editSong.php");
         } else {
             // Insertar la canción en la base de datos
+            $insertSong = "INSERT INTO songs(title, filePath, imgPath, singerID) 
+            VALUES ('$title', '$mp3Path', '$imgPath', $singerID)";
+            if (!mysqli_query($conn, $insertSong)) {
+            echo  "Error: " . "<br>" . mysqli_error($conn);
+            } else {
+             header("Location: editSong.php");
+            }
         }
     }
 }

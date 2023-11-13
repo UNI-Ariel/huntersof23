@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2023 at 02:03 AM
+-- Generation Time: Nov 13, 2023 at 11:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `spottplay`
+-- Database: `myspotplay`
 --
 
 -- --------------------------------------------------------
@@ -37,8 +37,8 @@ CREATE TABLE `favourites` (
 --
 
 INSERT INTO `favourites` (`uid`, `songID`) VALUES
-(9, 14),
-(9, 15);
+(10, 23),
+(10, 24);
 
 -- --------------------------------------------------------
 
@@ -62,11 +62,23 @@ INSERT INTO `groups` (`id`, `groupName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `listsongs`
+--
+
+CREATE TABLE `listsongs` (
+  `playlist_id` int(11) NOT NULL,
+  `song_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `playlists`
 --
 
 CREATE TABLE `playlists` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `imagen` varchar(255) DEFAULT NULL
@@ -120,9 +132,6 @@ CREATE TABLE `songs` (
 --
 
 INSERT INTO `songs` (`id`, `title`, `filePath`, `imgPath`, `dateAdded`, `singerID`) VALUES
-(14, 'Pixabay', 'music/pixabay.mp3', 'images/piano.jpg', '2021-06-03 14:38:34', 9),
-(15, 'Midnight', 'music/midnight.mp3', 'images/Midnight_Mist.jpg', '2021-06-03 14:38:58', 9),
-(16, 'Electronica', 'music/electronica.mp3', 'images/lofi.jpg', '2021-06-03 14:39:21', 9),
 (17, 'Bloody Mary', 'music/Bloody Mary.mp3', 'images/bloodymary.jpg', '2023-10-26 01:40:40', 1),
 (18, 'Faded', 'music/faded.mp3', 'images/faded.png', '2023-10-26 01:45:42', 3),
 (19, 'Lost On You', 'music/Lost On You.mp3', 'images/lostonyou.jpg', '2023-10-26 01:51:57', 4),
@@ -151,11 +160,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `groupID`) VALUES
-(5, 'pum', '', '58af57d4977baf21166dbfb12b606789', 2),
-(9, 'baobao', '', 'b6c6cfe1a7ba5eac0f984f3ef97c8490', 1),
 (10, 'Harold', '', 'c57f431343f100b441e268cc12babc34', 2),
-(11, 'test2', 'asd@gmail.com', '1adbb3178591fd5bb0c248518f39bf6d', 2),
-(12, 'test3', 'asd2@gmail.com', '1adbb3178591fd5bb0c248518f39bf6d', 2);
+(29, 'admin', 'admin@', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 --
 -- Indexes for dumped tables
@@ -175,10 +181,18 @@ ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `listsongs`
+--
+ALTER TABLE `listsongs`
+  ADD KEY `listsongs_ibfk_1` (`playlist_id`),
+  ADD KEY `listsongs_ibfk_2` (`song_id`);
+
+--
 -- Indexes for table `playlists`
 --
 ALTER TABLE `playlists`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `singers`
@@ -214,7 +228,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `singers`
@@ -232,7 +246,7 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
@@ -244,6 +258,19 @@ ALTER TABLE `users`
 ALTER TABLE `favourites`
   ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`songID`) REFERENCES `songs` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `listsongs`
+--
+ALTER TABLE `listsongs`
+  ADD CONSTRAINT `listsongs_ibfk_1` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `listsongs_ibfk_2` FOREIGN KEY (`song_id`) REFERENCES `songs` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `playlists`
+--
+ALTER TABLE `playlists`
+  ADD CONSTRAINT `playlists_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `songs`

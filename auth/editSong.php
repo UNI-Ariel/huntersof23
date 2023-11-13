@@ -1,0 +1,108 @@
+<?php
+include('./auth.php');
+
+if (!$authenticated) {
+    header("Location: ./login.php");
+} else {
+    if (!$admin) {
+        header("Location: ./unauth.php");
+    }
+}
+
+include("../utils/dbConnection.php");
+$sql = "SELECT * FROM songs";
+$result = mysqli_query($conn, $sql);
+$songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Musica</title>
+    <link rel="stylesheet" href="./css/editSong.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .blue-table {
+            background-color: #28324b; /* Cambiar a tu color azul deseado */
+            color: #fff; /* Cambiar a tu color de texto deseado */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="link">
+            <a class="ca2" href="adminDashboard.php">Atrás</a>
+        </div>
+        <h2>Lista De Musicas</h2>
+        <table align="center" border="1"  class="displaySong">
+            <tr>
+                <th>No</th>
+                <th>Imagenes</th>
+                <th>Nombre</th>
+                <th>Archivo de Musica</th>
+                <th colspan="3">Acciones</th>
+            </tr>
+
+            <?php foreach ($songs as $index => $song) : if ($index == 6) break; ?>
+                <tr>
+                    <td><?php echo $index + 1; ?></td>
+                    <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $song['imgPath'] ?>"></td>
+                    <td><?php echo $song['title']; ?></td>
+                    <td><?php echo $song['filePath']; ?></td>
+                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=<?php echo $song['id'] ?>">Editar</a></td>
+                    <td><a style="padding: 5px; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=<?php echo $song['id'] ?>">Eliminar</a></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <div class="paginationButton">
+           
+        </div>
+    </div>
+</body>
+
+
+<script type="text/javascript">
+    function pagination(value) {
+        let header = `<tr>
+            <th colspan="6">Lista de Musica</th>
+        </tr>
+        <tr>
+            <th>No</th>
+            <th>Imagenes</th>
+            <th>Nombre</th>
+            <th>Archivo de Musica</th>
+            <th colspan="3">Acciones</th>
+        </tr>`
+        let displaySong = document.getElementsByClassName("displaySong")[0];
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let results = JSON.parse(this.responseText);;
+
+                let html = '';
+                displaySong.innerHTML = header;
+
+                results.map((value, index) => {
+                    html +=
+                        ` <tr>
+                    <td> ${index + 1}</td>
+                    <td><img style="width: 50px; height: 50px;" src='../${value['imgPath']}'></td>
+                    <td>${value['title']}</td>
+                    <td>${value['filePath']}</td>
+                   
+                    </tr>`
+                })
+                displaySong.innerHTML += html;
+            }
+        };
+        xhttp.open("GET", "paginationSong.php?page=" + value, true);
+        xhttp.send();
+    }
+</script>
+
+</html>

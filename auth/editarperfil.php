@@ -6,7 +6,7 @@ include('./auth.php');  // Incluye el archivo de autenticación
 if (!$authenticated) {  // Si no está autenticado, redirige a la página de inicio de sesión
     header("Location: ./login.php");
 } else {
-    if (!$admin) {  // Si no es administrador, redirige a la página de no autorizado
+    if (!$Username) {  
         header("Location: ./unauth.php");
     }
 }

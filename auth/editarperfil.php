@@ -1,24 +1,12 @@
 <!-- ./auth/editarperfil.php -->
 
-
-
 <?php
-// Incluye los archivos necesarios
-include("../utils/dbConnection.php");
-include("../auth/auth.php");
+include('./auth.php');  // Incluye el archivo de autenticación
 
-// Verifica si el usuario está autenticado
-if (!$authenticated) {
-    // Redirige si el usuario no está autenticado
-    redirect("../index.php");
+if (!$authenticated) {  // Si no está autenticado, redirige a la página de inicio de sesión
+    header("Location: ./login.php");
 }
-    <label for="newName">Nuevo Nombre:</label>
-    <input type="text" id="newName" name="newName" required>
 
-    
-
-    <input type="submit" value="Guardar Cambios">
-</form>
 ?>
 <!-- ./auth/editarperfil.php -->
 
@@ -27,6 +15,12 @@ if (!$authenticated) {
 <head>
     <!-- Asegúrate de incluir las etiquetas meta y enlaces a CSS necesarios -->
     <title>Editar Perfil - SpottPlay</title>
+    <form action="./auth/handle-edit-profile.php" method="post">
+    <label for="newName">Nuevo Nombre:</label>
+    <input type="text" id="newName" name="newName" required>
+
+    
+
+    <input type="submit" value="Guardar Cambios">
+</form>
 </head>
-
-

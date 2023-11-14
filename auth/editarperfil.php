@@ -1,16 +1,17 @@
 <!-- ./auth/editarperfil.php -->
 
-<?php
-include('./auth.php');  // Incluye el archivo de autenticación
 
-if (!$authenticated) {  // Si no está autenticado, redirige a la página de inicio de sesión
-    header("Location: ./login.php");
-} else {
-    if (!$Username) {  
-        header("Location: ./unauth.php");
-    }
+
+<?php
+// Incluye los archivos necesarios
+include("../utils/dbConnection.php");
+include("../auth/auth.php");
+
+// Verifica si el usuario está autenticado
+if (!$authenticated) {
+    // Redirige si el usuario no está autenticado
+    redirect("../index.php");
 }
-<form action="./auth/handle-edit-profile.php" method="post">
     <label for="newName">Nuevo Nombre:</label>
     <input type="text" id="newName" name="newName" required>
 

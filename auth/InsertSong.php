@@ -8,6 +8,7 @@ if (!$authenticated) {  // Si no está autenticado, redirige a la página de ini
         header("Location: ./unauth.php");
     }
 }
+
 include("../utils/dbConnection.php");  // Incluye el archivo de conexión a la base de datos
 $getSingers = "SELECT * from singers";  // Consulta para obtener todos los cantantes
 $result = mysqli_query($conn, $getSingers);  // Ejecuta la consulta en la base de datos
@@ -24,6 +25,7 @@ if (isset($_GET['id'])) {  // Verifica si se recibe un ID por GET para edición
     $titleUpdate = $data["title"];  // Obtiene el título para la edición
     $singerIDfff = $data["singerID"];  // Obtiene el ID del cantante para la edición
     $formTitle = "Editar Musica"; // Cambiar el título si se está editando
+
 }
 
 $errors = array('title' => '', 'mp3' => '', 'img' => '');  // Arreglo para mensajes de error
@@ -32,10 +34,11 @@ $title = $mp3 = $img = $singerID = '';  // Variables para título, archivos y ID
 // Función para guardar un archivo en el servidor
 function saveFile($fileInfo)
 {
-        // Lógica para guardar el archivo en el servidor
+    // Lógica para guardar el archivo en el servidor
     $filename = $fileInfo['name'];
     $type = $fileInfo['type'];
     $folder = (strpos($type, "image") !== false) ? 'images/' : 'music/';
+
     $tmpPath = $fileInfo['tmp_name'];
     $destinationPath = $folder . $filename;
 
@@ -47,6 +50,7 @@ function saveFile($fileInfo)
 
     return $destinationPath;
 }
+
 // Manejo del formulario al enviar los datos
 if (isset($_POST['submit'])) {
     // Validación de los campos del formulario
@@ -57,41 +61,41 @@ if (isset($_POST['submit'])) {
     } else {
         $title = $_POST['title'];
     }
-        // Validación del campo de cantante
+    // Validación del campo de cantante
     $singerID = $_POST['singer'];
-        // Validación del archivo de música
+    // Validación del archivo de música
     if (empty($_FILES["mp3"]["name"])) {
         $errors['mp3'] = "Music File cannot be empty";
     } else {
         $mp3 = $_FILES['mp3'];
     }
-        // Validación del archivo de imagen
+    // Validación del archivo de imagen
     if (empty($_FILES["image"]["name"])) {
         $errors['image'] = "Image file cannot be empty";
     } else {
         $img = $_FILES['image'];
     }
-         // Comprobación de errores
+    // Comprobación de errores
     if (array_filter($errors)) {
         echo 'Formulario no válido';
     } else {
-// Insertar o actualizar en la base de datos
-        $mp3Path = saveFile($mp3);
-        $imgPath = saveFile($img);
+        // Insertar o actualizar en la base de datos
+        $mp3Path = saveFile($mp3);         // Guardar la ruta del archivo de música
+        $imgPath = saveFile($img);                // Guardar la ruta del archivo de imagen
 
         if (isset($_GET['id'])) {
-                        // Actualizar la canción en la base de datos
+            // Actualizar la canción en la base de datos
             $updateSong = "UPDATE songs SET title = '$title', filePath = '$mp3Path', imgPath = '$imgPath', singerID = '$singerID' WHERE id =$id";
             $res3 = mysqli_query($conn, $updateSong);
             header("Location: editSong.php");
         } else {
-                        // Insertar la canción en la base de datos
+            // Insertar la canción en la base de datos
             $insertSong = "INSERT INTO songs(title, filePath, imgPath, singerID) 
             VALUES ('$title', '$mp3Path', '$imgPath', $singerID)";
             if (!mysqli_query($conn, $insertSong)) {
-                echo  "Error: " . "<br>" . mysqli_error($conn);
+            echo  "Error: " . "<br>" . mysqli_error($conn);
             } else {
-                header("Location: editSong.php");
+             header("Location: editSong.php");
             }
         }
     }
@@ -102,7 +106,7 @@ if (isset($_POST['submit'])) {
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cancion</title>
@@ -112,42 +116,32 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="add-info">
+        <!-- Sección para agregar información de la canción -->
         <h3 class="notice"><?php echo $formTitle; ?></h3>
         <form class="form-insert" method="POST" enctype="multipart/form-data">
             <?php foreach ($errors as $error) : ?>
-                <p class="error"><?php echo $error; ?></p>
+                <p class="error"><?php echo $error; ?></p> <!-- Muestra errores del formulario -->
             <?php endforeach; ?>
             <label>Nombre de la Musica</label>
             <input type="text" name="title" placeholder="Título" value="<?php echo $titleUpdate; ?>">
             <label>Nombre del Artista</label>
-            <input type="text" name="singer" id="singerSearch" oninput="searchSinger(this.value)">
-            <div id="singerResults"></div>
+            <select name="singer">
+           <option value="" selected disabled>Seleccionar Artista</option>
+           <?php foreach ($singers as $singer) : ?>
+           <option value='<?php echo $singer['id']; ?>'>
+           <?php echo $singer['name']; ?>
+           </option>
+           <?php endforeach; ?>
+           </select>
             <label>Subir Archivo</label>
             <input type="file" name="mp3" accept="audio/*">
             <label>Subir Imagen</label>
             <input type="file" name="image" accept="image/*"><br>
-            <a href="editSong.php" class="ca">Cancelar</a>
-            <button type="submit" name="submit">Guardar</button>
+            <a href="editSong.php" class="ca">Cancelar</a> <!-- Enlace para volver cancelar -->
+            <button type="submit" name="submit">Guardar</button> <!-- Botón para guardar el formulario -->
+
         </form>
     </div>
-
-    <script>
-        function searchSinger(query) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("singerResults").innerHTML = this.responseText;
-                }
-            };
-            xhttp.open("GET", "searchSinger.php?q=" + query, true);
-            xhttp.send();
-        }
-
-        function selectSinger(name) {
-            document.getElementById("singerSearch").value = name;
-            document.getElementById("singerResults").innerHTML = '';
-        }
-    </script>
 </body>
 
 </html>

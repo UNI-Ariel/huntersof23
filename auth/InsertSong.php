@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
 
     // Validación del campo de título
     if (empty($_POST['title'])) {
-        $errors['title'] = "Title cannot be empty";
+        $errors['title'] = "El título no puede estar vacío.";
     } else {
         $title = $_POST['title'];
     }
@@ -65,13 +65,13 @@ if (isset($_POST['submit'])) {
     $singerID = $_POST['singer'];
     // Validación del archivo de música
     if (empty($_FILES["mp3"]["name"])) {
-        $errors['mp3'] = "Music File cannot be empty";
+        $errors['mp3'] = "El archivo de música no puede estar vacío";
     } else {
         $mp3 = $_FILES['mp3'];
     }
     // Validación del archivo de imagen
     if (empty($_FILES["image"]["name"])) {
-        $errors['image'] = "Image file cannot be empty";
+        $errors['image'] = "El archivo de imagen no puede estar vacío";
     } else {
         $img = $_FILES['image'];
     }
@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
             <label>Subir Imagen</label>
             <input type="file" name="image" accept="image/*"><br>
             <a href="editSong.php" class="ca">Cancelar</a> <!-- Enlace para volver cancelar -->
-            <button type="submit" name="submit">Guardar</button> <!-- Botón para guardar el formulario -->
+            <button type="submit" name="submit" style="cursor: pointer;">Guardar</button> <!-- Botón para guardar el formulario -->
 
         </form>
     </div>

@@ -18,74 +18,109 @@ if ($resultado) {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conexion));
 }
+?> 
 
-// Procesar el formulario cuando se envíe
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nuevoNombre = $_POST['nuevoNombre'];
-    $nuevoCorreo = $_POST['nuevoCorreo'];
+<?php
+// Archivo de conexión a la base de datos (reemplázalo con tus propios detalles de conexión)
+include 'conexion.php';
 
-    // Actualizar nombre y correo en la base de datos
-    $sqlUpdate = "UPDATE usuarios SET nombre = '$nuevoNombre', correo = '$nuevoCorreo' WHERE id = $id_usuario";
-    if (mysqli_query($conexion, $sqlUpdate)) {
-        // Éxito en la actualización del nombre y correo
-    } else {
-        // Manejar errores de la consulta
-        die("Error: " . mysqli_error($conexion));
-    }
+// ID del usuario (ajústalo según tu aplicación, por ejemplo, desde la sesión)
+$id_usuario = 1;
 
-    // Procesar la nueva imagen si se proporciona
-    if ($_FILES['nuevaImagen']['error'] == 0) {
-        $imagenTmpPath = $_FILES['nuevaImagen']['tmp_name'];
-        $imagenNombre = $_FILES['nuevaImagen']['name'];
+// Obtener datos actuales del usuario para mostrar en el formulario
+$sql = "SELECT nombre, correo, imagen FROM usuarios WHERE id = $id_usuario";
+$resultado = mysqli_query($conn, $sql);
 
-        // Mover la imagen al directorio deseado (aquí deberías validar el tipo de archivo, tamaño, etc.)
-        move_uploaded_file($imagenTmpPath, 'directorio_destino/' . $imagenNombre);
-
-        // Actualizar la información de la imagen en la base de datos
-        $sqlImagen = "UPDATE usuarios SET imagen = '$imagenNombre' WHERE id = $id_usuario";
-        if (!mysqli_query($conexion, $sqlImagen)) {
-            // Manejar errores de la consulta
-            die("Error: " . mysqli_error($conexion));
-        }
-    }
-
-    // Redirigir a la página de perfil o mostrar un mensaje de éxito
-    header('Location: perfil.php');
-    exit();
+if ($resultado) {
+    $fila = mysqli_fetch_assoc($resultado);
+    $nombreActual = $fila['nombre'];
+    $correoActual = $fila['correo'];
+    $imagenActual = $fila['imagen'];
+} else {
+    // Manejar errores de la consulta
+    die("Error: " . mysqli_error($conn));
 }
+
+// Cerrar la conexión a la base de datos después de obtener los datos
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Perfil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Editar Perfil</h1>
+    <div class="container">
+        <h1>Editar Perfil</h1>
 
-    <form action="editar_perfil.php" method="post" enctype="multipart/form-data">
-        <label for="nuevoNombre">Nuevo Nombre:</label>
-        <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $nombreActual; ?>" required>
-        <br>
+        <form action="editar_perfil.php" method="post" enctype="multipart/form-data">
+            <label for="nuevoNombre">Nuevo Nombre:</label>
+            <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $nombreActual; ?>" required>
 
-        <label for="nuevoCorreo">Nuevo Correo:</label>
-        <input type="email" id="nuevoCorreo" name="nuevoCorreo" value="<?php echo $correoActual; ?>" required>
-        <br>
+            <label for="nuevoCorreo">Nuevo Correo:</label>
+            <input type="email" id="nuevoCorreo" name="nuevoCorreo" value="<?php echo $correoActual; ?>" required>
 
-        <!-- Mostrar la imagen actual -->
-        <img src="directorio_destino/<?php echo $imagenActual; ?>" alt="Imagen Actual">
+            <label for="imagenActual">Imagen Actual:</label>
+            <img src="directorio_destino/<?php echo $imagenActual; ?>" alt="Imagen Actual">
 
-        <br>
+            <label for="nuevaImagen">Cambiar Imagen:</label>
+            <input type="file" id="nuevaImagen" name="nuevaImagen">
 
-        <label for="nuevaImagen">Cambiar Imagen:</label>
-        <input type="file" id="nuevaImagen" name="nuevaImagen">
-        <br>
-
-        <input type="submit" value="Guardar Cambios">
-    <br>   
-        <input type="submit" value="Eliminar Cambios">
-    </form>
+            <input type="submit" value="Guardar Cambios">
+        </form>
+    </div>
 </body>
 </html>

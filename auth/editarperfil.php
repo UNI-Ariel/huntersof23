@@ -3,39 +3,39 @@
 include("../utils/dbConnection.php");
 
 
-$id_usuario = 1;
+$id_users = 1;
 
 // Obtener datos actuales del usuario para mostrar en el formulario
-$sql = "SELECT nombre, correo, imagen FROM usuarios WHERE id = $id_usuario";
-$resultado = mysqli_query($conexion, $sql);
+$sql = "SELECT username, email, imgUser FROM users WHERE id = $id_users";
+$resultado = mysqli_query($conn, $sql);
 
 if ($resultado) {
     $fila = mysqli_fetch_assoc($resultado);
-    $nombreActual = $fila['nombre'];
-    $correoActual = $fila['correo'];
-    $imagenActual = $fila['imagen'];
+    $usernameActual = $fila['username'];
+    $emailActual = $fila['email'];
+    $imgUserActual = $fila['imgUser'];
 } else {
     // Manejar errores de la consulta
-    die("Error: " . mysqli_error($conexion));
+    die("Error: " . mysqli_error($conn));
 }
 ?> 
 
 <?php
 // Archivo de conexión a la base de datos (reemplázalo con tus propios detalles de conexión)
-include 'conexion.php';
+include("../utils/dbConnection.php");
 
 // ID del usuario (ajústalo según tu aplicación, por ejemplo, desde la sesión)
-$id_usuario = 1;
+$id_users = 1;
 
 // Obtener datos actuales del usuario para mostrar en el formulario
-$sql = "SELECT nombre, correo, imagen FROM usuarios WHERE id = $id_usuario";
+$sql = "SELECT username, email, imgUser FROM users WHERE id = $id_users";
 $resultado = mysqli_query($conn, $sql);
 
 if ($resultado) {
     $fila = mysqli_fetch_assoc($resultado);
-    $nombreActual = $fila['nombre'];
-    $correoActual = $fila['correo'];
-    $imagenActual = $fila['imagen'];
+    $usernameActual = $fila['username'];
+    $emailActual = $fila['email'];
+    $imgUserActual = $fila['imgUser'];
 } else {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
@@ -106,12 +106,12 @@ mysqli_close($conn);
     <div class="container">
         <h1>Editar Perfil</h1>
 
-        <form action="editar_perfil.php" method="post" enctype="multipart/form-data">
+        <form action="editarperfil.php" method="post" enctype="multipart/form-data">
             <label for="nuevoNombre">Nuevo Nombre:</label>
-            <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $nombreActual; ?>" required>
+            <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $username; ?>" required>
 
-            <label for="nuevoCorreo">Nuevo Correo:</label>
-            <input type="email" id="nuevoCorreo" name="nuevoCorreo" value="<?php echo $correoActual; ?>" required>
+            <label for="nuevoemail">Nuevo Correo:</label>
+            <input type="email" id="nuevoemail" name="nuevoemail" value="<?php echo $emailActual; ?>" required>
 
             <label for="imagenActual">Imagen Actual:</label>
             <img src="directorio_destino/<?php echo $imagenActual; ?>" alt="Imagen Actual">
@@ -120,6 +120,7 @@ mysqli_close($conn);
             <input type="file" id="nuevaImagen" name="nuevaImagen">
 
             <input type="submit" value="Guardar Cambios">
+            <input type="submit" value="Eliminar  Cambios">
         </form>
     </div>
 </body>

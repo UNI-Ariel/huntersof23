@@ -37,10 +37,28 @@ if (isset($_GET['search'])) {
                 </div>
                 <div class="func" >
                     <?php echo $heartIcon; ?>
-                    <i class="fas fa-plus"></i>
+                    <button class="open-modal-button" onclick="openModal()"><i class="fas fa-plus" ></i></button>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
 </section>
+
+
+
+
+<link rel="stylesheet" href="pages/play.css">
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  <script src="pages/mosPlayList.js"></script>
+
+
+
+
 

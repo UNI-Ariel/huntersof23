@@ -1,6 +1,6 @@
 <!-- Modal nuevo registro -->
 <div class="modal fade" id="nuevoModal" tabindex="-1" aria-labelledby="nuevoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal-dialog" style="width: calc(100%  4cm); max-width: calc(100% 4cm); margin: 1cm auto;">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="nuevoModalLabel" style="color: white;">Crear Lista De Reproduccion</h1>

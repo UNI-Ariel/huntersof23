@@ -54,9 +54,9 @@
     // Agregar una función para validar la longitud del campo "descripcion" al cambiar
     document.getElementById('descripcion').addEventListener('input', function () {
         var descripcion = this.value;
-        if (descripcion.length > 30) {
-            document.getElementById('descripcion-error').textContent = 'Número de caracteres excedido. (Máximo de 30 )';
-            this.setCustomValidity('Número de caracteres excedido. (Máximo de 30 )');
+        if (descripcion.length > 60) {
+            document.getElementById('descripcion-error').textContent = 'Número de caracteres excedido. (Máximo de 60 )';
+            this.setCustomValidity('Número de caracteres excedido. (Máximo de 60 )');
         } else {
             document.getElementById('descripcion-error').textContent = '';
             this.setCustomValidity('');

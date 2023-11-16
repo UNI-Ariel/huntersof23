@@ -24,13 +24,14 @@ function openModal() {
     var modalHTML = '<button class="open-modal-button" onclick="">Agregar nuevo</button>';
 
     consultaResultados.forEach(function(result) {
-        modalHTML += '<div class="card">';
-        modalHTML += '<div class="card-content">';
-        modalHTML += '<h3>' + result.nombre_playlist +'&nbsp; &nbsp; &nbsp;'+ 'Cantidad de Canciones: ' + result.cantidad_canciones + '</h3>';
+        modalHTML += '<div class="card-header">';
+        modalHTML += '<div class="card-body">';
+        modalHTML += '<img src="' + result.imagen + '">';
+        
         
         modalHTML += '</div>';
-        modalHTML += '<div class="card-content">';
-        modalHTML += '<img src="' + result.imagen + '">';
+        modalHTML += '<div class="card-body">';
+        modalHTML += '<p>'+ result.nombre_playlist +'&nbsp; &nbsp; &nbsp;'+ 'Cantidad de Canciones: ' + result.cantidad_canciones + '</p>';
        // modalHTML += '<p>ID Playlist: ' + result.idPlay + '</p>';
        // modalHTML += '<p>Cantidad de Canciones: ' + result.cantidad_canciones + '</p>';
         modalHTML += '</div></div>';

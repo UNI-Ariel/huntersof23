@@ -2,40 +2,17 @@
 // Archivo de conexión a la base de datos 
 include("../utils/dbConnection.php");
 
-
-$id_users = 1;
+$id_user = $_REQUEST['user'];
 
 // Obtener datos actuales del usuario para mostrar en el formulario
-$sql = "SELECT username, email, imgUser FROM users WHERE id = $id_users";
+$sql = "SELECT username, email, userImg FROM users WHERE id = $id_user";
 $resultado = mysqli_query($conn, $sql);
 
 if ($resultado) {
     $fila = mysqli_fetch_assoc($resultado);
     $usernameActual = $fila['username'];
     $emailActual = $fila['email'];
-    $imgUserActual = $fila['imgUser'];
-} else {
-    // Manejar errores de la consulta
-    die("Error: " . mysqli_error($conn));
-}
-?> 
-
-<?php
-// Archivo de conexión a la base de datos (reemplázalo con tus propios detalles de conexión)
-include("../utils/dbConnection.php");
-
-// ID del usuario (ajústalo según tu aplicación, por ejemplo, desde la sesión)
-$id_users = 1;
-
-// Obtener datos actuales del usuario para mostrar en el formulario
-$sql = "SELECT username, email, imgUser FROM users WHERE id = $id_users";
-$resultado = mysqli_query($conn, $sql);
-
-if ($resultado) {
-    $fila = mysqli_fetch_assoc($resultado);
-    $usernameActual = $fila['username'];
-    $emailActual = $fila['email'];
-    $imgUserActual = $fila['imgUser'];
+    $imgUserActual = $fila['userImg'];
 } else {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
@@ -108,7 +85,7 @@ mysqli_close($conn);
 
         <form action="editarperfil.php" method="post" enctype="multipart/form-data">
             <label for="nuevoNombre">Nuevo Nombre:</label>
-            <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $username; ?>" required>
+            <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $usernameActual; ?>" required>
 
             <label for="nuevoemail">Nuevo Correo:</label>
             <input type="email" id="nuevoemail" name="nuevoemail" value="<?php echo $emailActual; ?>" required>

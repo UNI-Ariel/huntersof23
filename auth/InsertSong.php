@@ -119,11 +119,10 @@ if (isset($_POST['submit'])) {
         <!-- Sección para agregar información de la canción -->
         <h3 class="notice"><?php echo $formTitle; ?></h3>
         <form class="form-insert" method="POST" enctype="multipart/form-data">
-            <?php foreach ($errors as $error) : ?>
-                <p class="error"><?php echo $error; ?></p> <!-- Muestra errores del formulario -->
-            <?php endforeach; ?>
+            
             <label>Nombre de la Musica</label>
             <input type="text" name="title" placeholder="Título" value="<?php echo $titleUpdate; ?>">
+            <p class="error"><?php echo $errors['title']; ?></p> <!-- Muestra el error específico debajo del campo de entrada del título -->
             <label>Nombre del Artista</label>
             <select name="singer">
            <option value="" selected disabled>Seleccionar Artista</option>
@@ -134,9 +133,11 @@ if (isset($_POST['submit'])) {
            <?php endforeach; ?>
            </select>
             <label>Subir Archivo</label>
-            <input type="file" name="mp3" accept="audio/*">
+            <input type="file" name="mp3" accept=".mp3, .wav, audio/mpeg, audio/wav"><!--accept="audio/*"--> 
+            <p class="error"><?php echo $errors['mp3']; ?></p>
             <label>Subir Imagen</label>
             <input type="file" name="image" accept="image/*"><br>
+            <p class="error"><?php echo $errors['image']; ?></p> 
             <a href="editSong.php" class="ca">Cancelar</a> <!-- Enlace para volver cancelar -->
             <button type="submit" name="submit" style="cursor: pointer;">Guardar</button> <!-- Botón para guardar el formulario -->
 

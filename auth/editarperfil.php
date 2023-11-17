@@ -1,49 +1,87 @@
 <?php
-// Archivo de conexión a la base de datos 
+
+include('./auth.php');
+
+if (!$authenticated) {
+    header("Location: ./login.php");
+    
+} 
 include("../utils/dbConnection.php");
 
 
-$id_users = 1;
-
-// Obtener datos actuales del usuario para mostrar en el formulario
-$sql = "SELECT username, email, imgUser FROM users WHERE id = $id_users";
+//$name = $infoSinger = $imgFile = "";
+//$id_user = $_REQUEST['user'];
+$id_user = $uid;
+$sql = "SELECT username, email, userImg FROM users WHERE id = $id_user";
 $resultado = mysqli_query($conn, $sql);
-
 if ($resultado) {
     $fila = mysqli_fetch_assoc($resultado);
     $usernameActual = $fila['username'];
     $emailActual = $fila['email'];
-    $imgUserActual = $fila['imgUser'];
-} else {
-    // Manejar errores de la consulta
-    die("Error: " . mysqli_error($conn));
-}
-?> 
-
-<?php
-// Archivo de conexión a la base de datos (reemplázalo con tus propios detalles de conexión)
-include("../utils/dbConnection.php");
-
-// ID del usuario (ajústalo según tu aplicación, por ejemplo, desde la sesión)
-$id_users = 1;
-
-// Obtener datos actuales del usuario para mostrar en el formulario
-$sql = "SELECT username, email, imgUser FROM users WHERE id = $id_users";
-$resultado = mysqli_query($conn, $sql);
-
-if ($resultado) {
-    $fila = mysqli_fetch_assoc($resultado);
-    $usernameActual = $fila['username'];
-    $emailActual = $fila['email'];
-    $imgUserActual = $fila['imgUser'];
+    $imgUserActual = $fila['userImg'];
 } else {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
 }
 
-// Cerrar la conexión a la base de datos después de obtener los datos
-mysqli_close($conn);
+
+
+if (isset($_POST['submit'])) {
+    if (empty($_FILES["userImg"])) {
+        if (!isset($_GET['id']))
+            $errors['userImg'] = "Image field cannot be empty";
+    } else {
+        if (strpos($_FILES["userImg"]["type"], "image") !== false) {
+            $userimg = $_FILES['userImg'];
+        } else {
+            $errors['userImg'] = "Wrong file format. Expect an image file. Please check your file again.";
+        }
+    }
+
+    if (empty($_POST["username"])) {
+        $errors["username"] = "Singer's name can not be empty";
+    } else {
+        $username = $_POST["username"];
+    }
+
+    if (empty($_POST["email"])) {
+        $errors["email"] = "Info can not be empty";
+    } else {
+        $email = $_POST["email"];
+    }
+
+
+    if (array_filter($errors)) {
+        echo 'Form not valid';
+    } else {
+        if ($userimg != "")
+            $userimg = saveFile($userimg);
+        else
+            $userimg = $data["username"];
+
+
+
+        //IF GET ID -> UPDATE IT
+        if (isset($_GET['id'])) {
+            $updatePerfil = "UPDATE users SET username = '$username', email = '$email', userImg = '$userimg' WHERE id =$id_user";
+            $res3 = mysqli_query($conn, $updatePerfil);
+            header("Location: index.php");
+        } else {//creo que esto borrare
+            $insertSinger = "INSERT INTO singers(name, info, image)
+            VALUES ('$singername', '$info', '$images')";
+            if (!mysqli_query($conn, $insertSinger)) {
+                echo  "Error: " . "<br>" . mysqli_error($conn);
+            } else {
+                header("Location: index.php");
+            }
+        }//hast aqui
+    }
+}
+
+
 ?>
+?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -54,14 +92,14 @@ mysqli_close($conn);
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #28324b;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
+            padding: 10px;
+            background-color: #e4e5de;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -71,44 +109,70 @@ mysqli_close($conn);
         }
 
         form {
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         input {
             width: 100%;
-            padding: 8px;
+            padding: 5px;
             margin-bottom: 16px;
             box-sizing: border-box;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 16px;
-        }
+        
 
         input[type="submit"] {
-            background-color: #4caf50;
+            background-color: #181c29;
             color: #fff;
             padding: 10px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
         }
+
+        input[type="submit"]:hover {
+            background-color: #28324b;
+        }
+
+        input[type="button"] {
+            background-color: #28324b;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
+
+    <body>
+    
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Singer</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
 <body>
     <div class="container">
         <h1>Editar Perfil</h1>
 
-        <form action="editarperfil.php" method="post" enctype="multipart/form-data">
+        <form action="editarPerfil.php" method="post" enctype="multipart/form-data">
             <label for="nuevoNombre">Nuevo Nombre:</label>
-            <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $username; ?>" required>
+            <input type="text" id="nuevoNombre" name="nuevoNombre" value="<?php echo $usernameActual; ?>" required>
 
             <label for="nuevoemail">Nuevo Correo:</label>
             <input type="email" id="nuevoemail" name="nuevoemail" value="<?php echo $emailActual; ?>" required>
@@ -119,9 +183,12 @@ mysqli_close($conn);
             <label for="nuevaImagen">Cambiar Imagen:</label>
             <input type="file" id="nuevaImagen" name="nuevaImagen">
 
-            <input type="submit" value="Guardar Cambios">
-            <input type="submit" value="Eliminar  Cambios">
+            <a href="..\index.php" class="ca">Cancelar</a>
+            <a href="..\index.php" class="ca">Guardar</a>
+            
+            
         </form>
     </div>
 </body>
+
 </html>

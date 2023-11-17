@@ -1,6 +1,6 @@
 <!-- Modal nuevo registro -->
 <div class="modal fade" id="nuevoModal" tabindex="-1" aria-labelledby="nuevoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal-dialog" style="width: calc(100%  4cm); max-width: calc(100% 4cm); margin: 1cm auto;">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="nuevoModalLabel" style="color: white;">Crear Lista De Reproduccion</h1>
@@ -54,9 +54,9 @@
     // Agregar una función para validar la longitud del campo "descripcion" al cambiar
     document.getElementById('descripcion').addEventListener('input', function () {
         var descripcion = this.value;
-        if (descripcion.length > 30) {
-            document.getElementById('descripcion-error').textContent = 'Número de caracteres excedido. (Máximo de 30 )';
-            this.setCustomValidity('Número de caracteres excedido. (Máximo de 30 )');
+        if (descripcion.length > 60) {
+            document.getElementById('descripcion-error').textContent = 'Número de caracteres excedido. (Máximo de 60 )';
+            this.setCustomValidity('Número de caracteres excedido. (Máximo de 60 )');
         } else {
             document.getElementById('descripcion-error').textContent = '';
             this.setCustomValidity('');

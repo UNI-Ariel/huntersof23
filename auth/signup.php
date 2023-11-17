@@ -22,7 +22,10 @@ if (isset($_POST['submit'])) {
     $re_password = cleanData($_POST['re_password']);
 
     //Verificaciones del nombre de usuario
-    if(strlen($username) < 3 or strlen($username) > 20) {
+    if($username === ""){
+        $errors['username'] = "El nombre esta vacio";
+    }
+    elseif(strlen($username) < 3 or strlen($username) > 20) {
         $errors['username'] = "El nombre debe tener entre 3 y 20 caracteres";
     }
     elseif (!ctype_alnum($username))
@@ -39,7 +42,14 @@ if (isset($_POST['submit'])) {
     }
     
     //Verificaciones del correo
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $valid_emails = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com'];
+    if($email === ""){
+        $errors['email'] = "EL correo esta vacio";
+    }
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = "EL correo es inválido";
+    }
+    elseif(!in_array(explode("@", $email)[1], $valid_emails) ){
         $errors['email'] = "EL correo es inválido";
     }
     else
@@ -51,15 +61,21 @@ if (isset($_POST['submit'])) {
         }
     }
     //Verificaciones de contraseña
-    if(strlen($password) < 8 or strlen($password) > 20) {
+    $allowed_spaces = 3;
+    if($password === ""){
+        $errors['password'] = "La contraseña esta vacia";
+    }
+    elseif(strlen($password) < 8 or strlen($password) > 20) {
         $errors['password'] = "La contraseña debe tener entre 8 y 20 caracteres";
+    }
+    elseif(substr_count($password, " ") > $allowed_spaces){
+        $errors['password'] = "La contraseña no puede tener mas de " . $allowed_spaces . " espacios";
     }
     
     if (empty($re_password)) {
         $errors['re_password'] = "Confirme la contraseña";
     }
-    
-    if ($password !== $re_password) {
+    elseif ($password !== $re_password) {
         $errors['re_password'] = "La contraseña no coincide";
     }
 

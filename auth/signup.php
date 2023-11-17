@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
     
     //Verificaciones del correo
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = "EL correo es invalido";
+        $errors['email'] = "EL correo es inválido";
     }
     else
     {
@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
         <input class="<?php if ($errors['username'] != '') {
                         echo 'error1';
                         } ?>" 
-        type="text" name="username" placeholder="(Minimo 3 caracteres)" value="<?php echo $username; ?>">
+        type="text" name="username" placeholder="(Mínimo 3 caracteres)" value="<?php echo $username; ?>">
         <p class="error-container"><?php echo $errors['username']; ?></p>
         
         <label>Correo</label>
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
         <input class="<?php if ($errors['password'] != '') {
                         echo 'error1';
                         } ?>" 
-        type="password" name="password" placeholder="(minimo 8 caracteres)" value="<?php echo $password; ?>">
+        type="password" name="password" placeholder="(mínimo 8 caracteres)" value="<?php echo $password; ?>">
         <p class="error-container"><?php echo $errors['password']; ?></p>
 
         <label>Confirmar contraseña</label>

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 02, 2023 at 02:03 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-11-2023 a las 16:31:30
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `spottplay`
+-- Base de datos: `myspotplay`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `favourites`
+-- Estructura de tabla para la tabla `favourites`
 --
 
 CREATE TABLE `favourites` (
@@ -33,17 +33,17 @@ CREATE TABLE `favourites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `favourites`
+-- Volcado de datos para la tabla `favourites`
 --
 
 INSERT INTO `favourites` (`uid`, `songID`) VALUES
-(9, 14),
-(9, 15);
+(10, 23),
+(10, 24);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groups`
+-- Estructura de tabla para la tabla `groups`
 --
 
 CREATE TABLE `groups` (
@@ -52,7 +52,7 @@ CREATE TABLE `groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `groups`
+-- Volcado de datos para la tabla `groups`
 --
 
 INSERT INTO `groups` (`id`, `groupName`) VALUES
@@ -62,11 +62,23 @@ INSERT INTO `groups` (`id`, `groupName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `playlists`
+-- Estructura de tabla para la tabla `listsongs`
+--
+
+CREATE TABLE `listsongs` (
+  `playlist_id` int(11) NOT NULL,
+  `song_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `playlists`
 --
 
 CREATE TABLE `playlists` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `imagen` varchar(255) DEFAULT NULL
@@ -75,7 +87,7 @@ CREATE TABLE `playlists` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `singers`
+-- Estructura de tabla para la tabla `singers`
 --
 
 CREATE TABLE `singers` (
@@ -86,7 +98,7 @@ CREATE TABLE `singers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `singers`
+-- Volcado de datos para la tabla `singers`
 --
 
 INSERT INTO `singers` (`id`, `name`, `info`, `image`) VALUES
@@ -98,12 +110,12 @@ INSERT INTO `singers` (`id`, `name`, `info`, `image`) VALUES
 (8, 'James Delaney', 'Descripción del Artista.', 'images/singers/cec.jpg'),
 (9, 'Unknown', 'Random Beatiful Songs', 'images/singers/lofi.jpg'),
 (10, 'Imagine Dragons', 'Descripción del artista.', 'images/singers/lofi.jpg'),
-(11, 'Coldplay', 'Descripción del artista.', 'images/singers/lofi.jpg');
+(11, 'Coldplay', 'Descripción del artista.\r\nChris Martin\r\n(Christopher Anthony John Martin; Exeter, Devon, 1977) Cantante y compositor inglés, líder de la banda Coldplay.', 'images/artista de codplay.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `songs`
+-- Estructura de tabla para la tabla `songs`
 --
 
 CREATE TABLE `songs` (
@@ -116,13 +128,10 @@ CREATE TABLE `songs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `songs`
+-- Volcado de datos para la tabla `songs`
 --
 
 INSERT INTO `songs` (`id`, `title`, `filePath`, `imgPath`, `dateAdded`, `singerID`) VALUES
-(14, 'Pixabay', 'music/pixabay.mp3', 'images/piano.jpg', '2021-06-03 14:38:34', 9),
-(15, 'Midnight', 'music/midnight.mp3', 'images/Midnight_Mist.jpg', '2021-06-03 14:38:58', 9),
-(16, 'Electronica', 'music/electronica.mp3', 'images/lofi.jpg', '2021-06-03 14:39:21', 9),
 (17, 'Bloody Mary', 'music/Bloody Mary.mp3', 'images/bloodymary.jpg', '2023-10-26 01:40:40', 1),
 (18, 'Faded', 'music/faded.mp3', 'images/faded.png', '2023-10-26 01:45:42', 3),
 (19, 'Lost On You', 'music/Lost On You.mp3', 'images/lostonyou.jpg', '2023-10-26 01:51:57', 4),
@@ -135,124 +144,143 @@ INSERT INTO `songs` (`id`, `title`, `filePath`, `imgPath`, `dateAdded`, `singerI
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `userImg` varchar(255) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   `groupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `groupID`) VALUES
-(5, 'pum', '', '58af57d4977baf21166dbfb12b606789', 2),
-(9, 'baobao', '', 'b6c6cfe1a7ba5eac0f984f3ef97c8490', 1),
 (10, 'Harold', '', 'c57f431343f100b441e268cc12babc34', 2),
-(11, 'test2', 'asd@gmail.com', '1adbb3178591fd5bb0c248518f39bf6d', 2),
-(12, 'test3', 'asd2@gmail.com', '1adbb3178591fd5bb0c248518f39bf6d', 2);
+(29, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `favourites`
+-- Indices de la tabla `favourites`
 --
 ALTER TABLE `favourites`
   ADD PRIMARY KEY (`uid`,`songID`),
   ADD KEY `favourites_ibfk_2` (`songID`);
 
 --
--- Indexes for table `groups`
+-- Indices de la tabla `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `playlists`
+-- Indices de la tabla `listsongs`
 --
-ALTER TABLE `playlists`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `listsongs`
+  ADD KEY `listsongs_ibfk_1` (`playlist_id`),
+  ADD KEY `listsongs_ibfk_2` (`song_id`);
 
 --
--- Indexes for table `singers`
+-- Indices de la tabla `playlists`
+--
+ALTER TABLE `playlists`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indices de la tabla `singers`
 --
 ALTER TABLE `singers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `songs`
+-- Indices de la tabla `songs`
 --
 ALTER TABLE `songs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `singerID` (`singerID`);
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `groupID` (`groupID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `groups`
+-- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `playlists`
+-- AUTO_INCREMENT de la tabla `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `singers`
+-- AUTO_INCREMENT de la tabla `singers`
 --
 ALTER TABLE `singers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `songs`
+-- AUTO_INCREMENT de la tabla `songs`
 --
 ALTER TABLE `songs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `favourites`
+-- Filtros para la tabla `favourites`
 --
 ALTER TABLE `favourites`
   ADD CONSTRAINT `favourites_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `favourites_ibfk_2` FOREIGN KEY (`songID`) REFERENCES `songs` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `songs`
+-- Filtros para la tabla `listsongs`
+--
+ALTER TABLE `listsongs`
+  ADD CONSTRAINT `listsongs_ibfk_1` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `listsongs_ibfk_2` FOREIGN KEY (`song_id`) REFERENCES `songs` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `playlists`
+--
+ALTER TABLE `playlists`
+  ADD CONSTRAINT `playlists_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `songs`
 --
 ALTER TABLE `songs`
   ADD CONSTRAINT `songs_ibfk_1` FOREIGN KEY (`singerID`) REFERENCES `singers` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `users`
+-- Filtros para la tabla `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`groupID`) REFERENCES `groups` (`id`);

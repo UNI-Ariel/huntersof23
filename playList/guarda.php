@@ -19,8 +19,10 @@ if ($result->num_rows > 0) {
 }
 
 // Si el nombre no existe, procede a insertar los datos.
-$sql = "INSERT INTO playlists (nombre, descripcion)
-        VALUES ('$nombre', '$descripcion')";
+//TODO: Modificar el valor Hardcodeado '10' a $uid despues de unificar con la app principal
+$sql = "INSERT INTO playlists (user_id, nombre, descripcion)
+        VALUES (10,'$nombre', '$descripcion')";
+
 
 if ($conn->query($sql)) {
     $id = $conn->insert_id;

@@ -11,13 +11,13 @@ if (!$authenticated) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Panel de Control</title>
     <link rel="stylesheet" href="./css/editSong.css">
 </head>
 
@@ -30,12 +30,12 @@ if (!$authenticated) {
         </div>
 
         <div class="icon-dashboard">
-            <label>Canciones</label>
+            <label>Músicas</label>
             <a href="editSong.php"><i class="fas fa-music fa-7x"></i></a>
         </div>
 
         <div class="icon-dashboard">
-            <label>Cantantes</label>
+            <label>Artistas</label>
             <a href="editSinger.php"><i class="fas fa-microphone fa-7x"></i></a>
         </div>
 

@@ -12,9 +12,10 @@
         <ul class="logo-links">
             <h3><?php echo $username; ?></h3>
             <?php if ($authenticated) : ?>
+                <li><a href="./auth/editarperfil.php?user=<?php echo $uid; ?>">Editar Perfil</a></li>
                 <li><a href="./auth/logout.php">Cerrar Sesión</a></li>
                 <?php if ($admin) : ?>
-                    <li><a href="./auth/adminDashboard.php">Panel De Administración</a></li>
+                    <li><a href="./auth/adminDashboard.php">Panel de Control</a></li>
                 <?php endif; ?>
             <?php else : ?>
                 <li><a href="./auth/login.php">Iniciar Sesión</a></li>

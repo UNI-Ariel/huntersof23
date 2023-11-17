@@ -1,6 +1,6 @@
 <!-- Modal Editar modal -->
 <div class="modal fade" id="editaModal" tabindex="-1" aria-labelledby="editaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal-dialog" style="width: calc(100%  4cm); max-width: calc(100% 4cm); margin: 1cm auto;">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="nuevoModalLabel" style="color: white;">Editar Información</h1>
@@ -13,14 +13,14 @@
 
                     <div class="mb-2">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" name="nombre" id="nombre" maxlength="100" class="form-control" required>
+                        <input type="text" name="nombre" id="nombre" maxlength="30" class="form-control" required>
                         <span id="nombre-error-edit" style="color: #9cd2d3;"></span>
 
                     </div>
 
                     <div class="mb-2">
                         <label for="descripcion" class="form-label">Descripción:</label>
-                        <textarea name="descripcion" id="descripcion" class="form-control" rows="3" maxlength="120"></textarea>
+                        <textarea name="descripcion" id="descripcion" class="form-control" rows="3" maxlength="60"></textarea>
                     </div>
 
                     <div class="mb-2">
@@ -47,9 +47,9 @@
     // Validación para el campo "nombre" en el modal de edición
     document.getElementById('nombre').addEventListener('input', function () {
         var nombre = this.value;
-        if (nombre.length > 100) {
-            document.getElementById('nombre-error-edit').textContent = 'El nombre no puede tener más de 100 caracteres.';
-            this.setCustomValidity('El nombre no puede tener más de 100 caracteres.');
+        if (nombre.length > 30) {
+            document.getElementById('nombre-error-edit').textContent = 'El nombre no puede tener más de 30 caracteres.';
+            this.setCustomValidity('El nombre no puede tener más de 30 caracteres.');
         } else {
             document.getElementById('nombre-error-edit').textContent = '';
             this.setCustomValidity('');

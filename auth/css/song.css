@@ -1,0 +1,109 @@
+/* Estilos generales para todos los elementos */
+* {
+    font-family: sans-serif; /* Fuente para todos los elementos */
+    box-sizing: border-box; /* Para incluir el relleno y borde en el ancho y alto */
+}
+
+/* Estilos del cuerpo del documento */
+body {
+    background:#181c29; /* fondo */
+    display: flex; /* Usa el modelo de caja flexible */
+    justify-content: center; /* Centra horizontalmente los elementos flexibles */
+    height: 100vh; /* Altura del cuerpo igual al 100% de la ventana visible */
+    align-items: center; /* Centra verticalmente los elementos flexibles */
+    flex-direction: column; /* Coloca los elementos en columna */
+}
+
+/* Estilos del enlace con clase "ca" */
+.ca {
+    font-size: 14px; /* Tamaño de fuente */
+    display: inline-block; /* Mostrar como bloque en línea */
+    padding: 10px; /* Relleno alrededor del enlace */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    color: #444; /* Color del texto */
+}
+
+/* Estilos de la clase "notice" */
+.notice {
+    color: #fff; /* Color del texto */
+    display: block; /* Muestra el elemento como bloque */
+    text-align: center; /* Alineación del texto al centro */
+}
+
+/* Estilos del formulario con clase "form-insert" */
+.form-insert {
+    width: 500px; /* Ancho del formulario */
+    border: 2px solid #ccc; /* Borde del formulario */
+    background-color: #e4e5de; /*  */
+    border-radius: 15px; /* Borde redondeado */
+    padding: 30px; /* Relleno interno del formulario */
+}
+
+/* Estilos para los campos de entrada en el formulario */
+.form-insert input {
+    display: block; /* Mostrar como bloque */
+    border: 2px solid #ccc; /* Borde del campo de entrada */
+    width: 95%; /* Ancho del campo de entrada */
+    padding: 10px; /* Relleno dentro del campo de entrada */
+    margin: 10px auto; /* Márgenes */
+    border-radius: 5px; /* Borde redondeado */
+}
+
+/* Estilos para las etiquetas en el formulario */
+.form-insert label {
+    color: #0799b6; /* Color del texto */
+    font-size: 18px; /* Tamaño de fuente */
+    padding: 5px; /* Relleno alrededor de la etiqueta */
+}
+
+/* Estilos para los select en el formulario */
+.form-insert select {
+    display: block; /* Mostrar como bloque */
+    border: 2px solid #ccc; /* Borde del select */
+    width: 95%; /* Ancho del select */
+    padding: 5px; /* Relleno dentro del select */
+    margin: 10px auto; /* Márgenes */
+    border-radius: 5px; /* Borde redondeado */
+}
+
+/* Estilos para el botón en el formulario */
+.form-insert button {
+    float: right; /* Posicionamiento del botón a la derecha */
+    background: #0799B6; /* Color de fondo del botón */
+    padding: 10px 15px; /* Relleno del botón */
+    color: #fff; /* Color del texto */
+    border-radius: 5px; /* Borde redondeado */
+    margin-right: 10px; /* Márgen derecho */
+    border: none; /* Sin borde */
+}
+
+/* Estilos para el botón en estado de hover */
+.form-insert button:hover {
+    opacity: .7; /* Opacidad al pasar el cursor sobre el botón */
+}
+
+/* Estilos para el mensaje de error */
+.error {
+    background: #f2dede; /* Color de fondo del mensaje de error */
+    color: #A94442; /* Color del texto del mensaje de error */
+    width: 95%; /* Ancho del mensaje de error */
+    border-radius: 5px; /* Borde redondeado */
+    margin: 20px auto; /* Márgenes */
+}
+
+/* Estilos para el mensaje de éxito */
+.success {
+    background: #D4EDDA; /* Color de fondo del mensaje de éxito */
+    color: #40754C; /* Color del texto del mensaje de éxito */
+    padding: 10px; /* Relleno del mensaje de éxito */
+    width: 95%; /* Ancho del mensaje de éxito */
+    border-radius: 5px; /* Borde redondeado */
+    margin: 20px auto; /* Márgenes */
+}
+
+/* Estilos para el contenedor de enlaces */
+.link {
+    display: flex; /* Usa el modelo de caja flexible */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos flexibles */
+    width: 40%; /* Ancho del contenedor de enlaces */
+}

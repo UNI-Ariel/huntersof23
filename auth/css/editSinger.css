@@ -18,7 +18,7 @@ body {
     text-align: center;
     width: 1080px;
     height: 100%;
-    background-color: rgb(230, 230, 230);
+    
     color: black;
     padding-top: 50px;
     position: relative;
@@ -90,7 +90,7 @@ body {
   
   .success {
     background: #d4edda;
-    color: #40754c;
+    color: #0799B6;
     padding: 10px;
     width: 95%;
     border-radius: 5px;
@@ -123,12 +123,12 @@ body {
     padding: 10px 10px;
     border-radius: 15px;
     margin-bottom: 5px;
-    background-color: #fff;
+    background-color: #0799B6;;
   }
 
   .c3{
     width : 1000px;
-    background-color: #1DB954;
+    background-color: #0799B6;
     margin: 0 auto;
     margin-top: 5px;
     border-radius: 15px;
@@ -199,7 +199,7 @@ body {
   }
   
   input:checked[type="checkbox"] {
-    background: #1DB954;
+    background: #0799B6;
   }
   
   input[type="checkbox"]:before {
@@ -237,6 +237,6 @@ body {
   
   li:hover{
     cursor: pointer;
-    background-color: #1DB954;
+    background-color: #0799B6;
   }
   

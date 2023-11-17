@@ -50,7 +50,7 @@ if (isset($_GET['singerID'])) {
     </div>
 </div>
 <div class="products">
-    <h1>All Songs</h1>
+    <h1>Todas las cnciones del artista</h1>
     <?php foreach ($songs as $index => $song) : ?>
         <div class="song" data="<?php echo $song['id']; ?>">
             <div class="info">
@@ -69,7 +69,7 @@ if (isset($_GET['singerID'])) {
     <?php endforeach; ?>
 </div>
 <div class= "description">
-    <h2 class="title">Introduction</h2>
+    <h2 class="title">Introducción</h2>
     <div class="desDetail">
         <img src="<?php echo $singerImg; ?>" alt="" />
         <p><?php echo $singerInfo; ?></p>

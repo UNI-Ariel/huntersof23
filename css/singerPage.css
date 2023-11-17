@@ -4,6 +4,7 @@
     width: 100%;
     padding: 20px 80px;
     background: rgba(36, 36, 36, 0.3);
+    color: #fff;
 }
 
 .cover img {
@@ -29,7 +30,7 @@
 
 .pulse {
     margin-top: 50px;
-    width: 60px;
+    width: 200px;
     height: 60px;
     cursor: pointer;
     position: relative;
@@ -44,23 +45,24 @@
     left: 0;
     bottom: 0;
     position: absolute;
-    border-radius: 50%;
+    border-radius: 5px;
     transition: all 500ms ease;
 }
 
 .pulse::before {
-    content: "\f04b";
+    content: "\f04b   Reproducir";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 1.5em;
-    background: #1db954;
+    background: #0a54aa;
     display: grid;
     place-items: center;
     z-index: 10;
+    color: #fff;
 }
 
 .pulse::after {
-    background: #1db954;
+    background: #fff;
 }
 
 .pulse:hover::after {
@@ -86,6 +88,7 @@
 
 .products {
     padding: 50px;
+    color: #fff;
 }
 
 .description {
@@ -99,6 +102,7 @@
     font-family: "Raleway", sans-serif;
 
     transition: all 0.3s ease;
+    color: #fff;
 }
 
 .description > * {

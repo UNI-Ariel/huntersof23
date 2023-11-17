@@ -60,6 +60,11 @@ body {
 .displaySong{
     margin: 0 auto;
 }
+
+.displayUser{
+  width: 800px;
+  margin: 0 auto;
+}
   
   form {
     width: 500px;
@@ -241,4 +246,3 @@ body {
   li:hover{
     cursor: pointer;
   }
-  

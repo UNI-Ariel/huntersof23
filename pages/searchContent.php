@@ -45,18 +45,34 @@ if (isset($_GET['search'])) {
 </section>
 
 
-
-
+<!------Agregar auna lista de Reproduccion---------->
 <link rel="stylesheet" href="pages/play.css">
-
-  <!-- Modal -->
+  <!-- Modal1 -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <div id="modalContent"></div>
+    <span class="close" onclick="closeModal()">&times;</span>
+    <button class="open-modal-button" onclick="openModal2()">Agregar nuevo</button>
+      <div id="modalContent">
+       <!-- <img id="imagenModalSrc" src="" alt="Imagen de la base de datos">
+        <p id="nombreImagen"></p>
+        <p id="cantidad"></p>-->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal2 -->
+  <div id="myModal2" class="modal">
+    <div class="modal-content">
+    <span class="close" onclick="closeModal2()">&times;</span>
+      <div id="modalContent2">
+      </div>
     </div>
   </div>
   <script src="pages/mosPlayList.js"></script>
+  <script src="pages/addPlay.js"></script>
+
+<!------------------------->
+
 
 
 

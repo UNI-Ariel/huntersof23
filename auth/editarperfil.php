@@ -80,6 +80,80 @@ if (isset($_POST['submit'])) {
 
 
 ?>
+?>
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #28324b;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 10px;
+            background-color: #e4e5de;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        
+
+        input[type="submit"] {
+            background-color: #181c29;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #28324b;
+        }
+
+        input[type="button"] {
+            background-color: #28324b;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+    <body>
+    
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +184,7 @@ if (isset($_POST['submit'])) {
             <input type="file" id="nuevaImagen" name="nuevaImagen">
 
             <a href="..\index.php" class="ca">Cancelar</a>
-            <input type="submit" name="submit" value="Guardar Cambios">
+            <a href="..\index.php" class="ca">Guardar</a>
             
             
         </form>

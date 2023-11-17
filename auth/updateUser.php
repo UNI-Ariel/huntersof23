@@ -23,7 +23,6 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User</title>
-    
 </head>
 
 <body>
@@ -58,6 +57,45 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <button class="close">Aceptar</button>
         </div>
     </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll("input[type=checkbox]");
+        const rolModal = document.querySelector(".rolModal");
+        const pageContainer = document.querySelector(".container");
+        const closeModal = document.querySelector(".rolModal .close");
+
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("input", () => {
+                if (checkbox.hasAttribute('fromuser')) {
+                    //alert("You can not change your own role!!!")
+                    checkbox.checked = !checkbox.checked;
+                } else {
+                    const id = checkbox.id;
+                    const admin = (checkbox.checked) ? 1 : 2;
+                    pageContainer.classList.add("blur");
+                    rolModal.classList.add("active");
+
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            if (this.responseText !== "") {
+                                //showMessage(this.responseText);
+                            }
+                        }
+                    };
+                    
+                    closeModal.addEventListener("click", () => {
+                        pageContainer.classList.remove("blur");
+                        rolModal.classList.remove("active");
+                    });
+
+                    xmlhttp.open("GET", `changeRole.php?uid=${id}&admin=${admin}`, true);
+                    xmlhttp.send();
+                }
+            })
+        });
+    </script>
 </body>
 
 </html>

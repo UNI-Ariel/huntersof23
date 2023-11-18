@@ -155,8 +155,8 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <td><img style="width: 50px; height: 50px;" src='../${value['imgPath']}'></td>
                     <td>${value['title']}</td>
                     <td>${value['filePath']}</td>
-                    <td><a style="padding: 5px; background-color: #66FF33; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=${value['id']}">Update</a></td>
-                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=${value['id']}">Delete</a></td>
+                    <td><a style="padding: 5px; background-color: #66FF33; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=${value['id']}">Editar</a></td>
+                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=${value['id']}">Eliminar</a></td>
                     </tr>`
                 })
                 displaySong.innerHTML += html;

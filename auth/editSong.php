@@ -77,17 +77,17 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
          </div>
 
         
-        <h2>Lista De Musicas</h2>
+        <h2>Lista de Músicas</h2>
         <table align="center" border="1"  class="displaySong">
             <tr>
                 <th>No</th>
                 <th>Imagenes</th>
                 <th>Nombre</th>
-                <th>Archivo de Musica</th>
+                <th>Archivo de Música</th>
                 <th colspan="3">Acciones</th>
             </tr>
 
-            <?php foreach ($songs as $index => $song) : if ($index == 7) break; ?>
+            <?php foreach ($songs as $index => $song) : if ($index == 5) break; ?>
                 <tr>
                     <td><?php echo $index + 1; ?></td>
                     <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $song['imgPath'] ?>"></td>
@@ -99,15 +99,73 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <?php endforeach; ?>
         </table>
         <div class="paginationButton">
-        <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="1"> 1</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="2"> 2</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="3"> 3</li>
-            </ul>  
+            <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
+                <li onclick="previousPage();" style="padding: 10px; color: white;">&lt;</li>
+                <li onclick="pagination(1);" style="padding: 10px; color: white;" value="1">1</li>
+                <li onclick="pagination(2);" style="padding: 10px; color: white;" value="2">2</li>
+                <li onclick="pagination(3);" style="padding: 10px; color: white;" value="3">3</li>
+                <li onclick="nextPage();" style="padding: 10px; color: white;">&gt;</li>
+            </ul>
         </div>
     </div>
 
 </body>
+<script type="text/javascript">
+        let currentPage = 1; // Variable para almacenar la página actual
+
+    function previousPage() {
+        if (currentPage > 1) {
+        currentPage--;
+        pagination(currentPage);
+        }
+    }
+
+    function nextPage() {
+        // Aquí necesitas conocer la cantidad total de páginas para evitar avanzar más allá de la última página
+        let totalPages = 3; // Por ejemplo, asumamos que hay 3 páginas en total
+        if (currentPage < totalPages) {
+            currentPage++;
+            pagination(currentPage);
+        }
+    }
+    function pagination(value) {
+        let header = `<tr>
+            <th colspan="6"></th>
+        </tr>
+        <tr>
+            <th>No</th>
+            <th>Imagenes</th>
+            <th>Nombre</th>
+            <th>Archivo de Música</th>
+            <th colspan="3">Acciones</th>
+        </tr>`
+        let displaySong = document.getElementsByClassName("displaySong")[0];
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let results = JSON.parse(this.responseText);;
+
+                let html = '';
+                displaySong.innerHTML = header;
+
+                results.map((value, index) => {
+                    html +=
+                        ` <tr>
+                    <td> ${index + 1}</td>
+                    <td><img style="width: 50px; height: 50px;" src='../${value['imgPath']}'></td>
+                    <td>${value['title']}</td>
+                    <td>${value['filePath']}</td>
+                    <td><a style="padding: 5px; background-color: #66FF33; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=${value['id']}">Editar</a></td>
+                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=${value['id']}">Eliminar</a></td>
+                    </tr>`
+                })
+                displaySong.innerHTML += html;
+            }
+        };
+        xhttp.open("GET", "paginationSong.php?page=" + value, true);
+        xhttp.send();
+    }
+</script>
 
 
 

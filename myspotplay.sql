@@ -67,7 +67,8 @@ INSERT INTO `groups` (`id`, `groupName`) VALUES
 
 CREATE TABLE `listsongs` (
   `playlist_id` int(11) NOT NULL,
-  `song_id` int(11) NOT NULL
+  `song_id` int(11) NOT NULL,
+  `dateAdded` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -151,6 +152,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `userImg` varchar(255) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   `groupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
@@ -161,7 +163,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `groupID`) VALUES
 (10, 'Harold', '', 'c57f431343f100b441e268cc12babc34', 2),
-(29, 'admin', 'admin@', '21232f297a57a5a743894a0e4a801fc3', 1);
+(29, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 --
 -- Índices para tablas volcadas

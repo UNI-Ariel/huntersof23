@@ -1,18 +1,10 @@
 <?php
 
-include('./auth.php');
-
-if (!$authenticated) {
-    header("Location: ./login.php");
-    
-} 
 include("../utils/dbConnection.php");
 
 
 //$name = $infoSinger = $imgFile = "";
-//$id_user = $_REQUEST['user'];
-$id_user = $uid;
-$sql = "SELECT username, email, userImg FROM users WHERE id = $id_user";
+$sql = "SELECT username, email, userImg FROM users WHERE id = $uid";
 $resultado = mysqli_query($conn, $sql);
 if ($resultado) {
     $fila = mysqli_fetch_assoc($resultado);
@@ -23,8 +15,6 @@ if ($resultado) {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
 }
-
-
 
 if (isset($_POST['submit'])) {
     if (empty($_FILES["userImg"])) {
@@ -77,11 +67,7 @@ if (isset($_POST['submit'])) {
         }//hast aqui
     }
 }
-
-
 ?>
-?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -150,22 +136,6 @@ if (isset($_POST['submit'])) {
 
     </style>
 </head>
-
-    <body>
-    
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insert Singer</title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-
 <body>
     <div class="container">
         <h1>Editar Perfil</h1>
@@ -184,9 +154,7 @@ if (isset($_POST['submit'])) {
             <input type="file" id="nuevaImagen" name="nuevaImagen">
 
             <a href="..\index.php" class="ca">Cancelar</a>
-            <a href="..\index.php" class="ca">Guardar</a>
-            
-            
+            <a href="..\index.php" class="ca">Guardar</a>            
         </form>
     </div>
 </body>

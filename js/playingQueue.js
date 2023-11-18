@@ -49,7 +49,7 @@ const resetPlayingQueue = () => {
 
 // Show playing queue button's click event
 const playingQueueIcon = document.getElementById("playtist");
-playingQueueIcon.addEventListener("click", () => {
+playingQueueIcon?.addEventListener("click", () => {
     const modal = document.querySelector(".queue");
     modal.classList.toggle("queue-active");
 

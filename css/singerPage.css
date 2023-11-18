@@ -131,8 +131,19 @@
     height: 100%;
     width: 40%;
 }
-#singer button{
-     width: 65px;
 
-
+#singer a{
+    text-align: center;
+    width: 80px;
+    height: 40px;
+    padding: 10px 20px;
+    background-color: #0a54aa;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+#singer a:link,
+#singer a:visited,
+#singer a:active,
+#singer a:hover {
+    color: white;
 }

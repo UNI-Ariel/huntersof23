@@ -130,14 +130,14 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     function pagination(value) {
         let header = `<tr>
-            <th colspan="6">SONGS INFO</th>
+            <th colspan="6"></th>
         </tr>
         <tr>
             <th>No</th>
-            <th>Images</th>
-            <th>Name</th>
-            <th>Music File</th>
-            <th colspan="3">Operations</th>
+            <th>Imagenes</th>
+            <th>Nombre</th>
+            <th>Archivo de Musica</th>
+            <th colspan="3">Acciones</th>
         </tr>`
         let displaySong = document.getElementsByClassName("displaySong")[0];
         var xhttp = new XMLHttpRequest();

@@ -17,4 +17,10 @@ if (!$authenticated) {  // Si no está autenticado
             header("Location: editSong.php");  // Redirige a la página de edición de canciones
     }
 }
+
+    
 ?>
+<td>
+    <a style="padding: 5px; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;"
+       href="deleteSong.php?id=<?php echo $song['id']; ?>">Eliminar</a>
+</td>

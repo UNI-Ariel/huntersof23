@@ -77,13 +77,13 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
          </div>
 
         
-        <h2>Lista De Musicas</h2>
+        <h2>Lista de Músicas</h2>
         <table align="center" border="1"  class="displaySong">
             <tr>
                 <th>No</th>
                 <th>Imagenes</th>
                 <th>Nombre</th>
-                <th>Archivo de Musica</th>
+                <th>Archivo de Música</th>
                 <th colspan="3">Acciones</th>
             </tr>
 
@@ -136,7 +136,7 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <th>No</th>
             <th>Imagenes</th>
             <th>Nombre</th>
-            <th>Archivo de Musica</th>
+            <th>Archivo de Música</th>
             <th colspan="3">Acciones</th>
         </tr>`
         let displaySong = document.getElementsByClassName("displaySong")[0];

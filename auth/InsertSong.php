@@ -115,6 +115,8 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+    
+
     <div class="add-info">
         <!-- Sección para agregar información de la canción -->
         <h3 class="notice"><?php echo $formTitle; ?></h3>
@@ -137,7 +139,7 @@ if (isset($_POST['submit'])) {
             <p class="error"><?php echo $errors['mp3']; ?></p>
             <label>Subir Imagen</label>
             <input type="file" name="image" accept="image/*"><br>
-            <p class="error"><?php echo $errors['image']; ?></p> 
+            
             <a href="editSong.php" class="ca">Cancelar</a> <!-- Enlace para volver cancelar -->
             <button type="submit" name="submit" style="cursor: pointer;">Guardar</button> <!-- Botón para guardar el formulario -->
 

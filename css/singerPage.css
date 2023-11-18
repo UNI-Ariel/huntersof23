@@ -132,7 +132,9 @@
     width: 40%;
 }
 #singer button{
-     width: 65px;
-
-
+    width: 60px;
+}
+#singer a {
+ width:100% ;
+ margin: auto;
 }

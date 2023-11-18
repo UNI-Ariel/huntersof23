@@ -100,14 +100,53 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
         </table>
         <div class="paginationButton">
         <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="1"> 1</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="2"> 2</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="3"> 3</li>
+                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="1"> 1</li>
+                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="2"> 2</li>
+                <li onclick="pagination(this.value);" style="padding: 10px;  color: white;" value="3"> 3</li>
             </ul>  
         </div>
     </div>
 
 </body>
+<script type="text/javascript">
+    function pagination(value) {
+        let header = `<tr>
+            <th colspan="6">SONGS INFO</th>
+        </tr>
+        <tr>
+            <th>No</th>
+            <th>Images</th>
+            <th>Name</th>
+            <th>Music File</th>
+            <th colspan="3">Operations</th>
+        </tr>`
+        let displaySong = document.getElementsByClassName("displaySong")[0];
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let results = JSON.parse(this.responseText);;
+
+                let html = '';
+                displaySong.innerHTML = header;
+
+                results.map((value, index) => {
+                    html +=
+                        ` <tr>
+                    <td> ${index + 1}</td>
+                    <td><img style="width: 50px; height: 50px;" src='../${value['imgPath']}'></td>
+                    <td>${value['title']}</td>
+                    <td>${value['filePath']}</td>
+                    <td><a style="padding: 5px; background-color: #66FF33; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=${value['id']}">Update</a></td>
+                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=${value['id']}">Delete</a></td>
+                    </tr>`
+                })
+                displaySong.innerHTML += html;
+            }
+        };
+        xhttp.open("GET", "paginationSong.php?page=" + value, true);
+        xhttp.send();
+    }
+</script>
 
 
 

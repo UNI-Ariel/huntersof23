@@ -37,7 +37,7 @@ $favSongs = array_map("reformData", $queryResult);
                 </div>
                 <div class="func">
                     <i class="fas fa-trash"></i>
-                    <i class="fas fa-plus"></i>
+                    <button class="open-modal-button" onclick="openModal3()"><i class="fas fa-plus" ></i></button>
                    
                 </div>
             </div>
@@ -47,4 +47,68 @@ $favSongs = array_map("reformData", $queryResult);
 <script>
     // Convierte la matriz de canciones favoritas a un objeto JavaScript
     let favSongIDs = JSON.parse('<?php echo json_encode($favSongs); ?>');
+
 </script>
+
+<!------Agregar auna lista de Reproduccion---------->
+<link rel="stylesheet" href="pages/play.css">
+  <!-- Modal1 -->
+  <div id="myModal3" class="modal">
+    <div class="modal-content">
+    <span class="close" onclick="closeModal3()">&times;</span>
+    <button class="open-modal-button" onclick="openModal5()">Agregar nuevo</button>
+      <div id="modalContent3">
+       <!-- <img id="imagenModalSrc" src="" alt="Imagen de la base de datos">
+        <p id="nombreImagen"></p>
+        <p id="cantidad"></p>-->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal2 -->
+  <div id="myModal5" class="modal">
+    <div class="modal-content">
+    <span class="close" onclick="closeModal5()">&times;</span>
+      <div id="modalContent5">
+      </div>
+    </div>
+  </div>
+  <script src="pages/mosPlayList.js"></script>
+  <script src="pages/addPlay.js"></script>
+
+<!------------------------->
+<script>
+function openModal5() {
+     
+     var modal = document.getElementById('myModal5');
+     var modalContent = document.getElementById('modalContent5');
+   
+         var modalHTML = '';
+     //var modalHTML = '<button class="open-modal-button" onclick="">Agregar nuevo</button>';
+         modalHTML += '<form id="myForm">';
+         modalHTML += '<label for="nombre">Ponle nombre a tu Lista de Reproduccion</label>';
+         modalHTML += '<input type="text" id="nombre" name="nombre" required><br>';
+         
+         modalHTML += '<input type="reset" onclick="closeModal5()" value="Cancelar">';
+         modalHTML += '<input type="submit" value="Aceptar">';
+        // modalHTML += '<button class="" onclick="closeModal()">Cancelar</button>';
+    
+     modalContent.innerHTML = modalHTML;
+     
+     // Mostrar la modal
+     modal.style.display = 'block';
+   //});
+ }
+ function closeModal5() {
+    var modal = document.getElementById('myModal5');
+    modal.style.display = 'none';
+  }
+  
+  // Cerrar la modal si el usuario hace clic fuera de ella
+  window.addEventListener('click', function(event) {
+    var modal = document.getElementById('myModal5');
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  });
+ </script>

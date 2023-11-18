@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2023 a las 16:31:30
+-- Tiempo de generación: 17-11-2023 a las 22:31:13
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `myspotplay`
+-- Base de datos: `myspaotplay`
 --
 
 -- --------------------------------------------------------
@@ -67,7 +67,8 @@ INSERT INTO `groups` (`id`, `groupName`) VALUES
 
 CREATE TABLE `listsongs` (
   `playlist_id` int(11) NOT NULL,
-  `song_id` int(11) NOT NULL
+  `song_id` int(11) NOT NULL,
+  `dateAdded` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -102,14 +103,14 @@ CREATE TABLE `singers` (
 --
 
 INSERT INTO `singers` (`id`, `name`, `info`, `image`) VALUES
-(1, 'Lady Gaga', 'Descripción de la Artista.', 'images/singers/mtp.png'),
-(2, 'Jess Glynne', 'Descripción de la Artista.', 'images/singers/ducphuc.png'),
-(3, 'Alan Walker', 'Descripción del Artista.', 'images/singers/hoailam.png'),
-(4, 'LP', 'Descripción del Artista.', 'images/singers/huongtram.png'),
-(5, 'Justin Bieber', 'Descripción del Artista.', 'images/singers/chelinh.png'),
-(8, 'James Delaney', 'Descripción del Artista.', 'images/singers/cec.jpg'),
+(1, 'Lady Gaga', 'Descripción de la Artista.\r\nStefani Joanne Angelina Germanotta (Nueva York, 28 de marzo de 1986), más conocida por su nombre artístico Lady Gaga, es una cantante, compositora, productora, bailarina, actriz, activista y diseñadora de moda estadounidense.', 'images/Lady.jpg'),
+(2, 'Jess Glynne', 'Descripción de la Artista.\r\nJames Delaney es un teclista irlandés, conocidos Jessica Hannah Glynne ', 'images/jess.jpg'),
+(3, 'Alan Walker', 'Descripción del Artista.\r\nAlan Olav Walker (Northampton, Inglaterra; 24 de agosto de 1997) es un DJ, remezclador y productor discográfico noruego nacido en Northampton, Inglaterra.', 'images/alan.jpg'),
+(4, 'LP', 'Descripción del Artista.\r\nLaura Pergolizzi (Long Island, 18 de marzo de 1981), conocida artísticamente como LP, es una cantautora y compositora estadounidense.', 'images/LP.jpg'),
+(5, 'Justin Bieber', 'Descripción del Artista.\r\nJustin Drew Bieber (London, Ontario; 1 de marzo de 1994) es un cantautor canadiense.', 'images/Justin.jpg'),
+(8, 'James Delaney', 'Descripción del Artista.\r\nJames Delaney es un teclista irlandés que , durante los últimos 20 años , ha actuado con una amplia variedad de artistas conocidos', 'images/Delaney.jpg'),
 (9, 'Unknown', 'Random Beatiful Songs', 'images/singers/lofi.jpg'),
-(10, 'Imagine Dragons', 'Descripción del artista.', 'images/singers/lofi.jpg'),
+(10, 'Imagine Dragons', 'Descripción del artista.\r\nDaniel Coulter Reynolds (Las Vegas, Nevada, 14 de julio de 1987), más conocido como Dan Reynolds, es un cantante, compositor y músico estadounidense.', 'images/AImagineD.jpg'),
 (11, 'Coldplay', 'Descripción del artista.\r\nChris Martin\r\n(Christopher Anthony John Martin; Exeter, Devon, 1977) Cantante y compositor inglés, líder de la banda Coldplay.', 'images/artista de codplay.jpg');
 
 -- --------------------------------------------------------
@@ -151,6 +152,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `userImg` varchar(255) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
   `groupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
@@ -161,7 +163,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `groupID`) VALUES
 (10, 'Harold', '', 'c57f431343f100b441e268cc12babc34', 2),
-(29, 'admin', 'admin@', '21232f297a57a5a743894a0e4a801fc3', 1);
+(29, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1);
 
 --
 -- Índices para tablas volcadas

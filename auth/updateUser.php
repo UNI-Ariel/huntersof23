@@ -10,7 +10,7 @@ if (!$authenticated) {
 }
 
 include("../utils/dbConnection.php");
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM users WHERE id!='29'";
 $result = mysqli_query($conn, $sql);
 $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>

@@ -1,11 +1,5 @@
 <?php
 
-include('./auth.php');
-
-if (!$authenticated) {
-    header("Location: ./login.php");
-    
-} 
 include("../utils/dbConnection.php");
 
 

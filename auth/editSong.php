@@ -87,7 +87,7 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <th colspan="3">Acciones</th>
             </tr>
 
-            <?php foreach ($songs as $index => $song) : if ($index == 7) break; ?>
+            <?php foreach ($songs as $index => $song) : if ($index == 5) break; ?>
                 <tr>
                     <td><?php echo $index + 1; ?></td>
                     <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $song['imgPath'] ?>"></td>
@@ -99,16 +99,35 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <?php endforeach; ?>
         </table>
         <div class="paginationButton">
-        <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
-                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="1"> 1</li>
-                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="2"> 2</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;  color: white;" value="3"> 3</li>
-            </ul>  
+            <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
+                <li onclick="previousPage();" style="padding: 10px; color: white;">&lt;</li>
+                <li onclick="pagination(1);" style="padding: 10px; color: white;" value="1">1</li>
+                <li onclick="pagination(2);" style="padding: 10px; color: white;" value="2">2</li>
+                <li onclick="pagination(3);" style="padding: 10px; color: white;" value="3">3</li>
+                <li onclick="nextPage();" style="padding: 10px; color: white;">&gt;</li>
+            </ul>
         </div>
     </div>
 
 </body>
 <script type="text/javascript">
+        let currentPage = 1; // Variable para almacenar la página actual
+
+    function previousPage() {
+        if (currentPage > 1) {
+        currentPage--;
+        pagination(currentPage);
+        }
+    }
+
+    function nextPage() {
+        // Aquí necesitas conocer la cantidad total de páginas para evitar avanzar más allá de la última página
+        let totalPages = 3; // Por ejemplo, asumamos que hay 3 páginas en total
+        if (currentPage < totalPages) {
+            currentPage++;
+            pagination(currentPage);
+        }
+    }
     function pagination(value) {
         let header = `<tr>
             <th colspan="6">SONGS INFO</th>

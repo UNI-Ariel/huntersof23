@@ -11,6 +11,7 @@
 
 .pl-area h5 {
     text-wrap: wrap;
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 
@@ -179,4 +180,8 @@
 
 #pl-del-modal button:last-child {
     background-color: red;
+}
+
+.lista {
+    cursor: pointer;
 }

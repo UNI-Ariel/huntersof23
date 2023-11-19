@@ -47,7 +47,6 @@ if (isset($_GET['search'])) {
 <!------Agregar auna lista de Reproduccion--
 <link rel="stylesheet" href="pages/play.css">-------->
 
-
   <!-- Modal1 -->
   <div id="myModal" class="modal">
     <div class="modal-content">
@@ -122,7 +121,7 @@ if (isset($_GET['search'])) {
         var errorNombre = document.getElementById('error');
 
         // Validar la longitud del campo nombre
-        var expresionRegular = /^[a-zA-Z0-9]+$/;
+        var expresionRegular = /^[a-zA-Z0-9\s]+$/;
         if (nombre.length < 2 || nombre.length > 30 || !expresionRegular.test(nombre)) {
             errorNombre.textContent = 'El nombre debe tener entre 2 y 30 caracteres alfanumericos.';
         } else {
@@ -132,16 +131,16 @@ if (isset($_GET['search'])) {
             type: 'POST',
             url: 'pages/addPlay.php',
             data: { nombre: nombre, idSong: datoAlmacenado},
-            dataType: 'json',
+            //dataType: 'json',
             success: function(response) {
-                // Puedes manejar la respuesta del servidor aquí
                 console.log(response);
-                alert("Registro exitoso!! ");
-                // Cerrar la ventana modal después de insertar datos
-                $('#myModal2').hide();
+                alert(response);
+               closeModal2();
+               $('#nombreP').val('');
             },
-            error: function(error) {
-                console.error('Error:', error);
+            error: function() {
+                //console.error('Error:', error);
+                alert("Error al registra!! ");
             }
            });
             //cerrarModal();

@@ -3,73 +3,92 @@
     include("../auth/auth.php");
 
     header('Content-Type: application/json');
+    $server_msg = array('msg' => '', 'id' => '', 'name' => '', 'desc' => '', 'img' => '');
+
+    if(!$authenticated){
+        $server_msg['msg'] = "Error";
+        $server_msg['id'] = "No autorizado";
+        $server_msg['name'] = "No autorizado";
+        $server_msg['desc'] = "No autorizado";
+        $server_msg['img'] = "No autorizado";
+        echo json_encode( $server_msg);
+        exit;
+    }
+    
+    include("./processData.php");
+    include("./queries.php");
+
 
     $pl_name = $pl_desc = $pl_img = "";
-    $server_msg = array('msg' => '', 'name' => '', 'desc' => '', 'img' => '', 'extra' => '');
+    $errors = array('name' => '', 'desc' => '', 'img' => '');
     $img_dir = '../images/playlists/';
 
     if(isset($_POST['nombre']) && $_POST['nombre'] !== ''){
-        $pl_name = $conn->real_escape_string($_POST['nombre']);
-        if(strlen($pl_name) > 30){
-            $server_msg['name'] = 'Nombre debe tener entre 1 y 30 caracteres';
+        $pl_name = $_POST['nombre'];
+        $pl_name = trim($pl_name);  #Quitar espacios del inicio y fin
+        if(!p_valid_length($pl_name, 1, 30)){
+            $errors['name'] = 'Nombre debe tener entre 1 y 30 caracteres';
         }
-        else{
-            $sql = "SELECT id FROM playlists WHERE nombre = '$pl_name' AND user_id = '$uid'";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $server_msg['name'] = 'El nombre de la lista ya existe.';
-            }
+        elseif(q_playlist_name_exists($conn, $uid, $pl_name)){ #ver si ya existe una playlist con ese nombre
+            $errors['name'] = 'El nombre de la lista ya existe.';
         }
         
         if(isset($_POST['descripcion']) && $_POST['descripcion'] !== '' ){
-            $pl_desc = $conn->real_escape_string($_POST['descripcion']);
-            if(strlen($pl_desc) > 60){
-                $server_msg['desc'] = 'Descripcion debe tener un maximo de 60 caracteres';
+            $pl_desc = $_POST['descripcion'];
+            $pl_desc = trim($pl_desc);
+            if(!p_valid_length($pl_desc, 0, 60)){
+                $errors['desc'] = 'Descripcion debe tener un maximo de 60 caracteres';
             }
         }
+        if(empty($pl_desc)){ #Agregar descripcion por defecto
+            $pl_desc = 'Agrega una descripción';
+        }
 
-        if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0 ){
-            $allow_types = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
-            $detected_type = exif_imagetype($_FILES['imagen']['tmp_name']);
-            if(!in_array($detected_type, $allow_types)){
-                $server_msg['img'] = ' Formato de imágen no permitido';
+        if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0 && empty($errors['name'])){
+            $img = $_FILES['imagen'];
+            if(!p_valid_img_type($img)){
+                $errors['img'] = ' Formato de imágen no permitido';
             }
-            else{
-                $file_ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-                $pl_img = $img_dir . $uid . '_' . time() . '.' . $file_ext;
-                if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $pl_img)){
-                    $server_msg['img'] = 'No se guardo la imagen';
-                    $pl_img = '';
+            else{                
+                $file_ext = p_get_file_ext($img);
+                $pl_img = p_generate_file_name($uid, $file_ext); 
+                if(!p_save_file($img, $img_dir, $pl_img)){
+                    $errors['img'] = 'No se guardo la imagen intente de nuevo';
                 }
-                if(!empty ($pl_img) )
-                    $pl_img = substr($pl_img, 1);
+                else{
+                    $pl_img = substr($img_dir, 3) . $pl_img;
+                }
             }
         }
 
-        if(array_filter($server_msg)){
+        if(array_filter($errors)){
             $server_msg['msg'] = 'Error';
+            $server_msg['name'] = $errors['name'];
+            $server_msg['desc'] = $errors['desc'];
+            $server_msg['img'] = $errors['img'];
             echo json_encode($server_msg);
             exit;
         }
         else{
-            $sql = "INSERT INTO playlists(user_id, nombre, descripcion, imagen) VALUES('$uid', '$pl_name', '$pl_desc', '$pl_img')";
-            if ($conn->query($sql)) {
+            $data = array("name" => $pl_name, "desc" => $pl_desc, "img" => $pl_img);            
+            $res = q_add_to_playlists($conn, $uid, $data);
+            if($res){
                 $server_msg['msg'] = 'Success';
+                $server_msg['id'] = $res;
                 $server_msg['name'] = $pl_name;
                 $server_msg['desc'] = $pl_desc;
                 $server_msg['img'] = $pl_img;
-                $server_msg['extra'] = $conn ->insert_id;
                 echo json_encode($server_msg);
                 exit;
             }
-            else{
-                $server_msg['msg'] = 'Error';
-                echo json_encode($server_msg);
-                exit;
-            }
+            $server_msg['msg'] = 'Error';
+            $server_msg['id'] = 'Fallo al agregar el usuario';
+            echo json_encode($server_msg);
+            exit;
         }
     }
-    $server_msg['type'] = 'Error';
+    $server_msg['msg'] = 'Error';
+    $server_msg['id'] = 'Parametros invalidos';
     echo json_encode($server_msg);
     exit;
 ?>

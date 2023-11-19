@@ -106,8 +106,12 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <td><?php echo $song['title']; ?></td>
                     <td><?php echo $song['filePath']; ?></td>
                     <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px;text-decoration: none;" href="insertSong.php?id=<?php echo $song['id'] ?>">Editar</a></td>
-                    <td><a style="padding: 5px; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=<?php echo $song['id'] ?>">Eliminar</a></td>
+                   <!-- <td><a style="padding: 5px; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=<?php echo $song['id'] ?>">Eliminar</a></td>  -->
+                    <!-- Dentro del bucle foreach en editSong.php -->
+                  <td><a style= "padding: 5px; background-color: #6B0000;  color: #fff; border-radius: 15px; text-decoration: none; cursor: pointer;"  onclick="openModal()"  >Eliminar</a></td>
+
                 </tr>
+
             <?php endforeach; ?>
         </table>
         <div class="paginationButton">
@@ -199,14 +203,43 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <td>${value['title']}</td>
                     <td>${value['filePath']}</td>
                     <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px;text-decoration: none;" href="insertSong.php?id=<?php echo $song['id'] ?>">Editar</a></td>
-                    <td><a style="padding: 5px; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=<?php echo $song['id'] ?>">Eliminar</a></td>
-                </tr>`;
+                    <td><a style="padding: 5px; cursor: pointer; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;"onclick="openModal()"  >Eliminar</a>
+</td>
+                    </tr>`;
         });
         displaySong.innerHTML += html;
     }
         
 </script>
 </body>
+<!-- Dentro del body en editSong.php -->
+<div id="confirmDeleteModal" class="modal">
+<div class="modal-content" style="width: 10cm; height: 4cm; background-color: #28324b; color: white;">
+        
+      <!--  <span class="close" onclick="closeModal()">&times;</span>  -->
+        <p>¿Estás seguro de eliminar este elemento de tu lista?</p>
+        <div class="modal-buttons" style="margin-top: 1cm;" >
+              <button onclick="deleteSong()" style="cursor: pointer; background-color: #6B0000; color: white;">Aceptar</button>
+             <button onclick="closeModal()" style=" cursor: pointer; background-color: #0799B6; color: white;">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega el script al final del body para manipular el modal -->
+<script>
+    function openModal() {
+        document.getElementById('confirmDeleteModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('confirmDeleteModal').style.display = 'none';
+    }
+
+    function deleteSong() {
+        // Aquí puedes redirigir a deleteSong.php para eliminar la canción
+        window.location.href = 'deleteSong.php?id=<?php echo $song['id']; ?>';
+    }
+</script>
 
 
 </html>

@@ -29,6 +29,16 @@ body {
     overflow: hidden;
 }
 
+.container-User{
+  text-align: center;
+  width: 100%;
+  color: black;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  position: relative;
+  overflow: auto;
+}
+
 .dashboard {
     display: flex;
     justify-content: center;
@@ -160,6 +170,10 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.container-User .ca2 {
+  margin-left: 30%;
 }
 
   .c3{

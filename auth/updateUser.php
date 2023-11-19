@@ -27,10 +27,9 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-User">
         <div class="link">
-            <a class="ca2" href="adminDashboard.php"><strong>Atrás</strong></a>
-            <a style="margin-top:5px;"></a>
+            <a class="ca2" href="adminDashboard.php">Atrás</a>
         </div>
 
         <h2>Usuarios Registrados</h2>
@@ -62,7 +61,7 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <script>
         const checkboxes = document.querySelectorAll("input[type=checkbox]");
         const rolModal = document.querySelector(".rolModal");
-        const pageContainer = document.querySelector(".container");
+        const pageContainer = document.querySelector(".container-User");
         const closeModal = document.querySelector(".rolModal .close");
 
 

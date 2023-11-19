@@ -103,10 +103,10 @@ if (isset($_POST['submit'])) {
             type="text" name="email" placeholder="(Ejemplo: john@gmail.com)" value="<?php echo $emailActual; ?>" required>
             <p class="error-container"><?php echo $errors['email']; ?></p>
 
-            <a href="..\index.php" class="ca">Cancelar</a>
+            <a href="../index.php" class="ca">Cancelar</a>
             <button type="submit" name="submit">Guardar</button>        
         </form>
-    </div>                
+    </div>     
 </body>
 
 </html>

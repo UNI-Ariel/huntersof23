@@ -14,7 +14,7 @@ $nombre = $_POST['nombre'];
 $songId = $_POST['idSong'];
 
 // Validar datos antes de insertar en la base de datos (puedes agregar más validaciones según tus necesidades)
-$sql = "INSERT INTO playlist (nomPlay, desPlay, imgPlay, idUser ) VALUES ('$nombre', 'Lista de Reproduccion creada recientemente','playList/imagen/18.jpg',$userId)";
+$sql = "INSERT INTO playlists (user_id, nombre, descripcion, imagen ) VALUES ('$userId', '$nombre','Lista de Reproduccion creada recientemente','playList/imagen/18.jpg')";
 
 if ($conn->query($sql) === TRUE) {
     // Éxito

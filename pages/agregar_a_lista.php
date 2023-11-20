@@ -24,9 +24,10 @@ if (isset($_POST['idSong']) && isset($_POST['idPlay'])) {
         }
     }
 
-    // Cerrar la conexión
-   // $conn->close();
+   
 } else {
     echo "Datos incompletos";
 }
+ // Cerrar la conexión
+    $conn->close();
 ?>

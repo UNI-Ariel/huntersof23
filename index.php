@@ -42,6 +42,7 @@ foreach ($songs as $song) {
     <link rel="stylesheet" href="./css/searchPage.css">
     <link rel="stylesheet" href="./css/favourite.css">
     <link rel="stylesheet" href="./css/playlists.css">
+    <link rel="stylesheet" href="./css/play.css">
     <link rel="icon" href="./favicon.png">
     <!--<link href='https://css.gg/home.css' rel='stylesheet'>-->
 

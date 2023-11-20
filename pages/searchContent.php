@@ -147,6 +147,10 @@ if (isset($_GET['search'])) {
             //cerrarModal();
         }
     }
+    function closeModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+  }
 </script>
 
 <!--<script src="pages/mosPlayList.js"></script>-->

@@ -38,7 +38,7 @@
         <div >
             <label for="imagen">Imagen:</label>
             <input type="file" name="imagen" id="imagen" accept="image/jpeg, image/png, image/jpg">
-            <img id="imagenPreview" src="./images/playlists/default.png" width="300" height="300" >
+            <img id="imagenPreview" src="./images/playlists/default.png" width="300" height="300">
         </div>
 
         <p class="pl-err-img pl-error"></p>
@@ -61,6 +61,38 @@
         <div>
             <button class="closeModal">Cancelar</button>
             <button value="submit" name="submit">Eliminar</button>
+        </div>
+    </form>
+</dialog>
+
+<dialog id="pl-edit-modal" class="pl-modal">
+    <h2>Editar Información</h2>
+    <form action="./utils/editPlaylist.php" method="post" enctype="multipart/form-data" class="pl-modal-form">
+        <input type="hidden" name="id" value="">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" maxlength="30" required>
+            <p class="pl-err-name pl-error"></p>
+        </div>
+
+        <div>
+            <label for="descripcion">Descripción:</label>
+            <textarea name="descripcion" id="descripcion" rows="3" maxlength="60"></textarea>
+            <p class="pl-err-desc pl-error"></p>
+        </div>
+
+        <div>
+            <label for="imagen" class="form-label">Imagen:</label>
+            <input type="file" name="imagen" id="imagen" class="form-control" accept="image/jpeg, image/png, image/jpg">
+            <img id="imagenPreview" width="300" height="300" src="">
+            <p class="pl-err-img pl-error"></p>
+        </div>
+
+        <div>
+            <button class="closeModal">Cerrar</button>
+            <button value="submit" name="submit">
+                <i class="fa fa-save"></i> Guardar
+            </button>
         </div>
     </form>
 </dialog>
@@ -101,10 +133,16 @@
                         </button>
 
                         <div class="pl-dropdown-menu hide" tabindex="-1">
-                            <a class="pl-dropdown-item" href="#" data-target="#edit" data-id="<?= $row['id']; ?>" data-name="<?= $row['nombre']; ?>">
+                            <a class="pl-dropdown-item" href="#" data-target="#edit" 
+                                data-id="<?= $row['id']; ?>" 
+                                data-name="<?= $row['nombre']; ?>"
+                                data-desc="<?= $row['descripcion']; ?>">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a class="pl-dropdown-item" href="#" data-target="#delete" data-id="<?= $row['id']; ?>" data-name="<?= $row['nombre']; ?>">
+                            <a class="pl-dropdown-item" href="#" data-target="#delete" 
+                                data-id="<?= $row['id']; ?>" 
+                                data-name="<?= $row['nombre']; ?>"
+                                data-desc="<?= $row['descripcion']; ?>">
                                 <i class="fa fa-trash"></i> Eliminar
                             </a>
                         </div>

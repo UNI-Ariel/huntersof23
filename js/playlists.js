@@ -13,6 +13,9 @@ const pl_menu_opt = document.querySelectorAll('.pl-dropdown-item');
 const pl_del_modal_window = document.getElementById('pl-del-modal');
 const pl_del_form = document.querySelector('#pl-del-modal form');
 const pl_del_submit_btn = document.querySelector('#pl-del-modal button[value="submit"]');
+const pl_edit_modal_window = document.getElementById('pl-edit-modal');
+const pl_edit_form = document.querySelector('#pl-edit-modal form');
+const pl_edit_submit_btn = document.querySelector('#pl-edit-modal button[value="submit"]');
 
 pl_add_input_name.addEventListener('keyup', checkAddInputs);
 pl_add_input_desc.addEventListener('keyup', checkAddInputs);
@@ -54,6 +57,14 @@ function openOptionModal(opt){
         return;
     }
     if(opt_type === '#edit'){
+        document.querySelector('#pl-edit-modal input[type="hidden"]').value = opt.getAttribute('data-id');
+        document.querySelector('#pl-edit-modal #nombre').value = opt.getAttribute('data-name');
+        document.querySelector('#pl-edit-modal #descripcion').value = opt.getAttribute('data-desc');
+
+        const img = getCardRoot(opt).querySelector('img');
+        const preview = document.querySelector('#pl-edit-modal #imagenPreview');
+        preview.src = img.src;
+        pl_edit_modal_window.showModal();
         return;
     }
     alert('Bad Opteration');
@@ -280,6 +291,45 @@ pl_del_form.addEventListener('submit', async (ev)=>{
         console.log(e.message);
     }    
 });
+
+pl_edit_form.addEventListener('submit', async (ev)=>{
+    ev.preventDefault();
+    const url = pl_edit_form.action;
+    const form = new FormData(ev.target);
+    try{
+        const res = await getServerData({url, form});
+        if(res.msg === 'Success'){
+            pl_edit_modal_window.close();
+            setResultMsg('Se actualizo la lista de reproduccion');
+            displayResultBox();
+            updateCardItem(res);
+        }
+        else{
+            const err = document.querySelector('#pl-del-modal .pl-del-err');
+            err.innerText = 'Error al editar lista de reproduccion';
+        }
+    }
+    catch(e){
+        console.log(e.message);
+    }    
+});
+
+function updateCardItem(params){
+    const card = getCardRoot(document.querySelector('a[data-id="' + params.extra + '"]'));
+    if(params.img !== ''){
+        card.querySelector('img').src = params.img;
+    }
+    card.querySelector('h5').innerText = params.name;
+
+    const edit = card.querySelector('a[data-target="#edit"]');
+    edit.setAttribute('data-name', params.name);
+    edit.setAttribute('data-desc', params.desc);
+
+    const del = card.querySelector('a[data-target="#delete"]');
+    del.setAttribute('data-name', params.name);
+    del.setAttribute('data-desc', params.desc);
+    return;
+}
 
 function getCardRoot(element){
     let root = element;

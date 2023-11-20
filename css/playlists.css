@@ -9,6 +9,11 @@
     text-align: center;
 }
 
+.pl-area h5 {
+    text-wrap: wrap;
+    overflow: hidden;
+}
+
 .pl-result{
     padding: 15px;
     border-radius: 5px;

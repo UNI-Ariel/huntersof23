@@ -6,7 +6,7 @@
 
     $pl_name = $pl_desc = $pl_img = "";
     $server_msg = array('msg' => '', 'name' => '', 'desc' => '', 'img' => '', 'extra' => '');
-    $img_dir = './images/playlists/';
+    $img_dir = '../images/playlists/';
 
     if(isset($_POST['nombre']) && $_POST['nombre'] !== ''){
         $pl_name = $conn->real_escape_string($_POST['nombre']);
@@ -36,11 +36,13 @@
             }
             else{
                 $file_ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-                $pl_img = $img_dir . $uid . '_' . time() . $file_ext;
+                $pl_img = $img_dir . $uid . '_' . time() . '.' . $file_ext;
                 if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $pl_img)){
                     $server_msg['img'] = 'No se guardo la imagen';
                     $pl_img = '';
                 }
+                if(!empty ($pl_img) )
+                    $pl_img = substr($pl_img, 1);
             }
         }
 

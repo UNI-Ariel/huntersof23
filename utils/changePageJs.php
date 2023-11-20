@@ -33,7 +33,7 @@
             const page = button.getAttribute("page-data"); // Obtiene la página asociada al botón
 
             // Verifica si se requiere autenticación para acceder a la página de favoritos
-            if (!authenticated && page == "favourites") {
+            if (!authenticated && (page == "favourites" ||  page == "playlists")) {
                 loginPopup(); // Muestra un formulario de inicio de sesión
                 return; // Detiene el cambio de página si no se ha autenticado
             }

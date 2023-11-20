@@ -83,7 +83,8 @@ if (isset($_POST['submit'])) {
         echo "";
     } else {
         $password = md5($password);
-        $sql2 = "INSERT INTO users(username, email, password, groupID) VALUE('$username', '$email', '$password', 2)";
+        $imagenPorDefecto= './images/users/default.png';
+        $sql2 = "INSERT INTO users(username, email, userImg,  password, groupID) VALUE('$username', '$email','$imagenPorDefecto' ,'$password', 2)";
         $result2 = mysqli_query($conn, $sql2);
         if ($result2) {
             /* header("Location: login.php"); */

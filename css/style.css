@@ -517,6 +517,7 @@ nav {
     transform: translate(-75%, 105%);
     opacity: 1;
     pointer-events: all;
+    z-index: 99;
 }
 
 .logo-links h3 {

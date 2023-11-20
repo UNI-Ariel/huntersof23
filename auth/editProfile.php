@@ -3,6 +3,7 @@ include('./auth.php');
 include("../utils/dbConnection.php");
 
 //$name = $infoSinger = $imgFile = "";
+
 $sql = "SELECT username, email, userImg FROM users WHERE id = $uid";
 $resultado = mysqli_query($conn, $sql);
 if ($resultado) {
@@ -10,12 +11,16 @@ if ($resultado) {
     $usernameActual = $fila['username'];
     $emailActual = $fila['email'];
     $imgUserActual = $fila['userImg'];
+    $imgUserActual2 = "../" . $fila['userImg'];
+   
+   
 } else {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
 }
 
-$errors = array('username' => '', 'email' => '');
+$errors = array('username' => '', 'email' => '', 'img' => '');
+$img='';
 if (isset($_POST['submit'])) {
     function cleanData($data)
     {
@@ -65,11 +70,23 @@ if (isset($_POST['submit'])) {
             $errors['email'] = "El correo ya existe";
         }
     }
-
+    //verificacion de imagen 
+    if (empty($_FILES["img"]["name"])) {
+        if (!isset($_GET['id']))
+            $errors['img'] = "La imagen no puede estar vacia";
+    } else {
+        if (strpos($_FILES["img"]["type"], "image") !== false) {
+            $img = $_FILES['img'];
+        } else {
+            $errors['img'] = "Formato de imagen incorrecto por favor seleccione otra imagen ";
+        }
+    }
+    
     if (array_filter($errors)) {
         echo "";
     } else {
-        $updatePerfil = "UPDATE users SET username = '$username', email = '$email' WHERE id =$uid";
+       
+        $updatePerfil = "UPDATE users SET username = '$username', email = '$email', userImg = '$images' WHERE id =$uid";
         $res3 = mysqli_query($conn, $updatePerfil);
         echo '<meta http-equiv="refresh" content="0;URL=\'editProfile.php?user=' . $uid . '\'">';
     }
@@ -88,7 +105,15 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <form action="editProfile.php" method="post">
             <h2>Editar Perfil</h2>
-
+            <?php if ($imgUserActual2 != " ") : ?>
+                <label></label>
+                <img style="width: 150px; height: 150px; display: block; margin-left: auto; margin-right: auto; border-radius: 50%; " src="<?php echo $imgUserActual2; ?>" alt="nose de base">
+                <br>
+            <?php endif; ?>
+    
+            <label>Actualizar Imagen?</label>
+            <input type="file" name="img" accept="image/*"> <br>       
+           
             <label for="nuevoNombre">Nuevo Nombre:</label>
             <input class="<?php if ($errors['username'] != '') {
                         echo 'error1';
@@ -102,11 +127,13 @@ if (isset($_POST['submit'])) {
                         } ?>" 
             type="text" name="email" placeholder="(Ejemplo: john@gmail.com)" value="<?php echo $emailActual; ?>" required>
             <p class="error-container"><?php echo $errors['email']; ?></p>
-
-            <a href="..\index.php" class="ca">Cancelar</a>
+           <br>
+            
+            
+            <a href="../index.php" class="ca">Cancelar</a>
             <button type="submit" name="submit">Guardar</button>        
         </form>
-    </div>                
+    </div>     
 </body>
 
 </html>

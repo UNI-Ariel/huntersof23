@@ -28,15 +28,17 @@ let recentPlay = [];
 let songIndex = 0;
 
 // Profile Logo
-const profilePics = document.querySelectorAll(".logo");
-profilePics.forEach((pic) => {
-    pic.addEventListener("click", () => {
-        const links = document.querySelectorAll(".logo-links");
+document.addEventListener("click", (event) => {
+    const clickedElement = event.target;
+    const isLogo = clickedElement.closest(".logo");
 
-        links.forEach((link) => {
-            link.classList.toggle("logo-active");
-        });
+    document.querySelectorAll(".logo-links").forEach((link) => {
+        link.classList.remove("logo-active");
     });
+    if (isLogo) {
+        const link = clickedElement.closest(".logo").nextElementSibling;
+        link.classList.toggle("logo-active");
+    }
 });
 
 // Update function to all the singer's links
@@ -264,9 +266,9 @@ songsTile.forEach((tile) => {
         playImmediate(song);
     });
 
-    queueIcon.addEventListener("click", () => {
+    /* queueIcon.addEventListener("click", () => {
         insertToQueue(song);
-    });
+    }); */
 
     if (favIcon) {
         favIcon.addEventListener("click", () => {

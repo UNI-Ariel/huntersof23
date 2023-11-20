@@ -14,9 +14,9 @@ body {
 }
 
 form {
-  width: 500px;
+  width: 600px;
   border: 2px solid #ccc;
-  padding: 30px;
+  padding: 10px;
   background: #fff;
   border-radius: 15px;
 }

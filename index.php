@@ -41,6 +41,7 @@ foreach ($songs as $song) {
     <link rel="stylesheet" href="./css/singerPage.css">
     <link rel="stylesheet" href="./css/searchPage.css">
     <link rel="stylesheet" href="./css/favourite.css">
+    <link rel="stylesheet" href="./css/playlists.css">
     <link rel="icon" href="./favicon.png">
     <!--<link href='https://css.gg/home.css' rel='stylesheet'>-->
 
@@ -64,34 +65,46 @@ foreach ($songs as $song) {
     </div>
     <div class="container">
         <div class="content">
-            <!-- Sidebar -->
-            <?php include("./components/sidebar.php"); ?>  <!-- Incluye un componente de barra lateral. -->
-            <!-- End sidebar -->
-
-            <!-- Music UI -->
+            <?php #Incluir Barra Lateral
+                include("./components/sidebar.php"); 
+            ?>
+            <?php 
+                #Fin barra Lateral 
+                #Inicio Music UI
+            ?>
             <div class="musicContainer" id="home">
-                <?php include("./pages/homeContent.php"); ?>  <!-- Incluye el contenido de la página de inicio. -->
+                <?php #Incluye el contenido de la página de inicio
+                    include("./pages/homeContent.php"); ?>
             </div>
             <div class="musicContainer hide" id="favourites">
                 <?php if ($authenticated) : ?>
-                    <?php include("./pages/favContent.php"); ?>  <!-- Incluye el contenido de la página de favoritos si el usuario está autenticado. -->
+                    <?php #Incluye el contenido de la página de favoritos si el usuario está autenticado
+                        include("./pages/favContent.php"); ?>
                 <?php endif; ?>
             </div>
             <div class="musicContainer hide" id="search">
-                <?php include("./pages/searchContent.php"); ?>  <!-- Incluye el contenido de la página de búsqueda. -->
+                <?php #Incluye el contenido de la página de búsqueda.
+                    include("./pages/searchContent.php"); ?>
             </div>
             <div class="musicContainer hide" id="singer">
-                <?php include("./pages/singerContent.php"); ?>  <!-- Incluye el contenido de la página de cantantes. -->
+                <?php #Incluye el contenido de la página de cantantes.
+                    include("./pages/singerContent.php"); ?>
             </div>
-            <!-- End Music UI -->
+            <div class="musicContainer hide" id="playlists">
+                <?php if ($authenticated) : ?>
+                    <?php #Incluye el contenido de la página de playlist si el usuario está autenticado.
+                        include("./pages/playlistContent.php"); ?>
+                <?php endif; ?>
+            </div>
+            <?php #End Music UI ?>
         </div>
-        <!-- Music Player -->
-        <?php include("./components/musicPlayer.php"); ?>  <!-- Incluye un componente de reproductor de música. -->
+        <?php #Music Player ?>
+        <?php #Incluye un componente de reproductor de música.
+            include("./components/musicPlayer.php"); ?>
     </div>
 </body>
 <script>
     let songDetails = JSON.parse('<?php echo json_encode($formatSongs); ?>');  // Convierte los detalles de la canción en un objeto JavaScript.
-    console.log(songDetails);
     let authenticated = JSON.parse('<?php echo json_encode($authenticated); ?>');  // Convierte el estado de autenticación en un valor JavaScript.
 </script>
 <script src="./js/songTile.js"></script>
@@ -100,7 +113,7 @@ foreach ($songs as $song) {
 <script src="./js/recentPlaylist.js"></script>
 <script src="./js/main.js"></script>
 <?php if ($authenticated) : ?>
-    <script src="./js/favourite.js"></script>  <!-- Incluye un script JavaScript si el usuario está autenticado. -->
+    <script src="./js/favourite.js"></script>  <?php #Incluye un script JavaScript si el usuario está autenticado. ?>
 <?php endif; ?>
 <?php include("./utils/changePageJs.php"); ?>  <!-- Incluye un archivo de utilidad para cambiar la página en JavaScript. -->
 </html>

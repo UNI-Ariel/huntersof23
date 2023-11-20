@@ -6,15 +6,18 @@
 
     $server_msg = array("msg" => "", "extra" => "");
 
+    $sql = "SELECT imagen FROM playlists WHERE id=$id";
+
+    $file = $conn->query($sql)->fetch_assoc()['imagen'];
+
     $sql = "DELETE FROM playlists WHERE id=$id";
     if ($conn->query($sql)) {
 
-        /* $dir = "imagen";
-        $poster = $dir . '/' . $id . '.jpg';
+        $file = '.' . $file;
 
-        if (file_exists($imagen)) {
-            unlink($imagen);
-        } */
+        if (strlen($file) > 2 && file_exists($file)) {
+            unlink($file);
+        }
 
         $server_msg['msg'] = "Success";
         $server_msg['extra'] = "$id";

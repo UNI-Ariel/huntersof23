@@ -11,9 +11,7 @@ if ($resultado) {
     $usernameActual = $fila['username'];
     $emailActual = $fila['email'];
     $imgUserActual = $fila['userImg'];
-    $imgUserActual2 = "../" . $fila['userImg'];
-   
-   
+    $imgUserActual2 = "../" . $fila['userImg'];   
 } else {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
@@ -71,24 +69,40 @@ if (isset($_POST['submit'])) {
         }
     }
     //verificacion de imagen 
-    if ($_FILES["img"]["error"] > 0) {
-        $errors['img'] = "Error al cargar la imagen: " . $_FILES["img"]["error"];
-    
+    if (isset($_FILES['img']) && $_FILES['img']['error'] === 0 ) {
+        $allow_types = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
+            $detected_type = exif_imagetype($_FILES['imagen']['tmp_name']);
+            if(!in_array($detected_type, $allow_types)){
+                $errors['img'] = ' Formato de imágen no permitido';
+            }
+            else{
+                $to_save_dir = '../images/users/';
+                $file_ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+                $pl_img = $to_save_dir . $uid . '_' . time() . '.' . $file_ext;
+                if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $pl_img)){
+                    $errors['img'] = 'No se guardo la imagen';
+                    $pl_img = '';
+                }
+                if(!empty ($pl_img) )
+                    $pl_img = substr($pl_img, 1);
+            }
     } else {
-        if (strpos($_FILES["img"]["type"], "image") !== false) {
-            $img = $_FILES['img'];
-        } else {
-            $errors['img'] = "Formato de imagen incorrecto por favor seleccione otra imagen ";
-        }
+        #La imagen no se mando como parametro!
+        //$errors['img'] = "Error al cargar la imagen: " . $_FILES["img"]["error"];
     }
     
     if (array_filter($errors)) {
-        echo "";
+        #Debug Aca
+        echo "ERROR ";
+        foreach(array_filter($errors) as &$value){
+            echo $value;
+        }
     } else {
-        $updatePerfil = "UPDATE users SET username = '$username', email = '$email', userImg = '$img' WHERE id = $uid";
-        $stmt = mysqli_prepare($conn, $updatePerfil);
-        mysqli_stmt_bind_param($stmt, "sss", $username, $email, $img, $uid);
-        $res3 = mysqli_stmt_execute($stmt);
+        $sql = "UPDATE users SET username = '$username', email = '$email', userImg = '$img' WHERE id = $uid";
+        if($conn->query($sql)){
+            echo "<script> alert('Se actualizaron los datos.') </script>";
+            echo '<meta http-equiv="refresh" content="0;URL=\'../index.php\'">';
+        }
     }
 }
 ?>

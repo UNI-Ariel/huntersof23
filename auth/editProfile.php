@@ -3,6 +3,7 @@ include('./auth.php');
 include("../utils/dbConnection.php");
 
 //$name = $infoSinger = $imgFile = "";
+
 $sql = "SELECT username, email, userImg FROM users WHERE id = $uid";
 $resultado = mysqli_query($conn, $sql);
 if ($resultado) {
@@ -10,6 +11,9 @@ if ($resultado) {
     $usernameActual = $fila['username'];
     $emailActual = $fila['email'];
     $imgUserActual = $fila['userImg'];
+    $imgUserActual2 = "../" . $fila['userImg'];
+   
+   
 } else {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
@@ -46,7 +50,8 @@ if (isset($_POST['submit'])) {
             $errors['username'] = "El usuario ya existe";
         }
     }
-
+    //verificacion de imagen 
+    
     //Verificaciones del correo
     $valid_emails = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com'];
     if($email === ""){
@@ -88,7 +93,15 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <form action="editProfile.php" method="post">
             <h2>Editar Perfil</h2>
-
+            <?php if ($imgUserActual2 != " ") : ?>
+                <label></label>
+                <img style="width: 150px; height: 150px; display: block; margin-left: auto; margin-right: auto; border-radius: 50%; " src="<?php echo $imgUserActual2; ?>" alt="nose de base">
+                <br>
+            <?php endif; ?>
+    
+            <label>Actualizar Imagen?</label>
+            <input type="file" name="img" accept="image/*"> <br>       
+           
             <label for="nuevoNombre">Nuevo Nombre:</label>
             <input class="<?php if ($errors['username'] != '') {
                         echo 'error1';
@@ -102,7 +115,9 @@ if (isset($_POST['submit'])) {
                         } ?>" 
             type="text" name="email" placeholder="(Ejemplo: john@gmail.com)" value="<?php echo $emailActual; ?>" required>
             <p class="error-container"><?php echo $errors['email']; ?></p>
-
+           <br>
+            
+            
             <a href="../index.php" class="ca">Cancelar</a>
             <button type="submit" name="submit">Guardar</button>        
         </form>

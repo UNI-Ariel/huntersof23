@@ -8,7 +8,24 @@
         </div>
     </div>
     <div class="logo-container">
-        <img src="./images/users/default.png" alt="" class="logo">
+        <?php
+        // Consulta para obtener la URL de la imagen del usuario desde la base de datos
+        $sqlImage = "SELECT userImg FROM users WHERE id = $uid";
+        $resultImage = mysqli_query($conn, $sqlImage);
+
+        if ($resultImage && $row = mysqli_fetch_assoc($resultImage)) {
+            // Obtén la URL de la imagen del usuario
+            $imageUrl = $row['userImg'];
+        } else {
+            // Si no se encuentra una imagen en la base de datos, usa la imagen por defecto
+            $imageUrl = "./images/users/default.png";
+        }
+        ?>
+    
+    <img src="<?php echo $imageUrl; ?>" alt="" class="logo">
+        <?php
+        //<img src="./images/users/default.png" alt="" class="logo">
+        ?>
         <ul class="logo-links">
             <h3><?php echo $username; ?></h3>
             <?php if ($authenticated) : ?>

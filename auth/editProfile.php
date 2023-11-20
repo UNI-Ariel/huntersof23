@@ -71,9 +71,9 @@ if (isset($_POST['submit'])) {
         }
     }
     //verificacion de imagen 
-    if (empty($_FILES["img"]["name"])) {
-        if (!isset($_GET['id']))
-            $errors['img'] = "La imagen no puede estar vacia";
+    if ($_FILES["img"]["error"] > 0) {
+        $errors['img'] = "Error al cargar la imagen: " . $_FILES["img"]["error"];
+    
     } else {
         if (strpos($_FILES["img"]["type"], "image") !== false) {
             $img = $_FILES['img'];
@@ -85,10 +85,10 @@ if (isset($_POST['submit'])) {
     if (array_filter($errors)) {
         echo "";
     } else {
-       
-        $updatePerfil = "UPDATE users SET username = '$username', email = '$email', userImg = '$images' WHERE id =$uid";
-        $res3 = mysqli_query($conn, $updatePerfil);
-        echo '<meta http-equiv="refresh" content="0;URL=\'editProfile.php?user=' . $uid . '\'">';
+        $updatePerfil = "UPDATE users SET username = '$username', email = '$email', userImg = '$img' WHERE id = $uid";
+        $stmt = mysqli_prepare($conn, $updatePerfil);
+        mysqli_stmt_bind_param($stmt, "sss", $username, $email, $img, $uid);
+        $res3 = mysqli_stmt_execute($stmt);
     }
 }
 ?>
@@ -103,7 +103,7 @@ if (isset($_POST['submit'])) {
 </head>
 <body>
     <div class="container">
-        <form action="editProfile.php" method="post">
+    <form action="editProfile.php" method="post" enctype="multipart/form-data">
             <h2>Editar Perfil</h2>
             <?php if ($imgUserActual2 != " ") : ?>
                 <label></label>
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
                 <br>
             <?php endif; ?>
     
-            <label>Actualizar Imagen?</label>
+            <label>Actualizar Imagen</label>
             <input type="file" name="img" accept="image/*"> <br>       
            
             <label for="nuevoNombre">Nuevo Nombre:</label>

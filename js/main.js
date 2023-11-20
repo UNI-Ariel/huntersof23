@@ -266,9 +266,9 @@ songsTile.forEach((tile) => {
         playImmediate(song);
     });
 
-    queueIcon.addEventListener("click", () => {
+    /* queueIcon.addEventListener("click", () => {
         insertToQueue(song);
-    });
+    }); */
 
     if (favIcon) {
         favIcon.addEventListener("click", () => {

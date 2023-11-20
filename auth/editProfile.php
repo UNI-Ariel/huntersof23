@@ -71,20 +71,20 @@ if (isset($_POST['submit'])) {
     //verificacion de imagen 
     if (isset($_FILES['img']) && $_FILES['img']['error'] === 0 ) {
         $allow_types = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
-            $detected_type = exif_imagetype($_FILES['imagen']['tmp_name']);
+            $detected_type = exif_imagetype($_FILES['img']['tmp_name']);
             if(!in_array($detected_type, $allow_types)){
                 $errors['img'] = ' Formato de imágen no permitido';
             }
             else{
                 $to_save_dir = '../images/users/';
-                $file_ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+                $file_ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
                 $pl_img = $to_save_dir . $uid . '_' . time() . '.' . $file_ext;
-                if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $pl_img)){
+                if(!move_uploaded_file($_FILES['img']['tmp_name'], $pl_img)){
                     $errors['img'] = 'No se guardo la imagen';
                     $pl_img = '';
                 }
                 if(!empty ($pl_img) )
-                    $pl_img = substr($pl_img, 1);
+                    $img = substr($pl_img, 1);
             }
     } else {
         #La imagen no se mando como parametro!

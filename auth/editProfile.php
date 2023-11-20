@@ -19,7 +19,8 @@ if ($resultado) {
     die("Error: " . mysqli_error($conn));
 }
 
-$errors = array('username' => '', 'email' => '');
+$errors = array('username' => '', 'email' => '', 'img' => '');
+$img='';
 if (isset($_POST['submit'])) {
     function cleanData($data)
     {
@@ -50,8 +51,7 @@ if (isset($_POST['submit'])) {
             $errors['username'] = "El usuario ya existe";
         }
     }
-    //verificacion de imagen 
-    
+
     //Verificaciones del correo
     $valid_emails = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com'];
     if($email === ""){
@@ -70,11 +70,23 @@ if (isset($_POST['submit'])) {
             $errors['email'] = "El correo ya existe";
         }
     }
-
+    //verificacion de imagen 
+    if (empty($_FILES["img"]["name"])) {
+        if (!isset($_GET['id']))
+            $errors['img'] = "La imagen no puede estar vacia";
+    } else {
+        if (strpos($_FILES["img"]["type"], "image") !== false) {
+            $img = $_FILES['img'];
+        } else {
+            $errors['img'] = "Formato de imagen incorrecto por favor seleccione otra imagen ";
+        }
+    }
+    
     if (array_filter($errors)) {
         echo "";
     } else {
-        $updatePerfil = "UPDATE users SET username = '$username', email = '$email' WHERE id =$uid";
+       
+        $updatePerfil = "UPDATE users SET username = '$username', email = '$email', userImg = '$images' WHERE id =$uid";
         $res3 = mysqli_query($conn, $updatePerfil);
         echo '<meta http-equiv="refresh" content="0;URL=\'editProfile.php?user=' . $uid . '\'">';
     }

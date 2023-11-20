@@ -1,151 +1,151 @@
 /* Estilos para la modal */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-  }
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Agrega un scroll vertical */
+  max-height: 70vh; /* Ajusta la altura máxima según tus necesidades */
   
-  .modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Agrega un scroll vertical */
-    max-height: 70vh; /* Ajusta la altura máxima según tus necesidades */
-    
-  }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-  }
-  .open-modal-button{
-    cursor: pointer;
-    background: var(--hover-bg-color);
-    text-align:center;
-  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+.open-modal-button{
+  cursor: pointer;
+  background: var(--hover-bg-color);
+  text-align:center;
+}
+
 /* Agrega estilos según tus preferencias */
 .card-header:hover {
-    color: var(--letter-color);
-    background: var(--hover-bg-color);
+  color: var(--letter-color);
+  background: var(--hover-bg-color);
 }
 
 .card-body:hover img {
-    transform: scale(1.3);
+  transform: scale(1.3);
 }
 .card-header{
-    display: flex;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
+  display: flex;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
 
-    height: 50%;
-    padding: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-   
-    /*flex-direction: column;*/
-    cursor: pointer;
-    background: rgb(255, 255, 255);
-  }
+  height: 50%;
+  padding: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+ 
+  /*flex-direction: column;*/
+  cursor: pointer;
+  background: rgb(255, 255, 255);
+}
+
+
+.card-body img {
+  width: 60px; /* ajusta el tamaño de la imagen según tus necesidades */
+  height:60px;
+  /*object-fit: cover;*/
+  margin-bottom: 5px;
+  box-shadow: 0 20px 20px -6px black;
+  transition: all 0.5s ease;
   
-  
-  .card-body img {
-    width: 60px; /* ajusta el tamaño de la imagen según tus necesidades */
-    height:60px;
-    /*object-fit: cover;*/
-    margin-bottom: 5px;
-    box-shadow: 0 20px 20px -6px black;
-    transition: all 0.5s ease;
-    
-  }
-  
-  .card-body {
-    padding: 10px;
-    flex: 1;
-    box-sizing: border-box;
-   
-  }
-  .card-body h3 {
-    font-family: 'Roboto', sans-serif;
-   /* margin-top: 5px;*/
-    text-align:center;
-    font-size: 13px;
-  }
-  
-  
-  
-  form {
-    background: #fff;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    margin: 8px 0;
-    text-align:center;
-  }
-  
-  input[type="text"],
-  textarea {
+}
+
+.card-body {
+  padding: 10px;
+  flex: 1;
+  box-sizing: border-box;
+ 
+}
+.card-body h3 {
+  font-family: 'Roboto', sans-serif;
+ /* margin-top: 5px;*/
+  text-align:center;
+  font-size: 13px;
+}
+
+
+
+#formularioP {
+  background: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.label{
+  display: block;
+  font-weight: bold;
+  margin: 8px 0;
+  text-align:center;
+}
+
+
+#nombreP {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  text-align:center;
+}
+.aceptar{
+  background-color: var(--hover-bg-color);
+}
+.cancelar{
+  background-color: #979a9e;
+}
+.aceptar,
+  .cancelar{
     width: 100%;
-    padding: 8px;
-    margin: 6px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
+    color: #fff;
+    padding: 10px;
+    /*border: none;*/
+    border: 10px solid #fff;
     border-radius: 4px;
-    text-align:center;
+    cursor: pointer;
   }
-  input[type="submit"]{
-    background-color: var(--hover-bg-color);
-  }
-  input[type="reset"]{
-    background-color: #979a9e;
-  }
-  input[type="submit"],
-    input[type="reset"] {
-      width: 48%;
-      color: #fff;
-      padding: 10px;
-      /*border: none;*/
-      border: 10px solid #fff;
-      border-radius: 4px;
-      cursor: pointer;
-    }
 
-    input[type="submit"]:hover{
-      background-color: #064955;
-    }
-    input[type="reset"]:hover {
-      background-color: #484f48;
-    }
-  
-  .error {
-    color: red;
+  .aceptar:hover{
+    background-color: #064955;
   }
-  
+  .cancelar:hover {
+    background-color: #484f48;
+  }
+
+.error {
+  color: red;
+}

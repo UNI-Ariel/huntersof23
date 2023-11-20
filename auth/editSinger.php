@@ -46,26 +46,20 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
             </tr>
 
 
-            <?php foreach ($singers as $index => $singer) : if ($index == 5) break; ?>
+            <?php foreach ($singers as $index => $singer) : if ($index == 100) break; ?>
                 <tr>
-                    <td><?php echo $index + 1; ?></td>
-                    <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $singer['image'] ?>"></td>
-                    <td><?php echo $singer['name']; ?></td>
-                    <td><?php echo $singer['info']; ?></td>
-                    <td><a style="padding: 5px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=<?php echo $singer['id'] ?>"><strong>Editar</strong></a></td>
-                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=<?php echo $singer['id'] ?>"><strong>Eliminar</strong></a></td>
+                    <td><?php echo $singer['id']; ?></td>
+                    <td WIDTH="50" HEIGHT="auto" ><img style="width: 50px; height: 50px;" src="<?php echo '../' . $singer['image'] ?>"></td>
+                    <td WIDTH="550" max-width="550"  HEIGHT="auto"><?php echo $singer['name']; ?></td>
+                    <td WIDTH="550" max-width="550"  ><?php echo $singer['info']; ?></td>
+                    <td WIDTH="200" max-width="200"  HEIGHT="auto"><a style="padding: 5px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=<?php echo $singer['id'] ?>"><strong>Editar</strong></a>
+                    <a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=<?php echo $singer['id'] ?>"><strong>Eliminar</strong></a></td>
                 </tr>
             <?php endforeach; ?>
 
         </table>
         <div class="c3"><a href=insertSinger.php>Agregar Artista</a></div>
-        <div class="paginationButton">
-            <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
-                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="1"> 1</li>
-                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="2"> 2</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;  color: white;" value="3"> 3</li>
-            </ul>
-        </div>
+        
     </div>
 
 </body>
@@ -93,12 +87,12 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 results.map((value, index) => {
                     html +=
                         ` <tr>
-                    <td> ${index + 1}</td>
-                    <td><img style="width: 50px; height: 50px;" src='../${value['image']}'></td>
-                    <td>${value['name']}</td>
-                    <td>${value['info']}</td>
-                    <td><a style="padding: 5px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=<?php echo $singer['id'] ?>"><strong>Editar</strong></a></td>
-                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=<?php echo $singer['id'] ?>"><strong>Eliminar</strong></a></td>
+                    <td> ${value['id']}</td>
+                    <td WIDTH="50" HEIGHT="auto"><img style="width: 50px; height: 50px;" src='../${value['image']}'></td>
+                    <td WIDTH="550" max-width="550">${value['name']}</td>
+                    <td WIDTH="550" max-width="550">${value['info']}</td>
+                    <td WIDTH="200" max-width="200"><a style="padding: 5px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=<?php echo $singer['id'] ?>"><strong>Editar</strong></a>
+                    <a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=<?php echo $singer['id'] ?>"><strong>Eliminar</strong></a></td>
                 </tr>`
                 })
                 displaySinger.innerHTML += html;

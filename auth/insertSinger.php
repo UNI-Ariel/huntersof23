@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include('./auth.php');
 
 if (!$authenticated) {
@@ -10,6 +11,8 @@ if (!$authenticated) {
 }
 
 include("../utils/dbConnection.php");
+
+
 
 $name = $infoSinger = $imgFile = "";
 
@@ -23,9 +26,22 @@ if (isset($_GET['id'])) {
     $infoSinger = $data["info"];
 }
 
+function cleanData($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
-$errors = array('singername' => '', 'info' => '', 'img' => '');
+$errors1 = array('singername' => '');
+$errors2 = array('info' => '');
+$errors3 = array('img' => '');
+$errors = array('singername' => '','info' => '','img' => '');
 $singername = $img = $info = '';
+
+$singername2 = $_POST['singername'];
+$info2 = $_POST['info'];
 
 
 
@@ -38,41 +54,57 @@ function saveFile($fileInfo)
     $destinationPath = 'images/singers/' . $filename;
 
     if (move_uploaded_file($tmpPath, '../' . $destinationPath)) {
-        echo "Successfully uploaded";
+        echo "Registro Exitoso";
     } else {
-        echo "Upload fail";
+        echo "Error de Registro";
     }
 
     return $destinationPath;
 }
 
+
+
+
 if (isset($_POST['submit'])) {
+    
+    
     if (empty($_FILES["img"]["name"])) {
         if (!isset($_GET['id']))
-            $errors['img'] = "La imagen no puede estar vacia";
+            $errors['img'] = "Imagen no puede estar vacio porfavor elija un archivo";
     } else {
         if (strpos($_FILES["img"]["type"], "image") !== false) {
             $img = $_FILES['img'];
         } else {
-            $errors['img'] = "Formato de imagen incorrecto por favor seleccione otra imagen ";
+            $errors['img'] = "Formato Incorrecto!!.";
         }
     }
 
     if (empty($_POST['singername'])) {
-        $errors['singername'] = "Nombre de artista no puede estar vacio!!";
+        $errors['singername'] = "Nombre de artista no puede estar vacio";
     } else {
+        if(strlen($singername2) < 3 or strlen($singername2) > 20) {
+            $errors['singername'] = "El nombre debe tener entre 3 y 20 caracteres";
+        }
+        else{
         $singername = $_POST['singername'];
+        }
     }
 
+    
     if (empty($_POST['info'])) {
-        $errors['info'] = "Descripción o Reseña no puede estar vacio!!";
+        $errors['info'] = "Información no puede estar vacio";
     } else {
+        if(strlen($info2) < 3 or strlen($info2) > 20) {
+            $errors['info'] = "La Informacion del Artista debe tener en 5 y 100 caracteres";
+        }
+        else{
         $info = $_POST['info'];
+        }
     }
 
 
     if (array_filter($errors)) {
-        echo 'Formulario con errores';
+        echo 'Formato no valido';
     } else {
         if ($img != "")
             $images = saveFile($img);
@@ -108,29 +140,31 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insert Singer</title>
+    <title>Registrar Artista</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
     <form method="POST" enctype="multipart/form-data">
-        <?php foreach ($errors as $error) : ?>
-            <p class="error"><?php echo $error; ?></p>
-        <?php endforeach; ?>
+    
         <h2>Registrar Artista</h2>
 
         <label>Nombre</label>
-        <input type="text" name="singername" placeholder="Nombre" value="<?php echo $name; ?>"><br>
+        <input type="text" name="singername" placeholder="Nombre" value="<?php echo $name; ?>">
+        
+            <p class="error"><?php echo $errors['singername']; ?></p>
+        
         <label>Descripción</label><br>
-        <textarea style=" margin: 10px; width: 360px; height: 164px; border: 2px solid #ccc; border-radius: 5px;" name="info" type="text" placeholder=" Reseña o Descripción del artista"><?php echo $infoSinger; ?></textarea><br>
-
-        <?php if ($imgFile != " ") : ?>
-            <label></label>
+        <textarea style=" margin: 10px; width: 360px; height: 164px; border: 2px solid #ccc; border-radius: 5px;" name="info" type="text" placeholder=" Reseña o Descripción del artista"><?php echo $infoSinger; ?></textarea>
+        <p class="error"><?php echo $errors['info']; ?></p>
+        <?php if ($imgFile != "") : ?>
+            <label>Currrent Imagen</label>
             <img style="width: 50px; height: 50px;" src="<?php echo $imgFile; ?>" alt="">
             <br>
         <?php endif; ?>
         <label>Imagen</label>
-        <input type="file" name="img" accept="image/*"> <br>
+        <input type="file" name="img" accept=".jpg, .jpeg, .png"> 
+        <p class="error"><?php echo $errors['img']; ?></p>
 
         <a href="editSinger.php" class="ca">Atras</a>
 

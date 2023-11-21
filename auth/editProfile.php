@@ -2,7 +2,9 @@
 include('./auth.php');
 include("../utils/dbConnection.php");
 
-//$name = $infoSinger = $imgFile = "";
+if (!$authenticated) {
+    header("Location: ./login.php");
+}
 
 $sql = "SELECT username, email, userImg FROM users WHERE id = $uid";
 $resultado = mysqli_query($conn, $sql);
@@ -11,7 +13,6 @@ if ($resultado) {
     $usernameActual = $fila['username'];
     $emailActual = $fila['email'];
     $imgUserActual = $fila['userImg'];
-    $imgUserActual2 = "../" . $fila['userImg'];   
 } else {
     // Manejar errores de la consulta
     die("Error: " . mysqli_error($conn));
@@ -76,7 +77,7 @@ if (isset($_POST['submit'])) {
                 $errors['img'] = ' Formato de imágen no permitido';
             }
             else{
-                $to_save_dir = '../images/users/';
+                $to_save_dir = '../images/users/'; #Ruta para guardar el archivo
                 $file_ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
                 $pl_img = $to_save_dir . $uid . '_' . time() . '.' . $file_ext;
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $pl_img)){
@@ -84,24 +85,27 @@ if (isset($_POST['submit'])) {
                     $pl_img = '';
                 }
                 if(!empty ($pl_img) )
-                    $img = substr($pl_img, 1);
+                    $img = substr($pl_img, 3); #Quita el ../ para guardar en bd
             }
     } else {
         #La imagen no se mando como parametro!
-        //$errors['img'] = "Error al cargar la imagen: " . $_FILES["img"]["error"];
+        $img = $imgUserActual; #Mantener la imagen actual
     }
     
     if (array_filter($errors)) {
         #Debug Aca
-        echo "ERROR ";
-        foreach(array_filter($errors) as &$value){
-            echo $value;
-        }
+        #echo "ERROR ";
     } else {
-        $sql = "UPDATE users SET username = '$username', email = '$email', userImg = '$img' WHERE id = $uid";
-        if($conn->query($sql)){
-            echo "<script> alert('Se actualizaron los datos.') </script>";
-            echo '<meta http-equiv="refresh" content="0;URL=\'../index.php\'">';
+        if($username === $usernameActual && $email === $emailActual && $img === $imgUserActual){
+            #No se modifico ningun valor 
+            echo "<script> alert('No hay ningún cambio para guardar') </script>";
+        }
+        else{
+            $sql = "UPDATE users SET username = '$username', email = '$email', userImg = '$img' WHERE id = $uid";
+            if($conn->query($sql)){
+                echo "<script> alert('Se actualizaron los datos.') </script>";
+                echo '<meta http-equiv="refresh" content="0;URL=\'../index.php\'">';
+            }
         }
     }
 }
@@ -119,15 +123,16 @@ if (isset($_POST['submit'])) {
     <div class="container">
     <form action="editProfile.php" method="post" enctype="multipart/form-data">
             <h2>Editar Perfil</h2>
-            <?php if ($imgUserActual2 != " ") : ?>
-                <label></label>
-                <img style="width: 150px; height: 150px; display: block; margin-left: auto; margin-right: auto; border-radius: 50%; " src="<?php echo $imgUserActual2; ?>" alt="nose de base">
-                <br>
-            <?php endif; ?>
-    
+            <img style="width: 150px; height: 150px; display: block; margin-left: auto; 
+                margin-right: auto; border-radius: 50%;" alt="imagen"
+                src="<?php echo empty($imgUserActual) ? '../images/users/default.png' : '../' . $imgUserActual; ?>" >
+            <br>
+
             <label>Actualizar Imagen</label>
-            <input type="file" name="img" accept="image/*"> <br>       
-           
+            <input type="file" name="img" accept="image/*">    
+            <p class="error-container"><?php echo $errors['img']; ?></p>
+            <br>
+
             <label for="nuevoNombre">Nuevo Nombre:</label>
             <input class="<?php if ($errors['username'] != '') {
                         echo 'error1';
@@ -142,7 +147,6 @@ if (isset($_POST['submit'])) {
             type="text" name="email" placeholder="(Ejemplo: john@gmail.com)" value="<?php echo $emailActual; ?>" required>
             <p class="error-container"><?php echo $errors['email']; ?></p>
            <br>
-            
             
             <a href="../index.php" class="ca">Cancelar</a>
             <button type="submit" name="submit">Guardar</button>        

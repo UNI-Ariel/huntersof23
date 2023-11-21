@@ -9,7 +9,7 @@
     </div>
     <div class="logo-container">
         <?php
-            $imageUrl = "./images/users/default.png";
+            $imageUrl = "images/users/default.png";
             if($authenticated){
                 $sqlImage = "SELECT userImg FROM users WHERE id = $uid";
                 $resultImage = mysqli_query($conn, $sqlImage);

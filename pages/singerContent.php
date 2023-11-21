@@ -40,7 +40,7 @@ if (isset($_GET['singerID'])) {
 }
 ?>
 <?php include('./components/navbar.php'); ?>
-<a href="./search.php"><i class ="fa fa-arrow-left"></i></a>
+<a href="#" class="buttonContainer" page-data="search"><i class ="fa fa-arrow-left"></i></a>
 <div class="cover">
     <img src="<?php echo $singerImg; ?>" alt="" />
     <div class="coverDetail">

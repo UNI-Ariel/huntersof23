@@ -82,9 +82,9 @@ const makeSongTitle = (index, song) => {
         }
     });
 
-    queueIcon.addEventListener("click", () => {
+    /* queueIcon.addEventListener("click", () => {
         insertToQueue(song); // Agrega la canción a la cola de reproducción
-    });
+    }); */
 
     return titleContainer; // Devuelve el elemento de título de canción
 };
@@ -134,9 +134,9 @@ const makeSongTitleForFav = (index, song) => {
         addToFav(song, true); // Elimina de favoritos
     });
 
-    queueIcon.addEventListener("click", () => {
+    /* queueIcon.addEventListener("click", () => {
         insertToQueue(song); // Agrega la canción a la cola de reproducción
-    });
+    }); */
 
     favContent.appendChild(titleContainer); // Agrega el elemento de título de canción a la sección de favoritos
 };

@@ -18,7 +18,7 @@ if ($resultado) {
     die("Error: " . mysqli_error($conn));
 }
 
-$errors = array('username' => '', 'email' => '', 'img' => '');
+$errors = array('username' => '', 'email' => '', 'img' => '', 'img_format' => '');
 $img='';
 if (isset($_POST['submit'])) {
     function cleanData($data)
@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
         $allow_types = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
             $detected_type = exif_imagetype($_FILES['img']['tmp_name']);
             if(!in_array($detected_type, $allow_types)){
-                $errors['img'] = ' Formato de imágen no permitido';
+                $errors['img_format'] = ' Formato de imágen no permitido';
             }
             else{
                 $to_save_dir = '../images/users/'; #Ruta para guardar el archivo
@@ -130,7 +130,7 @@ if (isset($_POST['submit'])) {
 
             <label>Actualizar Imagen</label>
             <input type="file" name="img" accept="image/*">    
-            <p class="error-container"><?php echo $errors['img']; ?></p>
+            <p class="error-container"><?php echo $errors['img_format']; ?></p>
             <br>
 
             <label for="nuevoNombre">Nuevo Nombre:</label>

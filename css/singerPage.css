@@ -146,4 +146,5 @@
 #singer a:active,
 #singer a:hover {
     color: white;
+    text-decoration: none;
 }

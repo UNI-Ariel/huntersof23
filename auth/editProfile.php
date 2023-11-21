@@ -1,11 +1,11 @@
 <?php
 include('./auth.php');
-include("../utils/dbConnection.php");
 
 if (!$authenticated) {
     header("Location: ./login.php");
 }
 
+include("../utils/dbConnection.php");
 $sql = "SELECT username, email, userImg FROM users WHERE id = $uid";
 $resultado = mysqli_query($conn, $sql);
 if ($resultado) {
@@ -79,13 +79,18 @@ if (isset($_POST['submit'])) {
             else{
                 $to_save_dir = '../images/users/'; #Ruta para guardar el archivo
                 $file_ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
-                $pl_img = $to_save_dir . $uid . '_' . time() . '.' . $file_ext;
+                $pl_img = $to_save_dir . $uid . '_' . time() . '.' . $file_ext; #Nombre imagen nueva
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $pl_img)){
                     $errors['img'] = 'No se guardo la imagen';
                     $pl_img = '';
                 }
-                if(!empty ($pl_img) )
+                if(!empty ($pl_img) ){  #Se guardo la imagen nueva
                     $img = substr($pl_img, 3); #Quita el ../ para guardar en bd
+                    $_SESSION['userimage'] = $img; #actualizar imagen en la sesion
+                    if (!empty($imgUserActual) && file_exists( '../' . $imgUserActual)) { #Borrar imagen Vieja
+                        unlink( '../' . $imgUserActual);
+                    }
+                }
             }
     } else {
         #La imagen no se mando como parametro!
@@ -99,6 +104,7 @@ if (isset($_POST['submit'])) {
         if($username === $usernameActual && $email === $emailActual && $img === $imgUserActual){
             #No se modifico ningun valor 
             echo "<script> alert('No hay ningún cambio para guardar') </script>";
+            echo '<meta http-equiv="refresh" content="0;URL=\'editProfile.php\'">';
         }
         else{
             $sql = "UPDATE users SET username = '$username', email = '$email', userImg = '$img' WHERE id = $uid";
@@ -125,11 +131,11 @@ if (isset($_POST['submit'])) {
             <h2>Editar Perfil</h2>
             <img style="width: 150px; height: 150px; display: block; margin-left: auto; 
                 margin-right: auto; border-radius: 50%;" alt="imagen"
-                src="<?php echo empty($imgUserActual) ? '../images/users/default.png' : '../' . $imgUserActual; ?>" >
+                src="<?php echo '../' . $userimage; ?>" >
             <br>
 
-            <label>Actualizar Imagen</label>
-            <input type="file" name="img" accept="image/*">    
+            <label for="img">Actualizar Imagen</label>
+            <input type="file" name="img" id="img" accept="image/*">    
             <p class="error-container"><?php echo $errors['img_format']; ?></p>
             <br>
 
@@ -137,14 +143,20 @@ if (isset($_POST['submit'])) {
             <input class="<?php if ($errors['username'] != '') {
                         echo 'error1';
                         } ?>" 
-            type="text" name="username" placeholder="(Mínimo 3 caracteres)" value="<?php echo $usernameActual; ?>" required>
+                type="text" name="username" placeholder="(Mínimo 3 caracteres)" 
+                value="<?php echo $usernameActual; ?>" id="nuevoNombre"
+                autocomplete="off" required
+            >
             <p class="error-container"><?php echo $errors['username']; ?></p>
 
             <label for="nuevoemail">Nuevo Correo:</label>
             <input class="<?php if ($errors['email'] != '') {
                         echo 'error1';
                         } ?>" 
-            type="text" name="email" placeholder="(Ejemplo: john@gmail.com)" value="<?php echo $emailActual; ?>" required>
+                type="text" name="email" placeholder="(Ejemplo: john@gmail.com)" 
+                value="<?php echo $emailActual; ?>" id="nuevoemail"
+                autocomplete="off" required
+            >
             <p class="error-container"><?php echo $errors['email']; ?></p>
            <br>
             

@@ -7,31 +7,15 @@
             </div>
         </div>
     </div>
-    <div class="logo-container">
-        <?php
-            $imageUrl = "images/users/default.png";
-            if($authenticated){
-                $sqlImage = "SELECT userImg FROM users WHERE id = $uid";
-                $resultImage = mysqli_query($conn, $sqlImage);
-                if ($resultImage && $row = mysqli_fetch_assoc($resultImage)) {
-                    // Obtén la URL de la imagen del usuario
-                    if(!empty($row['userImg']))
-                        $imageUrl = $row['userImg'];
-                } else {
-                    // Si no se encuentra una imagen en la base de datos, usa la imagen por defecto
-                }
-            }
-            // Consulta para obtener la URL de la imagen del usuario desde la base de datos
-        ?>
-    
-    <img src="<?php echo $imageUrl; ?>" alt="" class="logo">
+    <div class="logo-container">    
+    <img src="<?php echo $userimage; ?>" alt="Imagen Usuario" class="logo">
         <?php
         //<img src="./images/users/default.png" alt="" class="logo">
         ?>
         <ul class="logo-links">
             <h3><?php echo $username; ?></h3>
             <?php if ($authenticated) : ?>
-                <li><a href="./auth/editProfile.php?user=<?php echo $uid; ?>">Editar Perfil</a></li>
+                <li><a href="./auth/editProfile.php">Editar Perfil</a></li>
                 <?php if ($admin) : ?>
                     <li><a href="./auth/adminDashboard.php">Panel de Control</a></li>
                 <?php endif; ?>

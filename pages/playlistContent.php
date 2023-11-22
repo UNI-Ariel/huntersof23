@@ -112,8 +112,8 @@
 
     <div class="pl-items" >
         <?php while ($row = $playlists->fetch_assoc()) { ?>
-            <div class="pl-card">
-                <td>
+            <div class="pl-card" >
+                <div class="lista" style="cursor: pointer;" data-idlist="<?php echo $row['id']; ?>">
                     <?php
                         echo "<img src='";
                         $pl_img = $row['imagen'];
@@ -124,7 +124,7 @@
                             echo $dir . "default.png'>";
                         }
                     ?>
-                </td>
+                </div>
                 <div class="pl-card-info">
                     <h5><?= $row['nombre']; ?></h5>
                     <div class="pl-dropdown">
@@ -154,3 +154,7 @@
 
 </section>
 <script src="./js/playlists.js"></script>
+<script>
+//goToListaPage();
+</script>
+

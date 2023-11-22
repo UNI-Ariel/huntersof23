@@ -2,7 +2,8 @@
 include("./utils/getUrl.php");  // Incluye un archivo de utilidad para obtener la URL actual.
 include("./utils/dbConnection.php");  // Incluye un archivo de utilidad para establecer la conexión a la base de datos.
 include("./auth/auth.php");  // Incluye un archivo relacionado con la autenticación de usuarios.
-
+error_reporting(E_ALL);
+ini_set('display_errors',1);
 function redirect($url)
 {
     echo "<script type='text/javascript'>document.location.href='{$url}';</script>";  // Redirige a una URL mediante JavaScript.
@@ -91,6 +92,12 @@ foreach ($songs as $song) {
                 <?php #Incluye el contenido de la página de cantantes.
                     include("./pages/singerContent.php"); ?>
             </div>
+            <!----------implementando por mari----->
+            <div class="musicContainer hide" id="lista">
+                <?php #Incluye el contenido de la página de cantantes.
+                    include("./pages/listContent.php"); ?>
+            </div>
+            <!----------implementando por mari----->
             <div class="musicContainer hide" id="playlists">
                 <?php if ($authenticated) : ?>
                     <?php #Incluye el contenido de la página de playlist si el usuario está autenticado.

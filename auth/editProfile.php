@@ -80,6 +80,9 @@ if (isset($_POST['submit'])) {
                 $to_save_dir = '../images/users/'; #Ruta para guardar el archivo
                 $file_ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
                 $pl_img = $to_save_dir . $uid . '_' . time() . '.' . $file_ext; #Nombre imagen nueva
+                if (!file_exists($to_save_dir)) {
+                    mkdir($to_save_dir, 0777, true);
+                }
                 if(!move_uploaded_file($_FILES['img']['tmp_name'], $pl_img)){
                     $errors['img'] = 'No se guardo la imagen';
                     $pl_img = '';

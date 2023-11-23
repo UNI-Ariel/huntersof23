@@ -1,23 +1,9 @@
 <?php include('./components/navbar.php'); ?>
+
 <?php
-
-    function getPlaylists(){
-        global $uid, $conn;
-        $sql = "SELECT id, nombre, descripcion, imagen FROM playlists WHERE user_id=$uid";
-        return $conn->query($sql);
-    }
-
-    
-    function getPlaylist($pid){
-        global $uid, $conn;
-        $sql = "SELECT id, nombre, descripcion, imagen FROM playlists WHERE user_id=$uid AND id=$pid";
-        $resultado = $conn->query($sql);
-        $rows = $resultado->num_rows;
-        return rows;
-    }
-    
-    $playlists = getPlaylists();
-    $dir = "./images/playlists/";
+     include('./utils/queries.php');
+        
+    $playlists = q_get_all_playlists($conn, $uid);
 ?>
 <body onload="recargar">
 <dialog id="pl-add-modal" class="pl-modal">
@@ -25,13 +11,13 @@
     <form action="./utils/addPlaylist.php" method="post" enctype="multipart/form-data" class="pl-modal-form">
         <div >
             <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" id="nombre" required>
+            <input type="text" name="nombre" id="nombre" maxlength="30" required>
             <p class="pl-err-name pl-error"></p>
         </div>
 
         <div >
             <label for="descripcion">Descripción:</label>
-            <textarea name="descripcion" id="descripcion" rows="3" ></textarea>
+            <textarea name="descripcion" id="descripcion" rows="3" maxlength="60"></textarea>
             <p class="pl-err-desc pl-error"></p>
         </div>
 
@@ -87,7 +73,7 @@
             <img id="imagenPreview" width="300" height="300" src="">
             <p class="pl-err-img pl-error"></p>
         </div>
-
+        <p class="pl-edit-err pl-error"></p>
         <div>
             <button class="closeModal">Cerrar</button>
             <button value="submit" name="submit">
@@ -113,23 +99,15 @@
     <div class="pl-items" >
         <?php while ($row = $playlists->fetch_assoc()) { ?>
             <div class="pl-card" >
-            <form action="./lista.php" method="post" id="recargalista">
-
-                <div class="lista" style="cursor: pointer;" data-idlist="<?php echo $row['id']; ?>" onclick="recargar(<?=$row['id'];?>)">
+                <div class="lista" data-idlist="<?php echo $row['id']; ?>" onclick="recargar(<?=$row['id'];?>)">
                     <?php
-                        echo "<img src='";
-                        $pl_img = $row['imagen'];
-                        if( file_exists($pl_img) ){
-                           echo $pl_img . "'>";
-                        }
-                        else{
-                            echo $dir . "default.png'>";
-                        }
+                        $card_img = empty($row['imagen']) ? 'images/default/playlist.jpg' : $row['imagen'];
                     ?>
+                    <img src="<?= $card_img; ?>" title="<?= htmlspecialchars($row['descripcion']); ?>">
                 </div>
 
                 <div class="pl-card-info">
-                    <h5><?= $row['nombre']; ?></h5>
+                    <h5><?= htmlspecialchars($row['nombre']); ?></h5>
                     <div class="pl-dropdown">
                         <button class="pl-dropdown-btn" type="button">
                             ...
@@ -138,14 +116,14 @@
                         <div class="pl-dropdown-menu hide" tabindex="-1">
                             <a class="pl-dropdown-item" href="#" data-target="#edit" 
                                 data-id="<?= $row['id']; ?>" 
-                                data-name="<?= $row['nombre']; ?>"
-                                data-desc="<?= $row['descripcion']; ?>">
+                                data-name="<?= htmlspecialchars($row['nombre']); ?>"
+                                data-desc="<?= htmlspecialchars($row['descripcion']); ?>">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
                             <a class="pl-dropdown-item" href="#" data-target="#delete" 
                                 data-id="<?= $row['id']; ?>" 
-                                data-name="<?= $row['nombre']; ?>"
-                                data-desc="<?= $row['descripcion']; ?>">
+                                data-name="<?= htmlspecialchars($row['nombre']); ?>"
+                                data-desc="<?= htmlspecialchars($row['descripcion']); ?>">
                                 <i class="fa fa-trash"></i> Eliminar
                             </a>
                         </div>

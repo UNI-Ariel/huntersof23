@@ -4,7 +4,7 @@
      * 
      * @param mysqli $mysql Conexion a la base de datos MySQL
      * @param int $user_id El id del usuario para el cual se agregara la playlist
-     * @param  array $data Datos de la playlist a insertar: user_id, name, desc, img
+     * @param  array $data Datos de la playlist a insertar: name, desc, img
      * @return int|false Devuelve el id de la ultima insercion o FALSE si ocurrio error
      */
     function q_add_to_playlists($mysql, $user_id, $data){
@@ -48,6 +48,34 @@
         $sql = "SELECT * FROM playlists WHERE id=$playlist_id AND user_id=$user_id";
         $res = $mysql->query($sql);
         return $res->fetch_assoc();
+    }
+
+    /**
+     * Funcion para actualizar una playlist
+     * 
+     * @param mysqli $mysql Conexion a la base de datos MySQL
+     * @param int $user_id El id del usuario de la playlist
+     * @param int $playlist_id El id de la playlist
+     * @param array $new_data El arreglo asociativo con nuevos valores debe contener: 
+     *                       nombre, descripcion, imagen, con al menos un campo distinto de vacio o nulo.
+     * @return bool True si se actualizo, False caso contrario
+     */
+    function q_update_playlist($mysql, $user_id, $playlist_id, $new_data){
+        $update = array();
+        foreach ($new_data as $key => $value){
+            if(!empty($value)){
+                $value = $mysql->real_escape_string($value);
+                $update[] = "$key = '$value'";
+            }
+        }
+        if(!empty($update)){
+            $update = implode(', ', $update);
+            $sql = "UPDATE playlists SET $update WHERE id=$playlist_id AND user_id=$user_id";
+            if($mysql->query($sql)){
+                return TRUE;
+            }
+        }
+        return FALSE;
     }
 
     /**

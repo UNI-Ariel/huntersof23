@@ -181,3 +181,7 @@
 #pl-del-modal button:last-child {
     background-color: red;
 }
+
+.lista {
+    cursor: pointer;
+}

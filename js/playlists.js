@@ -30,7 +30,7 @@ close_modal_btns.forEach(btn =>{
     btn.addEventListener('click', (ev) =>{
         ev.preventDefault();
         const window = btn.closest('dialog');
-        window.close();
+        pl_close_modal_window(window);        
     })
 });
 
@@ -132,7 +132,7 @@ function checkAddInputs(){
 }
 
 function stringToJson(string){
-    let res = '{"msg":"Error","extra":"Error de lectura de la respuesta del servidor."}';
+    let res = '{"msg":"Error","id":"Error de lectura de la respuesta del servidor."}';
     try{
         res = JSON.parse(string);
         return res;
@@ -176,7 +176,7 @@ pl_add_form.addEventListener('submit', async (ev)=>{
     try{
         const res = await getServerData({url, form});
         if(res.msg === 'Success'){
-            pl_add_modal_window.close();
+            pl_close_modal_window(pl_add_modal_window);
             setResultMsg('Lista de reproduccion guardado');
             displayResultBox();
             addPlaylistItem(res);
@@ -199,27 +199,34 @@ function addPlaylistItem(params){
     const pl_container = document.querySelector('.pl-items');
     const div = document.createElement('div');
     div.classList.add('pl-card');
-    div.appendChild( createCardImg(params.img) );
-    div.appendChild( createCardInfo(params.extra, params.name) );
+    div.appendChild( createCardImg(params.id, params.img, params.desc) );
+    div.appendChild( createCardInfo(params.id, params.name, params.desc) );
     pl_container.appendChild(div);
+    goToListaPage();
+    return;
 }
 
-function createCardImg(source){
+function createCardImg(id, source, desc){
+    const div = document.createElement('div');
+    div.classList.add('lista');
+    div.setAttribute('data-idlist', id);
     const img = document.createElement('img');
+    img.title = desc;
     if(source.length > 0){
         img.src = source;
     }
     else{
-        img.src = './images/playlists/default.png';
+        img.src = 'images/default/playlist.jpg';
     }
-    return img;
+    div.appendChild(img);
+    return div;
 }
 
-function createCardInfo(id, name){
+function createCardInfo(id, name, desc){
     const info = document.createElement('div');
     info.classList.add('pl-card-info');
     const h5 = document.createElement('h5');
-    h5.innerText = name;
+    h5.innerHTML = name;
     info.appendChild(h5);
 
     const dropdown = document.createElement('div');
@@ -236,20 +243,21 @@ function createCardInfo(id, name){
     const menu = document.createElement('div');
     menu.classList.add('pl-dropdown-menu', 'hide');
     menu.tabIndex = -1;
-    menu.appendChild(createCardOption(id, name, 'edit') );
-    menu.appendChild(createCardOption(id, name, 'delete') );
+    menu.appendChild(createCardOption(id, name, desc, 'edit') );
+    menu.appendChild(createCardOption(id, name, desc,  'delete') );
     dropdown.appendChild(menu);
     info.appendChild(dropdown);
     return info;
     window.location.reload();
 }
 
-function createCardOption(id, name, type){
+function createCardOption(id, name, desc, type){
     const a = document.createElement('a');
     const i = document.createElement('i');
     a.classList.add('pl-dropdown-item');
     a.setAttribute('data-id', id);
     a.setAttribute('data-name', name);
+    a.setAttribute('data-desc', desc);
     a.href = '#';
     if(type === 'edit'){
         a.setAttribute('data-target', '#edit');
@@ -271,6 +279,15 @@ function createCardOption(id, name, type){
     return a;
 }
 
+function pl_close_modal_window(modal){
+    modal.close();
+    const forms = document.querySelectorAll('#playlists form');
+    forms.forEach(f => {
+        f.reset();
+    });
+    clear_error_msgs();
+}
+
 pl_del_form.addEventListener('submit', async (ev)=>{
     ev.preventDefault();
     const url = pl_del_form.action;
@@ -278,10 +295,10 @@ pl_del_form.addEventListener('submit', async (ev)=>{
     try{
         const res = await getServerData({url, form});
         if(res.msg === 'Success'){
-            pl_del_modal_window.close();
+            pl_close_modal_window(pl_del_modal_window);
             setResultMsg('Lista de reproduccion eliminada');
             displayResultBox();
-            deletePlaylistItem(res.extra);
+            deletePlaylistItem(res.id);
         }
         else{
             const err = document.querySelector('#pl-del-modal .pl-del-err');
@@ -289,7 +306,8 @@ pl_del_form.addEventListener('submit', async (ev)=>{
         }
     }
     catch(e){
-        console.log(e.message);
+        console.log(e);
+        console.error(e.stack);
     }    
 });
 
@@ -306,17 +324,26 @@ pl_edit_form.addEventListener('submit', async (ev)=>{
             updateCardItem(res);
         }
         else{
-            const err = document.querySelector('#pl-del-modal .pl-del-err');
-            err.innerText = 'Error al editar lista de reproduccion';
+            const err = document.querySelector('#pl-edit-modal .pl-edit-err');
+            err.innerText = res.id;
         }
     }
     catch(e){
-        console.log(e.message);
+        console.log(e);
+        console.error(e.stack);
     }    
 });
 
+function clear_error_msgs(){
+    const elements = document.querySelectorAll('.pl-error');
+    elements.forEach(e =>{
+        e.innerHTML = '';
+    });
+    return;
+}
+
 function updateCardItem(params){
-    const card = getCardRoot(document.querySelector('a[data-id="' + params.extra + '"]'));
+    const card = getCardRoot(document.querySelector('a[data-id="' + params.id + '"]'));
     if(params.img !== ''){
         card.querySelector('img').src = params.img;
     }
@@ -352,9 +379,15 @@ function setResultMsg(msg){
 
 function displayResultBox(){
     const box = pl_result_btn.parentElement;
-    if(box.classList.contains('hide')){
+    if(!box.classList.contains('hide')){
         box.classList.toggle('hide');
     }
+    setTimeout( () =>{
+        if(!box.classList.contains('hide')){
+            box.classList.toggle('hide');
+            box.classList.toggle('slide-in');
+        }
+    }, 5000);
 }
 
 function closeResultBox(){

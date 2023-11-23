@@ -1,30 +1,47 @@
 <?php
     include("./dbConnection.php");
     include("../auth/auth.php");
-    
-    $id = $conn->real_escape_string($_POST['id']);
 
-    $server_msg = array("msg" => "", "extra" => "");
+    header('Content-Type: application/json');
+    $server_msg = array("msg" => "", "id" => "");
 
-    $sql = "SELECT imagen FROM playlists WHERE id=$id";
-
-    $file = $conn->query($sql)->fetch_assoc()['imagen'];
-
-    $sql = "DELETE FROM playlists WHERE id=$id";
-    if ($conn->query($sql)) {
-
-        $file = '.' . $file;
-
-        if (strlen($file) > 2 && file_exists($file)) {
-            unlink($file);
-        }
-
-        $server_msg['msg'] = "Success";
-        $server_msg['extra'] = "$id";
-    } else {
+    if(!$authenticated){
         $server_msg['msg'] = "Error";
-        $server_msg['extra'] = "$id";
+        $server_msg['id'] = "No autorizado";
+        echo json_encode( $server_msg);
+        exit;
     }
-    echo json_encode($server_msg);
-    exit;
+    
+    include("./queries.php");
+    include("./processData.php");
+
+
+    if(isset($_POST['id']) && !empty($_POST['id'])){
+        $id = $conn->real_escape_string($_POST['id']);
+
+        $playlist = q_get_playlist($conn, $uid, $id);
+        if($playlist){
+            $image = $playlist['imagen'];
+
+            if(q_delete_playlist($conn, $uid, $id)){
+                if(!empty($image)){
+                    p_delete_file("../" . $image);
+                }
+                $server_msg['msg'] = "Success";
+                $server_msg['id'] = "$id";
+                echo json_encode($server_msg);
+                exit;
+            }
+            else{
+                $server_msg['msg'] = "Error";
+                $server_msg['id'] = "No se borro la lista de reproducción";
+                echo json_encode($server_msg);
+                exit;
+            }
+        }
+        $server_msg['msg'] = "Error";
+        $server_msg['id'] = "No existe la lista de reproducción";
+        echo json_encode($server_msg);
+        exit;
+    }
 ?>

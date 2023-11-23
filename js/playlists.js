@@ -241,6 +241,7 @@ function createCardInfo(id, name){
     dropdown.appendChild(menu);
     info.appendChild(dropdown);
     return info;
+    window.location.reload();
 }
 
 function createCardOption(id, name, type){

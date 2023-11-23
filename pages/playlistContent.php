@@ -19,7 +19,7 @@
     $playlists = getPlaylists();
     $dir = "./images/playlists/";
 ?>
-
+<body onload="recargar">
 <dialog id="pl-add-modal" class="pl-modal">
     <h2>Crear Lista De Reproducción</h2>
     <form action="./utils/addPlaylist.php" method="post" enctype="multipart/form-data" class="pl-modal-form">
@@ -113,7 +113,9 @@
     <div class="pl-items" >
         <?php while ($row = $playlists->fetch_assoc()) { ?>
             <div class="pl-card" >
-                <div class="lista" style="cursor: pointer;" data-idlist="<?php echo $row['id']; ?>">
+            <form action="./lista.php" method="post" id="recargalista">
+
+                <div class="lista" style="cursor: pointer;" data-idlist="<?php echo $row['id']; ?>" onclick="recargar(1)" id="recargaP">
                     <?php
                         echo "<img src='";
                         $pl_img = $row['imagen'];
@@ -125,6 +127,7 @@
                         }
                     ?>
                 </div>
+
                 <div class="pl-card-info">
                     <h5><?= $row['nombre']; ?></h5>
                     <div class="pl-dropdown">
@@ -153,8 +156,16 @@
     </div>
 
 </section>
+</body>
+
 <script src="./js/playlists.js"></script>
 <script>
-//goToListaPage();
+    function recargar(id){
+    document.getElementById('recargaP').addEventListener('click', function(e){
+        e.preventDefault();
+        window.location.href='./lista.php?listID=1';
+    });
+    }
 </script>
+
 

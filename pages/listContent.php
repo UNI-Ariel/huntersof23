@@ -38,7 +38,6 @@ if (isset($_GET['listID'])) {
     }
 }
 ?>
-
 <section class="pl-area">
    
     <div class="cover1">
@@ -62,13 +61,12 @@ if (isset($_GET['listID'])) {
                     <!--<h5 data-singer="<?php echo $song["singerID"]; ?>"><?php echo $song['singerName']; ?></h5>-->
                 </div>
             </div>
-            <div class="func">
-                <i class="fas fa-trash"></i>
-            </div>
+            <i class="fa fa-trash"></i>
         </div>
         <?php endforeach; ?>
     </div>
 </section>
+
 
 <!--<script src="./js/playlists.js"></script>-->
 

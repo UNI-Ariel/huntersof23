@@ -115,7 +115,7 @@
             <div class="pl-card" >
             <form action="./lista.php" method="post" id="recargalista">
 
-                <div class="lista" style="cursor: pointer;" data-idlist="<?php echo $row['id']; ?>" onclick="recargar(1)" id="recargaP">
+                <div class="lista" style="cursor: pointer;" data-idlist="<?php echo $row['id']; ?>" onclick="recargar(<?=$row['id'];?>)">
                     <?php
                         echo "<img src='";
                         $pl_img = $row['imagen'];
@@ -161,10 +161,8 @@
 <script src="./js/playlists.js"></script>
 <script>
     function recargar(id){
-    document.getElementById('recargaP').addEventListener('click', function(e){
-        e.preventDefault();
-        window.location.href='./lista.php?listID=1';
-    });
+        const url = './lista.php?listID='+id;
+        window.location.href=url;
     }
 </script>
 

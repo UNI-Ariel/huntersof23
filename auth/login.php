@@ -37,6 +37,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['id'] = $row['id'];
+                $_SESSION['userimage'] = $row['userImg'];
                 $_SESSION['admin'] = ($row['groupID'] == 1) ? true : false;
 
                 header("Location: ../index.php");

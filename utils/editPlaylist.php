@@ -3,85 +3,113 @@
     include("../auth/auth.php");
 
     header('Content-Type: application/json');
+    $server_msg = array('msg' => '', 'id' => '', 'name' => '', 'desc' => '', 'img' => '');
+
+    if(!$authenticated){
+        $server_msg['msg'] = "Error";
+        $server_msg['id'] = "No autorizado";
+        $server_msg['name'] = "No autorizado";
+        $server_msg['desc'] = "No autorizado";
+        $server_msg['img'] = "No autorizado";
+        echo json_encode( $server_msg);
+        exit;
+    }
+
+    include("./processData.php");
+    include("./queries.php");
 
     $pl_name = $pl_desc = $pl_img = "";
-    $server_msg = array('msg' => '', 'name' => '', 'desc' => '', 'img' => '', 'extra' => '');
+    $errors = array('name' => '', 'desc' => '', 'img' => '');
     $img_dir = '../images/playlists/';
 
-    $id = $conn->real_escape_string($_POST['id']);
-
-    $sql = "SELECT nombre, descripcion, imagen FROM playlists WHERE id=$id";
-    $current_data = $conn->query($sql)->fetch_assoc();
+    $playlist_id = $conn->real_escape_string($_POST['id']);
+    $current_data = q_get_playlist($conn, $uid ,$playlist_id);
 
     if(isset($_POST['nombre']) && $_POST['nombre'] !== ''){
-        $pl_name = $conn->real_escape_string($_POST['nombre']);
-        if(strlen($pl_name) > 30){
-            $server_msg['name'] = 'Nombre debe tener entre 1 y 30 caracteres';
+        $pl_name = trim($_POST['nombre']);
+        if( !p_valid_length($pl_name, 1, 30) ){
+            $errors['name'] = 'Nombre debe tener entre 1 y 30 caracteres';
+        }
+        elseif($current_data['nombre'] !== $pl_name){
+            if (q_playlist_name_exists($conn, $uid, $pl_name)) {
+                $errors['name'] = 'El nombre de la lista ya existe.';
+            }
         }
         else{
-            if($current_data['nombre'] !== $_POST['nombre']){
-                $sql = "SELECT id FROM playlists WHERE nombre = '$pl_name' AND user_id = '$uid'";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    $server_msg['name'] = 'El nombre de la lista ya existe.';
-                }
-            }
+            $pl_name = $current_data['nombre'];
         }
         
         if(isset($_POST['descripcion']) && $_POST['descripcion'] !== '' ){
-            $pl_desc = $conn->real_escape_string($_POST['descripcion']);
-            if(strlen($pl_desc) > 60){
-                $server_msg['desc'] = 'Descripcion debe tener un maximo de 60 caracteres';
+            $pl_desc = trim($_POST['descripcion']);
+            if( !p_valid_length($pl_desc, 0, 60) ){
+                $errors['desc'] = 'Descripcion debe tener un maximo de 60 caracteres';
+            }
+            elseif($pl_desc === $current_data['descripcion']){
+                $pl_desc = $current_data['descripcion'];
             }
         }
 
         if(isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0 ){
-            $allow_types = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
-            $detected_type = exif_imagetype($_FILES['imagen']['tmp_name']);
-            if(!in_array($detected_type, $allow_types)){
-                $server_msg['img'] = ' Formato de imágen no permitido';
+            $img = $_FILES['imagen'];
+            if(!p_valid_img_type($img)){
+                $errors['img'] = ' Formato de imágen no permitido';
             }
             else{
-                $file_ext = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-                $pl_img = $img_dir . $uid . '_' . time() . '.' . $file_ext;
-                if(!move_uploaded_file($_FILES['imagen']['tmp_name'], $pl_img)){
-                    $server_msg['img'] = 'No se guardo la imagen';
-                    $pl_img = '';
+                $file_ext = p_get_file_ext($img);
+                $pl_img = p_generate_file_name($uid, $file_ext); 
+                if(!p_save_file($img, $img_dir, $pl_img)){
+                    $errors['img'] = 'No se guardo la imagen intente nuevamente';
                 }
-                if(!empty ($pl_img) ) {
-                    $pl_img = substr($pl_img, 1);
+                else{
+                    $pl_img = substr($img_dir, 3) . $pl_img;
                 }
             }
         }
+        else{
+            $pl_img = $current_data['imagen'];
+        }
 
-        if(array_filter($server_msg)){
+        if(array_filter($errors)){
             $server_msg['msg'] = 'Error';
+            $server_msg['name'] = $errors['name'];
+            $server_msg['desc'] = $errors['desc'];
+            $server_msg['img'] = $errors['img'];
             echo json_encode($server_msg);
             exit;
         }
         else{
-            $sql = "UPDATE playlists SET nombre='$pl_name', descripcion='$pl_desc'";
-            if(!empty($pl_img)){
-                $sql = $sql . ", imagen='$pl_img'";
-            }
-            $sql= $sql . " WHERE id='$id'";
-            if ($conn->query($sql)) {
-                $server_msg['msg'] = 'Success';
-                $server_msg['name'] = $pl_name;
-                $server_msg['desc'] = $pl_desc;
-                $server_msg['img'] = $pl_img;
-                $server_msg['extra'] = $id;
-                echo json_encode($server_msg);
-                exit;
+            if($pl_img !== $current_data['imagen'] || $current_data['nombre'] !== $pl_name || 
+            $current_data['descripcion'] !== $pl_desc){
+                $data = array('nombre' => $pl_name, 'descripcion' => $pl_desc, 'imagen' => $pl_img);
+                if(q_update_playlist($conn, $uid, $playlist_id, $data)){
+                    if($pl_img !== $current_data['imagen'] && !empty($current_data['imagen'])){
+                        p_delete_file('../' . $current_data['imagen']);
+                    }
+                    $server_msg['msg'] = 'Success';
+                    $server_msg['id'] = $playlist_id;
+                    $server_msg['name'] = $pl_name;
+                    $server_msg['desc'] = $pl_desc;
+                    $server_msg['img'] = $pl_img;
+                    echo json_encode($server_msg);
+                    exit;
+                }
+                else{
+                    $server_msg['msg'] = 'Error';
+                    $server_msg['id'] = 'Fallo al actualizar los datos';
+                    echo json_encode($server_msg);
+                    exit;
+                }
             }
             else{
                 $server_msg['msg'] = 'Error';
+                $server_msg['id'] = 'No se modifico ningun dato';
                 echo json_encode($server_msg);
                 exit;
             }
         }
     }
-    $server_msg['type'] = 'Error';
+    $server_msg['msg'] = 'Error';
+    $server_msg['id'] = 'Solicitud invalida';
     echo json_encode($server_msg);
     exit;
 ?>

@@ -83,8 +83,7 @@ if (isset($_POST['submit'])) {
         echo "";
     } else {
         $password = md5($password);
-        $imagenPorDefecto= './images/users/default.png';
-        $sql2 = "INSERT INTO users(username, email, userImg,  password, groupID) VALUE('$username', '$email','$imagenPorDefecto' ,'$password', 2)";
+        $sql2 = "INSERT INTO users(username, email, password, groupID) VALUE('$username', '$email', '$password', 2)";
         $result2 = mysqli_query($conn, $sql2);
         if ($result2) {
             /* header("Location: login.php"); */
@@ -137,13 +136,12 @@ if (isset($_POST['submit'])) {
                         } ?>" 
         type="password" name="re_password" placeholder="(Confirmar Contraseña)">
         <p class="error-container"><?php echo $errors['re_password']; ?></p>
-        <div class="show-pass-container">
-            <div class="show-pass-checkbox">
-                <input type="checkbox" id="show-pass">    
-                Mostrar Contraseña
-            </div>
-        </div>
 
+        <div class="show-pass-container">
+            <input type="checkbox" id="show-pass">    
+            <label for="show-pass">Mostrar Contraseña</label>
+        </div>
+            
         <button type="submit" name="submit">Registrarse</button>
         <a href="..\index.php" class="ca">Cancelar</a>
     </form>

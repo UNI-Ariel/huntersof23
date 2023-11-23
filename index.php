@@ -1,9 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 include("./utils/getUrl.php");  // Incluye un archivo de utilidad para obtener la URL actual.
 include("./utils/dbConnection.php");  // Incluye un archivo de utilidad para establecer la conexión a la base de datos.
 include("./auth/auth.php");  // Incluye un archivo relacionado con la autenticación de usuarios.
-error_reporting(E_ALL);
-ini_set('display_errors',1);
 function redirect($url)
 {
     echo "<script type='text/javascript'>document.location.href='{$url}';</script>";  // Redirige a una URL mediante JavaScript.

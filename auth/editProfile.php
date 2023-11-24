@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
                 $errors['img_format'] = ' Formato de imágen no permitido';
             } else{
                 $max_file_size = 2 * 1024 * 1024; // 2 MB (ajusta según tus necesidades)
-
+            }
          if ($_FILES['img']['size'] > $max_file_size) {
             $errors['img_format'] = 'El tamaño de la imagen excede el límite permitido (2 MB)';
            } else {

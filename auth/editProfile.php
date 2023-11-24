@@ -36,8 +36,8 @@ if (isset($_POST['submit'])) {
     if($username === ""){
         $errors['username'] = "El nombre esta vacio";
     }
-    elseif(strlen($username) < 3 or strlen($username) > 20) {
-        $errors['username'] = "El nombre debe tener entre 3 y 20 caracteres";
+    elseif(strlen($username) < 3 or strlen($username) > 10) {
+        $errors['username'] = "El nombre debe tener entre 3 y 10 caracteres";
     }
     elseif (!ctype_alnum($username))
     {
@@ -75,8 +75,12 @@ if (isset($_POST['submit'])) {
             $detected_type = exif_imagetype($_FILES['img']['tmp_name']);
             if(!in_array($detected_type, $allow_types)){
                 $errors['img_format'] = ' Formato de imágen no permitido';
-            }
-            else{
+            } else{
+                $max_file_size = 2 * 1024 * 1024; // 2 MB (ajusta según tus necesidades)
+
+         if ($_FILES['img']['size'] > $max_file_size) {
+            $errors['img_format'] = 'El tamaño de la imagen excede el límite permitido (2 MB)';
+           } else {
                 $to_save_dir = '../images/users/'; #Ruta para guardar el archivo
                 $file_ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
                 $pl_img = $to_save_dir . $uid . '_' . time() . '.' . $file_ext; #Nombre imagen nueva

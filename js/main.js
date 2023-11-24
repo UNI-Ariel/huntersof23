@@ -428,7 +428,66 @@ inputSearchs.forEach((inputSearch) => {
 
 goToSingerPage();
 
+//Funcionalidad adicional Volumen---------------
 
+document.addEventListener("keydown", (ev) => {
+    ev.stopPropagation();
+    if (ev.key === " ") {
+        const tag = ev.target.tagName;
+        if(tag !== 'INPUT' && tag !== 'TEXTAREA'){
+            ev.preventDefault();
+            if (isPlaying) {
+                pauseSong();
+            } else {
+                playSong();
+            }
+        }
+    }
+});
+
+volumeInfo.addEventListener('wheel', (ev)=>{
+    ev.stopPropagation();
+    if(!mute.classList.contains('muted')){
+        const dir = ev.deltaY > 0 ? 'down' : 'up';
+        const add = 0.05;
+        currentVol = dir === 'up' ? currentVol + add : currentVol - add;
+        if(currentVol < 0){
+            currentVol = 0;
+        }
+        else if(currentVol > 1){
+            currentVol = 1;
+        }
+        audio.volume = currentVol;
+        localStorage.volume = currentVol;
+        toggleMuteIcon();
+        const volPercent = (currentVol / 1) * 100;
+        volume.style.width = `${volPercent}% `;
+    }
+});
+
+function toggleMuteIcon(){
+    if(currentVol === 0){
+        mute.classList.remove("fa-volume-up");
+        mute.classList.add("fa-volume-mute");
+        mute.style.color = "red";
+    }
+    else{
+        mute.classList.add("fa-volume-up");
+        mute.classList.remove("fa-volume-mute");
+        mute.style.color = "#0799B6";
+    }
+}
+
+window.addEventListener('load', ()=>{
+    if('volume' in localStorage){
+        const sv = localStorage.volume;
+        currentVol = parseFloat(sv);
+        audio.volume = currentVol;
+
+        const volPercent = (currentVol / 1) * 100;
+        volume.style.width = `${volPercent}% `;
+    }
+});
 
 //implementado por mari-----------
 

@@ -43,10 +43,11 @@
     </div>
 </div>
 <?php if ($authenticated) :?>
-    <script>
+    <?php #Por favor, dejar de agregar codigo que fuerze una actualizacion en la pagina.?>
+    <!-- <script>
     document.getElementById('recarga').addEventListener('click', function(e){
         e.preventDefault();
         window.location.href='./playlists.php';
     }); 
-    </script>
+    </script> -->
 <?php endif;?>

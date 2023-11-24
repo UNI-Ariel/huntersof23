@@ -524,6 +524,9 @@ function goToListaPage() {
                     // Update singer's personal info
                     const sImg = listUI.querySelector(".cover1 img");
                     sImg.src = data["imagen"];
+                    if(data["imagen"] == null){
+                        sImg.src = 'images/default/playlist.jpg'
+                    }
                     const sName = listUI.querySelector(".coverDetail h1");
                     sName.innerText = data["nombre"];
                     const sDescription = listUI.querySelector(".coverDetail p");

@@ -121,7 +121,7 @@ function checkAddInputs(){
     const name_l = pl_add_input_name.value.length;
     const desc_l = pl_add_input_desc.value.length;
     
-    if( name_l > 0 && name_l < 31 && desc_l < 61){
+    if( name_l > 1 && name_l < 31 && desc_l < 61){
         if(pl_add_submit_btn.disabled){
             toggleAddSubmitBtn();
         }

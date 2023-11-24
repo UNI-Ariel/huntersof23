@@ -26,8 +26,8 @@
     if(isset($_POST['nombre']) && $_POST['nombre'] !== ''){
         $pl_name = $_POST['nombre'];
         $pl_name = trim($pl_name);  #Quitar espacios del inicio y fin
-        if(!p_valid_length($pl_name, 1, 30)){
-            $errors['name'] = 'Nombre debe tener entre 1 y 30 caracteres';
+        if(!p_valid_length($pl_name, 2, 30)){
+            $errors['name'] = 'Nombre debe tener entre 2 y 30 caracteres';
         }
         elseif(q_playlist_name_exists($conn, $uid, $pl_name)){ #ver si ya existe una playlist con ese nombre
             $errors['name'] = 'El nombre de la lista ya existe.';

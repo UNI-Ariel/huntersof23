@@ -21,6 +21,9 @@ if (isset($_GET['listID'])) {
         $listName = $playL[0]["nombre"];
         $listInfo = $playL[0]["descripcion"];
         $listImg = $playL[0]["imagen"];
+        if($listImg === NULL || empty($listImg)){
+            $listImg = 'images/default/playlist.jpg';
+        }
         // Consulta para obtener todas las canciones del cantante
         $songsQuery =  "SELECT songs.id, songs.title title, songs.filePath audio, songs.imgPath img, singers.name singerName,singers.id singerID, lista.idPlay, lista.idLista 
         FROM lista,songs LEFT JOIN singers on singers.id = songs.singerID 
@@ -76,7 +79,7 @@ if (isset($_GET['listID'])) {
             <button onclick="eliminar(<?=$listID;?>)">Eliminar</button>
     </div>
 </div>
-<script src="./js/playlists.js"></script>
+
 <script>
     $(document).ready(function(){
         console.log("jQuery cargado");
@@ -105,9 +108,9 @@ if (isset($_GET['listID'])) {
                     var songElement = $('#'+songId);
                     songElement.remove();
                     
-                    if(response.reload){
+                    /* if(response.reload){
                         location.reload();
-                    }
+                    } */
 
             }else{
                 console.error('error eliminar');

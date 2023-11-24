@@ -16,3 +16,25 @@ playFavButton.addEventListener("click", () => {
         alert("You don't have any favorite song at the moment!!");
     }
 });
+
+
+const PulseBtn = document.querySelector(".playAllFav");
+//PulseBtn.addEventListener("click", () => {
+    function repro(){
+    if (listaSongIDs.length > 0) {
+        // Si hay canciones favoritas, crea una lista de reproducción con las canciones favoritas
+        let listplay = [];
+        console.log(listaSongIDs);
+        listaSongIDs.forEach((id) => {
+            listplay.push(songDetails[id]);
+        });
+        playingQueue = listplay; // Asigna la lista de reproducción de canciones favoritas a la cola de reproducción
+        playQueue(); // Inicia la reproducción de la cola
+    } else {
+        // Si no hay canciones favoritas, muestra un mensaje de alerta
+        alert("You don't have any favorite song at the moment!!");
+    }
+   // playingQueue = data["songs"];
+   // songIndex = 0;
+   // playQueue();
+}

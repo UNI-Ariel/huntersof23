@@ -22,12 +22,9 @@ if (isset($_GET['listID'])) {
         $listInfo = $playL[0]["descripcion"];
         $listImg = $playL[0]["imagen"];
         // Consulta para obtener todas las canciones del cantante
-        $songsQuery =  "SELECT songs.id, songs.title AS title,
-                        songs.filePath AS audio, songs.imgPath AS img,
-                        playlists.nombre, playlists.imagen, lista.idSong, lista.idPlay
-                    FROM playlists, songs, lista
-                    WHERE playlists.id=lista.idPlay AND songs.id=lista.idSong AND playlists.id=$listID
-                    ORDER BY lista.idLista DESC";
+        $songsQuery =  "SELECT songs.id, songs.title title, songs.filePath audio, songs.imgPath img, singers.name singerName,singers.id singerID, lista.idPlay, lista.idLista 
+        FROM lista,songs LEFT JOIN singers on singers.id = songs.singerID 
+        WHERE lista.idSong = songs.id and singers.id=songs.singerID and lista.idPlay=$listID  ORDER BY lista.idLista DESC";
 
         // Ejecutar la consulta para obtener las canciones del cantante
         $result2 = mysqli_query($conn, $songsQuery);
@@ -48,11 +45,12 @@ if (isset($_GET['listID'])) {
         <div class="coverDetail">
             <h1 > <?php echo $listName; ?></h1>
             <p style="color: rgb(32, 106, 124) ;"><?php echo $listInfo; ?></p>
-            <div class="pulse"></div>
+            <div class="pulse">
+            <!--<button class="playAllFav" onclick="repro()"><i class="fas fa-play"></i> <p>Reproducir</p></button>-->
+            </div>
         </div>
     </div>
     <div class="products">
-    <p>Todas las canciones de la Lista de Reproduccion</p>
         <?php foreach ($songs as $index => $song) : ?>
         <div class="song" data="<?php echo $song['id']; ?>">
             <div class="info">
@@ -60,11 +58,11 @@ if (isset($_GET['listID'])) {
                 <img src="<?php echo $song['img']; ?>">
                 <div class="detail">
                     <h4><?php echo $song['title']; ?></h4>
-                    <!--<h5 data-singer="<?php echo $song["singerID"]; ?>"><?php echo $song['singerName']; ?></h5>-->
+                    <h5><?php echo $song['singerName']; ?></h5>
                 </div>
             </div>
-            <div class ="func">
-            <button onclick="openModalE('<?=$song['title'];?>',<?=$song['id']; ?>)"><i class="fa fa-trash"></i></button>
+            <div class ="func" data-list="<?php echo $song["idLista"]; ?>">
+            <i class="fa fa-trash"></i>
             </div>
         </div>
         <?php endforeach; ?>

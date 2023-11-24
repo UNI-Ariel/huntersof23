@@ -109,6 +109,91 @@ function goToSingerPage() {
         });
     });
 }
+//--------------------------implementando por mari------------------------------------------>
+
+
+function goToListaPage() { 
+    const listaLinks = document.querySelectorAll(".lista");
+    listaLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            const listID = link.getAttribute("data-idlist");
+            console.log(listID);
+            // update url
+            window.history.pushState(
+                "",
+                "",
+                pageUrl + "/" + "lista.php" + "?listID=" + listID
+            );
+            // Show singer page
+            showContent("lista");
+            // Ajax connection to get singer's info and songs
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText !== "") {
+                    var dato = JSON.parse(this.responseText);
+
+                    const listUI = document.getElementById("lista");
+
+                    // Update singer's personal info
+                    const sImg = listUI.querySelector(".cover1 img");
+                    sImg.src = dato["imagen"];
+                    const sName = listUI.querySelector(".coverDetail h1");
+                    sName.innerText = dato["nombre"];
+                    const sDescription = listUI.querySelector(".coverDetail p");
+                    sDescription.innerText = dato["descripcion"];
+                    /*const sDescription =
+                        singerUI.querySelector(".description p");
+                    sDescription.innerText = data["info"];
+                    const sDesImg = listUI.querySelector(".description img");
+                    sDesImg.src = data["imagen"];*/
+
+                    // Make all the song cards (song title)
+                    const allSingerSongs = listUI.querySelector(".products");
+                    allSingerSongs.innerHTML = "";
+                    dato["songs"].forEach((song, index) => {
+                        const newTitle = makeSongPlay(index, song);
+                        allSingerSongs.appendChild(newTitle);
+                    });
+
+                    // Replace new pulse btn
+                   const pulseBtn = document.querySelector(".pulse");
+                    const newPulseBtn = pulseBtn.cloneNode(true);
+                    pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
+                    newPulseBtn.addEventListener("click", () => {
+                       /* if (data.length > 0) {
+                            // Si hay canciones favoritas, crea una lista de reproducción con las canciones favoritas
+                            let favouriteSongs = [];
+                            console.log(data);
+                            data.forEach((id) => {
+                                favouriteSongs.push(songDetails[id]);
+                            });
+                            playingQueue = favouriteSongs; // Asigna la lista de reproducción de canciones favoritas a la cola de reproducción
+                            playQueue(); // Inicia la reproducción de la cola
+                        } else {
+                            // Si no hay canciones favoritas, muestra un mensaje de alerta
+                            alert("You don't have any favorite song at the moment!!");
+                        }*/
+                        playingQueue = dato["songs"];
+                       songIndex = 0;
+                       playQueue();
+                    });
+                }
+            }
+        };
+        
+        xmlhttp.open(
+            "GET",
+            "./utils/getList.php?listID=" + listID,
+            true
+        );
+        xmlhttp.send();
+    });
+});
+}
+
+
+
 
 // Load song
 function loadSong(song) {
@@ -343,68 +428,15 @@ inputSearchs.forEach((inputSearch) => {
 
 goToSingerPage();
 
-//Funcionalidad adicional---------------
-document.addEventListener("keydown", (ev) => {
-    ev.stopPropagation();
-    if (ev.key === " ") {
-        const tag = ev.target.tagName;
-        if(tag !== 'INPUT' && tag !== 'TEXTAREA'){
-            ev.preventDefault();
-            if (isPlaying) {
-                pauseSong();
-            } else {
-                playSong();
-            }
-        }
-    }
-});
-
-volumeInfo.addEventListener('wheel', (ev)=>{
-    ev.stopPropagation();
-    if(!mute.classList.contains('muted')){
-        const dir = ev.deltaY > 0 ? 'down' : 'up';
-        const add = 0.05;
-        currentVol = dir === 'up' ? currentVol + add : currentVol - add;
-        if(currentVol < 0){
-            currentVol = 0;
-        }
-        else if(currentVol > 1){
-            currentVol = 1;
-        }
-        audio.volume = currentVol;
-        localStorage.volume = currentVol;
-        toggleMuteIcon();
-        const volPercent = (currentVol / 1) * 100;
-        volume.style.width = `${volPercent}% `;
-    }
-});
-
-function toggleMuteIcon(){
-    if(currentVol === 0){
-        mute.classList.remove("fa-volume-up");
-        mute.classList.add("fa-volume-mute");
-        mute.style.color = "red";
-    }
-    else{
-        mute.classList.add("fa-volume-up");
-        mute.classList.remove("fa-volume-mute");
-        mute.style.color = "#0799B6";
-    }
-}
-
-window.addEventListener('load', ()=>{
-    if('volume' in localStorage){
-        const sv = localStorage.volume;
-        currentVol = parseFloat(sv);
-        audio.volume = currentVol;
-
-        const volPercent = (currentVol / 1) * 100;
-        volume.style.width = `${volPercent}% `;
-    }
-});
 
 
 //implementado por mari-----------
+
+
+
+
+
+
 
 function goToListaPage() { 
     const listaLinks = document.querySelectorAll(".lista");

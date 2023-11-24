@@ -7,10 +7,10 @@ include("./index.php");
 </script>
 <script>
     
-   let singerSongs = JSON.parse('<?php echo json_encode($songs); ?>');
+   let listSongs = JSON.parse('<?php echo json_encode($songs); ?>');
     const pulseBtn = document.querySelector(".pulse");
     pulseBtn.addEventListener("click", () => {
-       playingQueue = singerSongs;
+       playingQueue = listSongs;
        songIndex = 0;
         playQueue();
     })

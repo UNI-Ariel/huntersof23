@@ -89,6 +89,61 @@ const makeSongTitle = (index, song) => {
     return titleContainer; // Devuelve el elemento de título de canción
 };
 
+//Funcion para crear un elemento  en la seccion de playlist
+const makeSongPlay = (index, song) => {
+    // Crea un contenedor de título de canción
+    const titleContainer = document.createElement("div");
+    titleContainer.classList.add("song");
+    titleContainer.setAttribute("data", song["id"]);
+
+    // Configura el contenido HTML del elemento de título de canción
+    titleContainer.innerHTML = `
+        <div class="info">
+            <h4>${index + 1}</h4>
+            <img src="${song["img"]}">
+            <div class="detail">
+                <h4>${song["title"]}</h4>
+                <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
+            </div>
+        </div>
+        <div class="func" style="color: white">
+            <i class="fas fa-trash"></i>
+        </div>
+    `;
+
+    // Agrega oyentes de eventos a los botones de reproducción, favoritos y cola
+    const playButton = titleContainer.querySelector("h4");
+   // const favIcon = titleContainer.querySelector("i.fa-heart");
+    //const queueIcon = titleContainer.querySelector("i.fa-plus");
+    const trashIcon = titleContainer.querySelector("i.fa-trash");
+
+    playButton.addEventListener("click", () => {
+        playImmediate(song); // Reproduce la canción de inmediato
+    });
+    /*
+    favIcon.addEventListener("click", () => {
+        addToFav(song, favIcon.classList.contains("fas")); // Agrega o quita de favoritos
+        if (authenticated) {
+            favIcon.className = favIcon.classList.contains("fas") ? "far fa-heart" : "fas fa-heart";
+        }
+    });*/
+
+    /* queueIcon.addEventListener("click", () => {
+        insertToQueue(song); // Agrega la canción a la cola de reproducción
+    }); */
+
+    return titleContainer; // Devuelve el elemento de título de canción
+};
+//------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 // Función para crear un elemento de título de canción en la sección de favoritos
 const makeSongTitleForFav = (index, song) => {
     const favContent = document.querySelector(".fav .tileContainer");

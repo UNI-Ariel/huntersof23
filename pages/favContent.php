@@ -37,7 +37,7 @@ $favSongs = array_map("reformData", $queryResult);
                 </div>
                 <div class="func">
                     <i class="fas fa-trash"></i>
-                    <button class="open-modal-button" data-songid="<?php echo $song['id']; ?>" onclick="openModal3(this)" ><i class="fas fa-plus" ></i></button>
+                    <button class="open-modal-button" data-songid="<?php echo $song['id']; ?>" onclick="openModal(this)" ><i class="fas fa-plus" ></i></button>
                    
                 </div>
             </div>

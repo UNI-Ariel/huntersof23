@@ -62,7 +62,7 @@ const makeSongTitle = (index, song) => {
         </div>
         <div class="func" style="color: white">
             ${heartIcon}
-            <i class="fas fa-plus"></i>
+            <button class="open-modal-button" data-songid=" ${song["id"]}" onclick="openModal(this)" ><i class="fas fa-plus" ></i></button>
         </div>
     `;
 
@@ -108,7 +108,7 @@ const makeSongTitleForFav = (index, song) => {
         </div>
         <div class="func">
             <i class="fas fa-trash"></i>
-            <i class="fas fa-plus"></i>
+            <button class="open-modal-button" data-songid=" ${song["id"]}" onclick="openModal(this)" ><i class="fas fa-plus" ></i></button>
         </div>
     `;
 

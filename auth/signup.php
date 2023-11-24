@@ -25,8 +25,8 @@ if (isset($_POST['submit'])) {
     if($username === ""){
         $errors['username'] = "El nombre esta vacio";
     }
-    elseif(strlen($username) < 3 or strlen($username) > 20) {
-        $errors['username'] = "El nombre debe tener entre 3 y 20 caracteres";
+    elseif(strlen($username) < 3 or strlen($username) > 10) {
+        $errors['username'] = "El nombre debe tener entre 3 y 10 caracteres";
     }
     elseif (!ctype_alnum($username))
     {

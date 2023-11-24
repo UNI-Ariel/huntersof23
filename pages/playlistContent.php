@@ -5,7 +5,6 @@
         
     $playlists = q_get_all_playlists($conn, $uid);
 ?>
-<body onload="recargar">
 <dialog id="pl-add-modal" class="pl-modal">
     <h2>Crear Lista De Reproducción</h2>
     <form action="./utils/addPlaylist.php" method="post" enctype="multipart/form-data" class="pl-modal-form">
@@ -99,7 +98,7 @@
     <div class="pl-items" >
         <?php while ($row = $playlists->fetch_assoc()) { ?>
             <div class="pl-card" >
-                <div class="lista" data-idlist="<?php echo $row['id']; ?>" onclick="recargar(<?=$row['id'];?>)">
+                <div class="lista" data-idlist="<?php echo $row['id']; ?>" >
                     <?php
                         $card_img = empty($row['imagen']) ? 'images/default/playlist.jpg' : $row['imagen'];
                     ?>
@@ -134,14 +133,13 @@
     </div>
 
 </section>
-</body>
 
 <script src="./js/playlists.js"></script>
-<script>
+<!-- <script>
     function recargar(id){
         const url = './lista.php?listID='+id;
         window.location.href=url;
     }
-</script>
+</script> -->
 
 

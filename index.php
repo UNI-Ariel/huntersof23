@@ -220,6 +220,7 @@ foreach ($songs as $song) {
             success: function(response) {
                 console.log(response);
                 alert(response);
+                updatePlaylists();
                closeModal2();
                $('#nombreP').val('');
             },

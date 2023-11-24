@@ -199,21 +199,22 @@ function addPlaylistItem(params){
     const pl_container = document.querySelector('.pl-items');
     const div = document.createElement('div');
     div.classList.add('pl-card');
-    div.appendChild( createCardImg(params.id, params.img, params.desc) );
-    div.appendChild( createCardInfo(params.id, params.name, params.desc) );
+    div.appendChild( createCardImg(params) );
+    div.appendChild( createCardInfo(params) );
     pl_container.appendChild(div);
     goToListaPage();
     return;
 }
 
-function createCardImg(id, source, desc){
+function createCardImg(params){
+    const src = 'img' in  params ? params.img : params.imagen;
     const div = document.createElement('div');
     div.classList.add('lista');
-    div.setAttribute('data-idlist', id);
+    div.setAttribute('data-idlist', params.id);
     const img = document.createElement('img');
-    img.title = desc;
-    if(source.length > 0){
-        img.src = source;
+    img.title = 'desc' in params ? params.desc : params.descripcion;
+    if(src.length > 0){
+        img.src = src;
     }
     else{
         img.src = 'images/default/playlist.jpg';
@@ -222,7 +223,12 @@ function createCardImg(id, source, desc){
     return div;
 }
 
-function createCardInfo(id, name, desc){
+//function createCardInfo(id, name, desc){
+function createCardInfo(params){
+    const id = params.id;
+    const name = 'name' in params ? params.name : params.nombre;
+    const desc = 'desc' in params ? params.desc : params.descripcion;
+
     const info = document.createElement('div');
     info.classList.add('pl-card-info');
     const h5 = document.createElement('h5');
@@ -248,7 +254,6 @@ function createCardInfo(id, name, desc){
     dropdown.appendChild(menu);
     info.appendChild(dropdown);
     return info;
-    window.location.reload();
 }
 
 function createCardOption(id, name, desc, type){
@@ -393,4 +398,21 @@ function displayResultBox(){
 function closeResultBox(){
     setResultMsg('');
     pl_result_btn.parentElement.classList.toggle('hide');
+}
+
+async function updatePlaylists(){
+    try{
+        const pl_container = document.querySelector('.pl-items');
+        const url = "./utils/getPlaylists.php";
+        const res = await fetch(url);
+        const string = await res.text();
+        const data =  stringToJson(string);
+        pl_container.innerHTML = '';
+        data.forEach(d =>{
+            addPlaylistItem(d);
+        });
+    }
+    catch (e){
+        console.log(e.message);
+    }
 }

@@ -38,6 +38,8 @@ if (isset($_GET['listID'])) {
     }
 }
 ?>
+<body var idSong;></body>
+
 <section class="pl-area">
    
     <div class="cover1">
@@ -62,26 +64,61 @@ if (isset($_GET['listID'])) {
                 </div>
             </div>
             <div class ="func">
-            <i class="fa fa-trash"></i>
+            <button onclick="openModalE('<?=$song['title'];?>',<?=$song['id']; ?>)"><i class="fa fa-trash"></i></button>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
 </section>
-
-
-<!--<script src="./js/playlists.js"></script>-->
-
-
-<!--<dialog id="pl-del-modal" class="pl-modal">
+<div id="modalE" class="modal">
+    <div class="contenido">
     <h2>¿Eliminar de la biblioteca?</h2>
-    <p>Se eliminara '<strong class="pl-del-name"></strong>' de la biblioteca</p>
-    <p class="pl-del-err pl-error"></p>
-    <form action="./utils/delPlaylist.php" method="post" class="pl-modal-form">
-        <input type="hidden" name="id" value="">
-        <div>
-            <button class="closeModal">Cancelar</button>
-            <button value="submit" name="submit">Eliminar</button>
-        </div>
-    </form>
-</dialog>-->
+    <p id="mensaje"></p>
+            <button onclick="closeModalE()">Cancelar</button>
+            <button onclick="eliminar(<?=$listID;?>)">Eliminar</button>
+    </div>
+</div>
+<script src="./js/playlists.js"></script>
+<script>
+    $(document).ready(function(){
+        console.log("jQuery cargado");
+    });
+</script>
+<script>
+    function openModalE(title, songId){
+        idSong=songId;
+        document.getElementById('mensaje').textContent='Se eliminara '+title+' de la Lista de Reproducción';
+        document.getElementById('modalE').style.display='block';
+    }
+
+    function closeModalE(){
+        document.getElementById('modalE').style.display='none';
+
+    }
+
+    function eliminar(idPlay){
+        $.ajax({
+            type: 'POST',
+            url: './utils/eliminarCancion.php',
+            data:{idSong: idSong, idPlay:idPlay},
+            dataType: '.json',
+            success: function(response){
+                if(response.success){
+                    var songElement = $('#'+songId);
+                    songElement.remove();
+                    
+                    if(response.reload){
+                        location.reload();
+                    }
+
+            }else{
+                console.error('error eliminar');
+            }
+        },
+        error: function(error){
+            console.error('error AJAX', error.responseText);
+        }
+    });
+        closeModalE();
+    }
+</script>

@@ -42,10 +42,11 @@
 
     </div>
 </div>
-<script>
+<?php if ($authenticated) :?>
+    <script>
     document.getElementById('recarga').addEventListener('click', function(e){
         e.preventDefault();
         window.location.href='./playlists.php';
-    });
-    
-</script>
+    }); 
+    </script>
+<?php endif;?>

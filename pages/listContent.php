@@ -72,7 +72,7 @@ if (isset($_GET['listID'])) {
     </div>
 </section>
 
-<dialog id="pl-del-modal" class="pl-modal">
+<dialog id="modalE" class="pl-modal">
     <div id="contenidoE">
     <h2>¿Eliminar de la biblioteca?</h2>
     <p id="mensaje"></p>
@@ -90,11 +90,11 @@ if (isset($_GET['listID'])) {
     function openModalE(title, songId){
         idSong=songId;
         document.getElementById('mensaje').textContent='Se eliminara '+title+' de la Lista de Reproducción';
-        document.getElementById('pl-del-modal').style.display='block';
+        document.getElementById('modalE').style.display='block';
     }
 
     function closeModalE(){
-        document.getElementById('pl-del-modal').style.display='none';
+        document.getElementById('modalE').style.display='none';
 
     }
 
@@ -106,9 +106,7 @@ if (isset($_GET['listID'])) {
             dataType: '.json',
             success: function(response){
                 if(response.success){
-                    var songElement = $('#'+songId);
-                    
-                    window.location.reload();
+                    var songElement = $('#'+idSong);
                     songElement.remove();
 
             }else{
@@ -122,6 +120,6 @@ if (isset($_GET['listID'])) {
         closeModalE();
     }
     function reiniciar(){
-        window.location.reload();
+       $('.product').load(location.reload());
     }
 </script>

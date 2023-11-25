@@ -240,5 +240,21 @@ foreach ($songs as $song) {
     var modal = document.getElementById('myModal2');
     modal.style.display = 'none';
   }
+  function closeModalE() {
+    var modal = document.getElementById('eliminarLista');
+    modal.style.display = 'none';
+  }
 </script>
+
+
+<!-- Modal de confirmación -->
+    <div class="modal"  id="eliminarLista">
+        <div class="modal-contentE">
+                <p>¿Estás seguro de que deseas eliminar?</p>
+            <div class="modal-footerE">
+                <button type="button" class="btn-cancelar" onclick="closeModalE()">Cancelar</button>
+                <button type="button" class="btn-eliminar" id="btnConfirmarEliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
 </html>

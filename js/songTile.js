@@ -35,6 +35,9 @@ const addToFav = (song, isFav) => {
     }
 };
 
+
+
+
 // Función para crear un elemento de título de canción en la interfaz
 const makeSongTitle = (index, song) => {
     // Crea un contenedor de título de canción
@@ -89,6 +92,9 @@ const makeSongTitle = (index, song) => {
     return titleContainer; // Devuelve el elemento de título de canción
 };
 
+
+
+
 //Funcion para crear un elemento  en la seccion de playlist
 const makeSongPlay = (index, song) => {
     // Crea un contenedor de título de canción
@@ -103,44 +109,57 @@ const makeSongPlay = (index, song) => {
             <img src="${song["img"]}">
             <div class="detail">
                 <h4>${song["title"]}</h4>
-                <h5 class="singerPage" data-singer="${song["singerID"]}">${song["singerName"]}</h5>
+                <h5 class="singerPage" >${song["singerName"]}</h5>
             </div>
         </div>
         <div class="func" style="color: white">
-            <i class="fas fa-trash"></i>
+            <i class="fas fa-trash" data-id="${song["idLista"]}"></i>
         </div>
     `;
 
     // Agrega oyentes de eventos a los botones de reproducción, favoritos y cola
     const playButton = titleContainer.querySelector("h4");
-   // const favIcon = titleContainer.querySelector("i.fa-heart");
-    //const queueIcon = titleContainer.querySelector("i.fa-plus");
     const trashIcon = titleContainer.querySelector("i.fa-trash");
+
+    const trashE=trashIcon.cloneNode(true);
+    trashIcon.parentNode.replaceChild(trashE,trashIcon);
 
     playButton.addEventListener("click", () => {
         playImmediate(song); // Reproduce la canción de inmediato
     });
-    /*
-    favIcon.addEventListener("click", () => {
-        addToFav(song, favIcon.classList.contains("fas")); // Agrega o quita de favoritos
-        if (authenticated) {
-            favIcon.className = favIcon.classList.contains("fas") ? "far fa-heart" : "fas fa-heart";
-        }
+
+    var idLis = trashE.getAttribute('data-id');
+//---------------------------------------------------------------
+  /* trashE.addEventListener("click", () => {
+        document.getElementById('eliminarLista').style.display='block';
+        const aceptar = document.getElementById('btnConfirmarEliminar');
+        aceptar.addEventListener("click", () => {
+            trashE.closest(".song").remove();
+            deleList(idLis);
+            document.getElementById('eliminarLista').style.display='none'; 
+        });
     });*/
-
-    /* queueIcon.addEventListener("click", () => {
-        insertToQueue(song); // Agrega la canción a la cola de reproducción
-    }); */
-
+    removeList(trashE, idLis);
     return titleContainer; // Devuelve el elemento de título de canción
-};
+    };
+function deleList(listaID) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "./utils/delLista.php?listaID=" + listaID);
+    xmlhttp.send();
+    
+}
+function removeList(icon, idL){
+    icon.addEventListener("click", () => {
+        document.getElementById('eliminarLista').style.display='block';
+        const aceptar = document.getElementById('btnConfirmarEliminar');
+        aceptar.addEventListener("click", () => {
+            icon.closest(".song").remove();
+            deleList(idL);
+            document.getElementById('eliminarLista').style.display='none'; 
+        });
+    });
+}
 //------------------------------------------------------------
-
-
-
-
-
-
 
 
 

@@ -40,8 +40,8 @@ if (isset($_GET['listID'])) {
 ?>
 <body var idSong;></body>
 
-<section class="pl-area">
-   
+
+
     <div class="cover1">
         <img src="<?php echo $listImg; ?>" alt="" />
         
@@ -49,7 +49,7 @@ if (isset($_GET['listID'])) {
             <h1 > <?php echo $listName; ?></h1>
             <p style="color: rgb(32, 106, 124) ;"><?php echo $listInfo; ?></p>
             <div class="pulse">
-            <!--<button class="playAllFav" onclick="repro()"><i class="fas fa-play"></i> <p>Reproducir</p></button>-->
+            <!--<button class="reproPlay"><i class="fas fa-play"></i> <p>Reproducir</p></button>-->
             </div>
         </div>
     </div>
@@ -65,63 +65,16 @@ if (isset($_GET['listID'])) {
                 </div>
             </div>
             <div class ="func" data-list="<?php echo $song["idLista"]; ?>">
-            <button onclick="openModalE('<?=$song['title'];?>',<?=$song['id']; ?>)"><i class="fa fa-trash"></i></button>
+            <i class="fa fa-trash"></i>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
-</section>
-
-<dialog id="pl-del-modal" class="pl-modal">
-    <div id="contenidoE">
-    <h2>¿Eliminar de la biblioteca?</h2>
-    <p id="mensaje"></p>
-            <button onclick="closeModalE()">Cancelar</button>
-            <button onclick="eliminar(<?=$listID;?>);reiniciar();">Eliminar</button>
-    </div>
-</dialog>
 
 <script>
-    $(document).ready(function(){
-        console.log("jQuery cargado");
-    });
-</script>
-<script>
-    function openModalE(title, songId){
-        idSong=songId;
-        document.getElementById('mensaje').textContent='Se eliminara '+title+' de la Lista de Reproducción';
-        document.getElementById('pl-del-modal').style.display='block';
-    }
-
-    function closeModalE(){
-        document.getElementById('pl-del-modal').style.display='none';
-
-    }
-
-    function eliminar(idPlay){
-        $.ajax({
-            type: 'POST',
-            url: './utils/eliminarCancion.php',
-            data:{idSong: idSong, idPlay:idPlay},
-            dataType: '.json',
-            success: function(response){
-                if(response.success){
-                    var songElement = $('#'+songId);
-                    
-                    window.location.reload();
-                    songElement.remove();
-
-            }else{
-                console.error('error eliminar');
-            }
-        },
-        error: function(error){
-            console.error('error AJAX', error.responseText);
-        }
-    });
-        closeModalE();
-    }
-    function reiniciar(){
-        window.location.reload();
-    }
-</script>
+//const traIc = document.querySelectorAll("#lista .func");
+//console.log(traIc);
+/*traIc.foreach(li=>{
+    removeList(li, li.getAttribute('data-list'));
+});*/
+</script>   

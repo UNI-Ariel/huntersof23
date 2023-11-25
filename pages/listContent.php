@@ -65,21 +65,24 @@ if (isset($_GET['listID'])) {
                 </div>
             </div>
             <div class ="func" data-list="<?php echo $song["idLista"]; ?>">
-            <i class="fa fa-trash"></i>
+            <button onclick="openModalE('<?=$song['title'];?>',<?=$song['id']; ?>)"><i class="fa fa-trash"></i></button>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
 </section>
-<div id="modalE" class="modal">
-    <div class="contenido">
+
+<dialog id="pl-del-modal" class="pl-modal">
+    <div id="contenidoE">
     <h2>¿Eliminar de la biblioteca?</h2>
     <p id="mensaje"></p>
             <button onclick="closeModalE()">Cancelar</button>
-            <button onclick="eliminar(<?=$listID;?>)">Eliminar</button>
+            <button onclick="eliminar(<?=$listID;?>);reiniciar();">Eliminar</button>
     </div>
-</div>
+</dialog>
 
+
+<script src="./js/playlists.js"></script>
 <script>
     $(document).ready(function(){
         console.log("jQuery cargado");
@@ -89,11 +92,11 @@ if (isset($_GET['listID'])) {
     function openModalE(title, songId){
         idSong=songId;
         document.getElementById('mensaje').textContent='Se eliminara '+title+' de la Lista de Reproducción';
-        document.getElementById('modalE').style.display='block';
+        document.getElementById('pl-del-modal').style.display='block';
     }
 
     function closeModalE(){
-        document.getElementById('modalE').style.display='none';
+        document.getElementById('pl-del-modal').style.display='none';
 
     }
 
@@ -106,11 +109,9 @@ if (isset($_GET['listID'])) {
             success: function(response){
                 if(response.success){
                     var songElement = $('#'+songId);
-                    songElement.remove();
                     
-                    /* if(response.reload){
-                        location.reload();
-                    } */
+                    window.location.reload();
+                    songElement.remove();
 
             }else{
                 console.error('error eliminar');
@@ -121,5 +122,8 @@ if (isset($_GET['listID'])) {
         }
     });
         closeModalE();
+    }
+    function reiniciar(){
+        window.location.reload();
     }
 </script>

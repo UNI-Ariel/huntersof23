@@ -77,4 +77,5 @@ if (isset($_GET['listID'])) {
 /*traIc.foreach(li=>{
     removeList(li, li.getAttribute('data-list'));
 });*/
+
 </script>   

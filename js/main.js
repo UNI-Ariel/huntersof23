@@ -114,10 +114,10 @@ function goToSingerPage() {
 
 function goToListaPage() { 
     const listaLinks = document.querySelectorAll(".lista");
-    const listasongs = [];
     listaLinks.forEach((link) => {
         link.addEventListener("click", () => {
             const listID = link.getAttribute("data-idlist");
+            const listasongs = [];
             console.log(listID);
             // update url
             window.history.pushState(
@@ -162,11 +162,10 @@ function goToListaPage() {
                     });
 
                     // Replace new pulse btn
-                   const pulseBtn = document.querySelector("#lista .pulse");
+                    const pulseBtn = document.querySelector("#lista .pulse");
                     const newPulseBtn = pulseBtn.cloneNode(true);
                     pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
-                    newPulseBtn.addEventListener("click", (ev) => {
-                        ev.preventDefault();
+                    newPulseBtn.addEventListener("click", () => {
                        /* if (data.length > 0) {
                             // Si hay canciones favoritas, crea una lista de reproducción con las canciones favoritas
                             let favouriteSongs = [];

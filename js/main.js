@@ -114,6 +114,7 @@ function goToSingerPage() {
 
 function goToListaPage() { 
     const listaLinks = document.querySelectorAll(".lista");
+    const listasongs = [];
     listaLinks.forEach((link) => {
         link.addEventListener("click", () => {
             const listID = link.getAttribute("data-idlist");
@@ -138,6 +139,9 @@ function goToListaPage() {
                     // Update singer's personal info
                     const sImg = listUI.querySelector(".cover1 img");
                     sImg.src = dato["imagen"];
+                    if(dato["imagen"] == null || dato["imagen"] === ''){
+                        sImg.src = 'images/default/playlist.jpg'
+                    }
                     const sName = listUI.querySelector(".coverDetail h1");
                     sName.innerText = dato["nombre"];
                     const sDescription = listUI.querySelector(".coverDetail p");
@@ -152,15 +156,17 @@ function goToListaPage() {
                     const allSingerSongs = listUI.querySelector(".products");
                     allSingerSongs.innerHTML = "";
                     dato["songs"].forEach((song, index) => {
+                        listasongs.push(songDetails[song['id']]);
                         const newTitle = makeSongPlay(index, song);
                         allSingerSongs.appendChild(newTitle);
                     });
 
                     // Replace new pulse btn
-                   const pulseBtn = document.querySelector(".pulse");
+                   const pulseBtn = document.querySelector("#lista .pulse");
                     const newPulseBtn = pulseBtn.cloneNode(true);
                     pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
-                    newPulseBtn.addEventListener("click", () => {
+                    newPulseBtn.addEventListener("click", (ev) => {
+                        ev.preventDefault();
                        /* if (data.length > 0) {
                             // Si hay canciones favoritas, crea una lista de reproducción con las canciones favoritas
                             let favouriteSongs = [];
@@ -174,9 +180,8 @@ function goToListaPage() {
                             // Si no hay canciones favoritas, muestra un mensaje de alerta
                             alert("You don't have any favorite song at the moment!!");
                         }*/
-                        playingQueue = dato["songs"];
-                       songIndex = 0;
-                       playQueue();
+                        playingQueue = listasongs;
+                        playQueue();
                     });
                 }
             }
@@ -427,6 +432,7 @@ inputSearchs.forEach((inputSearch) => {
 });
 
 goToSingerPage();
+goToListaPage();
 
 //Funcionalidad adicional Volumen---------------
 
@@ -488,84 +494,3 @@ window.addEventListener('load', ()=>{
         volume.style.width = `${volPercent}% `;
     }
 });
-
-//implementado por mari-----------
-
-
-
-
-
-
-
-function goToListaPage() { 
-    const listaLinks = document.querySelectorAll(".lista");
-    listaLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-            const listID = link.getAttribute("data-idlist");
-            console.log(listID);
-            // update url
-            window.history.pushState(
-                "",
-                "",
-                pageUrl + "/" + "lista.php" + "?listID=" + listID
-            );
-    
-            // Show singer page
-            showContent("lista");
-            // Ajax connection to get singer's info and songs
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "") {
-                    var data = JSON.parse(this.responseText);
-
-                    const listUI = document.getElementById("lista");
-
-                    // Update singer's personal info
-                    const sImg = listUI.querySelector(".cover1 img");
-                    sImg.src = data["imagen"];
-                    if(data["imagen"] == null){
-                        sImg.src = 'images/default/playlist.jpg'
-                    }
-                    const sName = listUI.querySelector(".coverDetail h1");
-                    sName.innerText = data["nombre"];
-                    const sDescription = listUI.querySelector(".coverDetail p");
-                    sDescription.innerText = data["descripcion"];
-                    /*const sDescription =
-                        singerUI.querySelector(".description p");
-                    sDescription.innerText = data["info"];
-                    const sDesImg = listUI.querySelector(".description img");
-                    sDesImg.src = data["imagen"];*/
-
-                    // Make all the song cards (song title)
-                    const allSingerSongs = listUI.querySelector(".products");
-                    allSingerSongs.innerHTML = "";
-                    data["songs"].forEach((song, index) => {
-                        const newTitle = makeSongTitle(index, song);
-                        allSingerSongs.appendChild(newTitle);
-                    });
-
-                    // Replace new pulse btn
-                    const pulseBtn = document.querySelector(".pulse");
-                    const newPulseBtn = pulseBtn.cloneNode(true);
-                    pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
-                    newPulseBtn.addEventListener("click", () => {
-                        playingQueue = data["songs"];
-                        songIndex = 0;
-                        playQueue();
-                    });
-                }
-            }
-        };
-        
-        xmlhttp.open(
-            "GET",
-            "./utils/getList.php?listID=" + listID,
-            true
-        );
-        xmlhttp.send();
-    });
-});
-}
-
-goToListaPage();

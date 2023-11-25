@@ -81,8 +81,6 @@ if (isset($_GET['listID'])) {
     </div>
 </dialog>
 
-
-<script src="./js/playlists.js"></script>
 <script>
     $(document).ready(function(){
         console.log("jQuery cargado");

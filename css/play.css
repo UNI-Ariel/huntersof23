@@ -2,7 +2,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;
@@ -161,6 +161,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* Agrega un scroll vertical */
   max-height: 70vh; 
+ 
 }
 
 .btn-cancelar{

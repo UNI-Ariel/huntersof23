@@ -109,6 +109,82 @@ function goToSingerPage() {
         });
     });
 }
+//--------------------------implementando por mari------------------------------------------>
+
+
+function goToListaPage() { 
+    const listaLinks = document.querySelectorAll(".lista");
+    listaLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            const listID = link.getAttribute("data-idlist");
+            const listasongs = [];
+            console.log(listID);
+            // update url
+            window.history.pushState(
+                "",
+                "",
+                pageUrl + "/" + "lista.php" + "?listID=" + listID
+            );
+            // Show singer page
+            showContent("lista");
+            // Ajax connection to get singer's info and songs
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText !== "") {
+                    var dato = JSON.parse(this.responseText);
+
+                    const listUI = document.getElementById("lista");
+
+                    // Update singer's personal info
+                    const sImg = listUI.querySelector(".cover1 img");
+                    sImg.src = dato["imagen"];
+                    if(dato["imagen"] == null || dato["imagen"] === ''){
+                        sImg.src = 'images/default/playlist.jpg'
+                    }
+                    const sName = listUI.querySelector(".coverDetail h1");
+                    sName.innerText = dato["nombre"];
+                    const sDescription = listUI.querySelector(".coverDetail p");
+                    sDescription.innerText = dato["descripcion"];
+                    /*const sDescription =
+                        singerUI.querySelector(".description p");
+                    sDescription.innerText = data["info"];
+                    const sDesImg = listUI.querySelector(".description img");
+                    sDesImg.src = data["imagen"];*/
+
+                    // Make all the song cards (song title)
+                    const allSingerSongs = listUI.querySelector(".products");
+                    allSingerSongs.innerHTML = "";
+                    dato["songs"].forEach((song, index) => {
+                        listasongs.push(songDetails[song['id']]);
+                        const newTitle = makeSongPlay(index, song);
+                        allSingerSongs.appendChild(newTitle);
+                    });
+
+                    // Replace new pulse btn
+                    const pulseBtn = document.querySelector("#lista .pulse");
+                    const newPulseBtn = pulseBtn.cloneNode(true);
+                    pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
+                    newPulseBtn.addEventListener("click", () => {
+                        playingQueue = listasongs;
+                        playQueue();
+                    });
+                }
+            }
+        };
+        
+        xmlhttp.open(
+            "GET",
+            "./utils/getList.php?listID=" + listID,
+            true
+        );
+        xmlhttp.send();
+    });
+});
+}
+
+
+
 
 // Load song
 function loadSong(song) {
@@ -209,6 +285,7 @@ function setVolume(e) {
 
     currentVol = (clickX / width) * 1;
     audio.volume = currentVol;
+    localStorage.volume = currentVol;
     volume.style.width = `${volumePercent}%`;
 }
 
@@ -315,12 +392,14 @@ mute.addEventListener("click", () => {
     if (audio.volume != 0) {
         mute.classList.remove("fa-volume-up");
         mute.classList.add("fa-volume-mute");
+        mute.classList.add("muted");
         mute.style.color = "red";
         audio.volume = 0;
         volume.style.width = "0%";
-    } else {
+    } else if(currentVol > 0){
         mute.classList.add("fa-volume-up");
         mute.classList.remove("fa-volume-mute");
+        mute.classList.remove("muted");
         mute.style.color = "#0799B6";
         audio.volume = currentVol;
 
@@ -339,83 +418,65 @@ inputSearchs.forEach((inputSearch) => {
 });
 
 goToSingerPage();
+goToListaPage();
 
+//Funcionalidad adicional Volumen---------------
 
-
-//implementado por mari-----------
-
-
-
-
-
-
-
-function goToListaPage() { 
-    const listaLinks = document.querySelectorAll(".lista");
-    listaLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-            const listID = link.getAttribute("data-idlist");
-            console.log(listID);
-            // update url
-            window.history.pushState(
-                "",
-                "",
-                pageUrl + "/" + "lista.php" + "?listID=" + listID
-            );
-    
-            // Show singer page
-            showContent("lista");
-            // Ajax connection to get singer's info and songs
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText !== "") {
-                    var data = JSON.parse(this.responseText);
-
-                    const listUI = document.getElementById("lista");
-
-                    // Update singer's personal info
-                    const sImg = listUI.querySelector(".cover1 img");
-                    sImg.src = data["imagen"];
-                    const sName = listUI.querySelector(".coverDetail h1");
-                    sName.innerText = data["nombre"];
-                    const sDescription = listUI.querySelector(".coverDetail p");
-                    sDescription.innerText = data["descripcion"];
-                    /*const sDescription =
-                        singerUI.querySelector(".description p");
-                    sDescription.innerText = data["info"];
-                    const sDesImg = listUI.querySelector(".description img");
-                    sDesImg.src = data["imagen"];*/
-
-                    // Make all the song cards (song title)
-                    const allSingerSongs = listUI.querySelector(".products");
-                    allSingerSongs.innerHTML = "";
-                    data["songs"].forEach((song, index) => {
-                        const newTitle = makeSongTitle(index, song);
-                        allSingerSongs.appendChild(newTitle);
-                    });
-
-                    // Replace new pulse btn
-                    const pulseBtn = document.querySelector(".pulse");
-                    const newPulseBtn = pulseBtn.cloneNode(true);
-                    pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
-                    newPulseBtn.addEventListener("click", () => {
-                        playingQueue = data["songs"];
-                        songIndex = 0;
-                        playQueue();
-                    });
-                }
+document.addEventListener("keydown", (ev) => {
+    ev.stopPropagation();
+    if (ev.key === " ") {
+        const tag = ev.target.tagName;
+        if(tag !== 'INPUT' && tag !== 'TEXTAREA'){
+            ev.preventDefault();
+            if (isPlaying) {
+                pauseSong();
+            } else {
+                playSong();
             }
-        };
-        
-        xmlhttp.open(
-            "GET",
-            "./utils/getList.php?listID=" + listID,
-            true
-        );
-        xmlhttp.send();
-    });
+        }
+    }
 });
+
+volumeInfo.addEventListener('wheel', (ev)=>{
+    ev.stopPropagation();
+    if(!mute.classList.contains('muted')){
+        const dir = ev.deltaY > 0 ? 'down' : 'up';
+        const add = 0.05;
+        currentVol = dir === 'up' ? currentVol + add : currentVol - add;
+        if(currentVol < 0){
+            currentVol = 0;
+        }
+        else if(currentVol > 1){
+            currentVol = 1;
+        }
+        audio.volume = currentVol;
+        localStorage.volume = currentVol;
+        toggleMuteIcon();
+        const volPercent = (currentVol / 1) * 100;
+        volume.style.width = `${volPercent}% `;
+    }
+});
+
+function toggleMuteIcon(){
+    if(currentVol === 0){
+        mute.classList.remove("fa-volume-up");
+        mute.classList.add("fa-volume-mute");
+        mute.style.color = "red";
+    }
+    else{
+        mute.classList.add("fa-volume-up");
+        mute.classList.remove("fa-volume-mute");
+        mute.style.color = "#0799B6";
+    }
 }
 
-goToListaPage();
+window.addEventListener('load', ()=>{
+    if('volume' in localStorage){
+        const sv = localStorage.volume;
+        currentVol = parseFloat(sv);
+        audio.volume = currentVol;
+
+        const volPercent = (currentVol / 1) * 100;
+        volume.style.width = `${volPercent}% `;
+    }
+});

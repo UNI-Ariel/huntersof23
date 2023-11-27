@@ -124,4 +124,137 @@ foreach ($songs as $song) {
     <script src="./js/favourite.js"></script>  <?php #Incluye un script JavaScript si el usuario está autenticado. ?>
 <?php endif; ?>
 <?php include("./utils/changePageJs.php"); ?>  <!-- Incluye un archivo de utilidad para cambiar la página en JavaScript. -->
+
+
+
+
+
+
+
+<!-------------------------------------------------------------------------->
+ <!-- Modal1 -->
+ <div id="myModal" class="modal">
+    <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <button class="open-modal-button" onclick="openModal2()">Agregar nuevo</button>
+      <div id="modalContent">
+      
+      </div>
+    </div>
+  </div>
+
+ <!-- Modal2 -->
+ <div id="myModal2" class="modal">
+    <div class="modal-content">
+    <span class="close" onclick="closeModal2()">&times;</span>
+      <div id="modalContent2">
+      <form id="formularioP">
+        <label for="nombre">Ponle nombre a tu Lista de Reproduccion</label> 
+        <input type="text" id="nombreP" name="nombreP"minlength="2" maxlength="30" pattern="[a-zA-Z0-9]+" title="Solo se permiten caracteres alfanuméricos" required>
+        <span style="color: red;" class="error" id="error"></span>
+        <!-- Agrega más campos según tus necesidades -->
+        <button style="background-color: #979a9e; color: white;  border: none; border-radius: 5px; cursor: pointer; width: 25%; " onclick="closeModal2()">Cancelar</button>
+        <button style="background-color: #266882; color: white;  border: none; border-radius: 5px; cursor: pointer; width: 25%; " type="button" onclick="insertarDatos()">Aceptar</button>
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript (index.php) -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+  var datoAlmacenado;
+  function openModal(button) {
+    var modal = document.getElementById('myModal');
+    var dataId = button.getAttribute('data-songid');
+
+// Puedes hacer lo que quieras con el valor data-id, por ejemplo, imprimirlo
+    console.log("ID del botón: " + dataId);
+    datoAlmacenado = dataId;
+            // Hacer una solicitud AJAX para obtener información adicional de la canción
+            $.ajax({
+                type: 'POST',
+                url: 'pages/mostrarLista.php',
+                data: { id: dataId },
+                success: function (data) {
+                  //console.log(data);
+                    // Mostrar los resultados en la ventana modal
+                    $('#modalContent').html(data);
+                   // $('#myModal').modal('show');
+                },
+                error: function () {
+                    alert('Error al obtener la información de la canción.');
+                }
+            });
+   modal.style.display = 'block';
+
+ }
+ function openModal2() {
+    //var modal = document.getElementById('myModal2');
+    $('#myModal').hide();
+    // Muestra el dato en el segundo modal
+    //$('#dato').text(datoAlmacenado);
+    $('#myModal2').show();
+    //alert("Dato usado en otra función: " + datoAlmacenado);
+
+ }
+ function insertarDatos() {
+       // Obtener el valor del campo nombre
+       var nombre = document.getElementById('nombreP').value;
+        var errorNombre = document.getElementById('error');
+
+        // Validar la longitud del campo nombre
+        var expresionRegular = /^[a-zA-Z0-9\s]+$/;
+        if (nombre.length < 2 || nombre.length > 30 || !expresionRegular.test(nombre)) {
+            errorNombre.textContent = 'El nombre debe tener entre 2 y 30 caracteres alfanumericos.';
+        } else {
+            // Si la validación pasa, puedes enviar los datos al servidor aquí
+            errorNombre.textContent = '';
+            $.ajax({
+            type: 'POST',
+            url: 'pages/addPlay.php',
+            data: { nombre: nombre, idSong: datoAlmacenado},
+            //dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                alert(response);
+                updatePlaylists();
+               closeModal2();
+               $('#nombreP').val('');
+            },
+            error: function() {
+                //console.error('Error:', error);
+                alert("Error al registra!! ");
+            }
+           });
+            //cerrarModal();
+        }
+    }
+    function closeModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+    }
+    function closeModal2() {
+    var modal = document.getElementById('myModal2');
+    modal.style.display = 'none';
+  }
+  function closeModalE() {
+    var modal = document.getElementById('eliminarLista');
+    modal.style.display = 'none';
+  }
+</script>
+
+
+<!-- Modal de confirmación -->
+    <div class="modal"  id="eliminarLista">
+        <div class="modal-contentE">
+                <p>¿Estás seguro de que deseas eliminar?</p>
+            <div class="modal-footerE">
+                <button type="button" class="btn-cancelar" onclick="closeModalE()">Cancelar</button>
+                <button type="button" class="btn-eliminar" id="btnConfirmarEliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
 </html>

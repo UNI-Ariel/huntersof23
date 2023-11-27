@@ -105,10 +105,9 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $song['imgPath'] ?>"></td>
                     <td><?php echo $song['title']; ?></td>
                     <td><?php echo $song['filePath']; ?></td>
-                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px;text-decoration: none;" href="insertSong.php?id=<?php echo $song['id'] ?>">Editar</a></td>
-                   <!-- <td><a style="padding: 5px; background-color: #6B0000; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSong.php?id=<?php echo $song['id'] ?>">Eliminar</a></td>  -->
-                    <!-- Dentro del bucle foreach en editSong.php -->
-                    <td><a style="padding: 5px; background-color: #6B0000; color: #fff;cursor: pointer; border-radius: 15px; text-decoration: none;" onclick="openModal(<?php echo $song['id']; ?>)" >Eliminar</a></td>
+                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=<?php echo $song['id']; ?>">Editar</a></td>
+                    <td><a style="padding: 5px; background-color: #6B0000; color: #fff; cursor: pointer; border-radius: 15px; text-decoration: none;" onclick="openModal(<?php echo $song['id']; ?>)" >Eliminar</a></td>
+
 
                 </tr>
 
@@ -202,8 +201,8 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <td><img style="width: 50px; height: 50px;" src='../${value['imgPath']}'></td>
                     <td>${value['title']}</td>
                     <td>${value['filePath']}</td>
-                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px;text-decoration: none;" href="insertSong.php?id=<?php echo $song['id'] ?>">Editar</a></td>
-                    <td><a style="padding: 5px; background-color: #6B0000; cursor: pointer; color: #fff; border-radius: 15px; text-decoration: none;" onclick="openModal(<?php echo $song['id']; ?>)" >Eliminar</a></td>
+                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px;text-decoration: none;" href="insertSong.php?id=${value['id']}">Editar</a></td>
+                    <td><a style="padding: 5px; background-color: #6B0000; cursor: pointer; color: #fff; border-radius: 15px; text-decoration: none;" onclick="openModal(${value['id']})" >Eliminar</a></td>
 
                     </tr>`;
         });
@@ -238,9 +237,11 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
         document.getElementById('confirmDeleteModal').style.display = 'none';
     }
     function deleteSong() {
-    var songId = document.getElementById('deleteSongId').value;
-    // Aquí puedes redirigir a deleteSong.php para eliminar la canción con el ID
-    window.location.href = 'deleteSong.php?id=' + songId;
+        var songId = document.getElementById('deleteSongId').value;
+        var songId = document.getElementById('deleteSongId').value;
+        // Aquí puedes redirigir a deleteSong.php para eliminar la canción con el ID
+        window.location.href = 'deleteSong.php?id=' + songId;
+        
 }
 
     

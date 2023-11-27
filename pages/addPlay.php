@@ -21,7 +21,7 @@ if ($resultVerificar->num_rows > 0) {
     echo "El nombre ya existe. Por favor, elige otro.";
 } else {
     // Agregar una nueva  lista de reproducción
-    $sql = "INSERT INTO playlists (user_id, nombre, descripcion, imagen ) VALUES ('$userId', '$nombre','Lista de Reproduccion creada recientemente','playList/imagen/18.jpg')";
+    $sql = "INSERT INTO playlists (user_id, nombre, descripcion) VALUES ('$userId', '$nombre','Lista de Reproduccion creada recientemente')";
 
     if ($conn->query($sql) === TRUE) {
         // Recupera el último ID de la inserción

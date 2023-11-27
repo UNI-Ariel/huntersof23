@@ -21,9 +21,10 @@ if ($resultCancion->num_rows > 0) {
    // $rowCancion = $resultCancion->fetch_assoc();
     while ($rowCancion = $resultCancion->fetch_assoc()) {
     // Imprimir la información adicional de la canción
+    $imagen = !empty($rowCancion['imagen']) ? $rowCancion['imagen'] : 'images/default/playlist.jpg';
     echo '<div class="card-header" data-valor="' . htmlspecialchars($rowCancion["id"]) . '" onclick="registrarCancion(this)" >';
     echo'<div class="card-body">';
-    echo '<img src="' . $rowCancion["imagen"] .'">';
+    echo '<img src="' . $imagen .'">';
     echo '</div>';
     echo '<div class="card-body">';
     echo '<p>'. $rowCancion["nombre"].'</p>';

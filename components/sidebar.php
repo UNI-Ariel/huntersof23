@@ -17,7 +17,7 @@
                 <i class="fas fa-search"></i>
                 <h3>Buscar</h3>
             </button>
-            <button class="buttonContainer" page-data="playlists" id="recarga">
+            <button class="buttonContainer" page-data="playlists">
                 <i class="fas fa-star"></i>
                 <h3>Biblioteca</h3>
             </button>
@@ -42,10 +42,9 @@
 
     </div>
 </div>
-<script>
+<!--<script>
     document.getElementById('recarga').addEventListener('click', function(e){
         e.preventDefault();
         window.location.href='./playlists.php';
-    });
-    
-</script>
+    }); 
+    </script>-->

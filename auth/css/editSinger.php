@@ -1,6 +1,6 @@
 <?php
 include('./auth.php');
-error_reporting(0);
+
 if (!$authenticated) {
     header("Location: ./login.php");
 } else {
@@ -59,7 +59,13 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         </table>
         <div class="c3"><a href=insertSinger.php>Agregar Artista</a></div>
-        
+        <div class="paginationButton">
+            <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
+                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="1"> 1</li>
+                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="2"> 2</li>
+                <li onclick="pagination(this.value);" style="padding: 10px; color: white;" value="3"> 3</li>
+            </ul>
+        </div>
     </div>
 
 </body>

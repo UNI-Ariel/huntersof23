@@ -35,6 +35,9 @@ const addToFav = (song, isFav) => {
     }
 };
 
+
+
+
 // Función para crear un elemento de título de canción en la interfaz
 const makeSongTitle = (index, song) => {
     // Crea un contenedor de título de canción
@@ -62,7 +65,7 @@ const makeSongTitle = (index, song) => {
         </div>
         <div class="func" style="color: white">
             ${heartIcon}
-            <i class="fas fa-plus"></i>
+            <button class="open-modal-button" data-songid=" ${song["id"]}" onclick="openModal(this)" ><i class="fas fa-plus" ></i></button>
         </div>
     `;
 
@@ -89,6 +92,77 @@ const makeSongTitle = (index, song) => {
     return titleContainer; // Devuelve el elemento de título de canción
 };
 
+
+
+
+//Funcion para crear un elemento  en la seccion de playlist
+const makeSongPlay = (index, song) => {
+    // Crea un contenedor de título de canción
+    const titleContainer = document.createElement("div");
+    titleContainer.classList.add("song");
+    titleContainer.setAttribute("data", song["id"]);
+
+    // Configura el contenido HTML del elemento de título de canción
+    titleContainer.innerHTML = `
+        <div class="info">
+            <h4>${index + 1}</h4>
+            <img src="${song["img"]}">
+            <div class="detail">
+                <h4>${song["title"]}</h4>
+                <h5 class="singerPage" >${song["singerName"]}</h5>
+            </div>
+        </div>
+        <div class="func" style="color: white">
+            <i class="fas fa-trash" data-id="${song["idLista"]}"></i>
+        </div>
+    `;
+
+    // Agrega oyentes de eventos a los botones de reproducción, favoritos y cola
+    const playButton = titleContainer.querySelector("h4");
+    const trashIcon = titleContainer.querySelector("i.fa-trash");
+
+    const trashE=trashIcon.cloneNode(true);
+    trashIcon.parentNode.replaceChild(trashE,trashIcon);
+
+    playButton.addEventListener("click", () => {
+        playImmediate(song); // Reproduce la canción de inmediato
+    });
+
+    var idLis = trashE.getAttribute('data-id');
+//---------------------------------------------------------------
+  /* trashE.addEventListener("click", () => {
+        document.getElementById('eliminarLista').style.display='block';
+        const aceptar = document.getElementById('btnConfirmarEliminar');
+        aceptar.addEventListener("click", () => {
+            trashE.closest(".song").remove();
+            deleList(idLis);
+            document.getElementById('eliminarLista').style.display='none'; 
+        });
+    });*/
+    removeList(trashE, idLis);
+    return titleContainer; // Devuelve el elemento de título de canción
+    };
+function deleList(listaID) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "./utils/delLista.php?listaID=" + listaID);
+    xmlhttp.send();
+    
+}
+function removeList(icon, idL){
+    icon.addEventListener("click", () => {
+        document.getElementById('eliminarLista').style.display='block';
+        const aceptar = document.getElementById('btnConfirmarEliminar');
+        aceptar.addEventListener("click", () => {
+            icon.closest(".song").remove();
+            deleList(idL);
+            document.getElementById('eliminarLista').style.display='none'; 
+        });
+    });
+}
+//------------------------------------------------------------
+
+
+
 // Función para crear un elemento de título de canción en la sección de favoritos
 const makeSongTitleForFav = (index, song) => {
     const favContent = document.querySelector(".fav .tileContainer");
@@ -108,7 +182,7 @@ const makeSongTitleForFav = (index, song) => {
         </div>
         <div class="func">
             <i class="fas fa-trash"></i>
-            <i class="fas fa-plus"></i>
+            <button class="open-modal-button" data-songid=" ${song["id"]}" onclick="openModal(this)" ><i class="fas fa-plus" ></i></button>
         </div>
     `;
 

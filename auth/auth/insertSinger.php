@@ -43,6 +43,7 @@ $singername2 = cleanData($_POST['singername']);
 $info2 = cleanData($_POST['info']);
 $allowed_spaces = 3;
 $allowed_numbers = 3;
+$allowed_numbers2 = 4;
 
 
 // INSERT SINGER INTO DATABASE
@@ -116,8 +117,24 @@ if (isset($_POST['submit'])) {
             $errors['info'] = "La Informacion del Artista debe tener en 5 y 100 caracteres, tenga en cuenta que los espacios cuentan como un caracter";
         }
         else{
-        $info = $_POST['info'];
+            if(substr_count($info, "1") or substr_count($info, "2")or substr_count($info, "3")or substr_count($info, "4")or substr_count($info, "5")or substr_count($info, "6")or substr_count($info, "7")or substr_count($info, "8")or substr_count($info, "9")or substr_count($info, "0"))
+            {
+            $allowed_numbers2++;    
+            }
+            else{
+
+            }
+            
+            
+                if($allowed_numbers2 > 3){
+                    $errors['info'] = "El la información no puede tener mas de 4 numeros";
+                }
+                else{          
+                    $info = $_POST['info'];
+                }
+            
         }
+        
     }
 
 

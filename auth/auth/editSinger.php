@@ -1,6 +1,6 @@
 <?php
 include('./auth.php');
-
+error_reporting(0);
 if (!$authenticated) {
     header("Location: ./login.php");
 } else {
@@ -22,7 +22,7 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singer</title>
+    <title>Artistas</title>
     <link rel="stylesheet" href="./css/editSinger.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -30,57 +30,51 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <body>
     <div class="container">
         <div class="link">
-            <a class="ca2" href="adminDashboard.php">BACK</a>
+            <a class="ca2" href="adminDashboard.php">Atras</a>
         </div>
 
-        <table id="customers" align="center" border="1" style="border-color: #fff;" class="displaySinger">
+        <table id="customers" align="center" border="1" style="border-color: #fff; background-color: white;" class="displaySinger">
             <tr>
-                <th colspan="6">SINGERS INFO</th>
+                <th colspan="6">Artistas</th>
             </tr>
             <tr>
-                <th>No</th>
-                <th>Images</th>
-                <th>Name</th>
-                <th>Info</th>
-                <th colspan="3">Operations</th>
+                <th>Nº de Registro</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Información </th>
+                <th colspan="3">Operaciones</th>
             </tr>
 
 
-            <?php foreach ($singers as $index => $singer) : if ($index == 5) break; ?>
+            <?php foreach ($singers as $index => $singer) : if ($index == 10) break; ?>
                 <tr>
-                    <td><?php echo $index + 1; ?></td>
-                    <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $singer['image'] ?>"></td>
-                    <td><?php echo $singer['name']; ?></td>
-                    <td><?php echo $singer['info']; ?></td>
-                    <td><a style="padding: 5px; background-color: #66FF33; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=<?php echo $singer['id'] ?>"><strong>Update</strong></a></td>
-                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=<?php echo $singer['id'] ?>"><strong>Delete</strong></a></td>
+                    <td><?php echo $singer['id']; ?></td>
+                    <td WIDTH="50" HEIGHT="auto" ><img style="width: 50px; height: 50px;" src="<?php echo '../' . $singer['image'] ?>"></td>
+                    <td WIDTH="550" max-width="550"  HEIGHT="auto"><?php echo $singer['name']; ?></td>
+                    <td WIDTH="550" max-width="550"  ><?php echo $singer['info']; ?></td>
+                    <td WIDTH="200" max-width="200"  HEIGHT="auto"><a style="padding: 5px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=<?php echo $singer['id'] ?>"><strong>Editar</strong></a>
+                    <a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=<?php echo $singer['id'] ?>"><strong>Eliminar</strong></a></td>
                 </tr>
             <?php endforeach; ?>
 
         </table>
-        <div class="c3"><a href=insertSinger.php>INSERT SINGER</a></div>
-        <div class="paginationButton">
-            <ul style="display: flex; list-style-type: none; color: black; margin: 0 auto; justify-content: center;">
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="1"> 1</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="2"> 2</li>
-                <li onclick="pagination(this.value);" style="padding: 10px;" value="3"> 3</li>
-            </ul>
-        </div>
+        <div class="c3"><a href=insertSinger.php>Agregar Artista</a></div>
+        
     </div>
 
 </body>
 <script type="text/javascript">
     function pagination(value) {
         let header = `<tr>
-            <th colspan="6">SINGERS INFO</th>
-        </tr>
-        <tr>
-            <th>No</th>
-            <th>Images</th>
-            <th>Name</th>
-            <th>Info</th>
-            <th colspan="3">Operations</th>
-        </tr>`
+        <th colspan="6">Artistas</th>
+            </tr>
+            <tr>
+                <th>Nº de Registro</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Información </th>
+                <th colspan="3">Operaciones</th>
+            </tr>`
         let displaySinger = document.getElementsByClassName("displaySinger")[0];
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -93,13 +87,13 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 results.map((value, index) => {
                     html +=
                         ` <tr>
-                    <td> ${index + 1}</td>
-                    <td><img style="width: 50px; height: 50px;" src='../${value['image']}'></td>
-                    <td>${value['name']}</td>
-                    <td>${value['info']}</td>
-                    <td><a style="padding: 5px; background-color: #66FF33; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=${value['id']}">Update</a></td>
-                    <td><a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=${value['id']}">Delete</a></td>
-                    </tr>`
+                    <td> ${value['id']}</td>
+                    <td WIDTH="50" HEIGHT="auto"><img style="width: 50px; height: 50px;" src='../${value['image']}'></td>
+                    <td WIDTH="550" max-width="550">${value['name']}</td>
+                    <td WIDTH="550" max-width="550">${value['info']}</td>
+                    <td WIDTH="200" max-width="200"><a style="padding: 5px; background-color: #0799B6; color: #fff; border-radius: 15px; text-decoration: none;" href="insertSinger.php?id=<?php echo $singer['id'] ?>"><strong>Editar</strong></a>
+                    <a style="padding: 5px; background-color: #E3242B; color: #fff; border-radius: 15px; text-decoration: none;" href="deleteSinger.php?id=<?php echo $singer['id'] ?>"><strong>Eliminar</strong></a></td>
+                </tr>`
                 })
                 displaySinger.innerHTML += html;
             }

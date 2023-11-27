@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {  // Verifica si se recibe un ID por GET para edición
     $res2 = mysqli_query($conn, $sql2);
     $data = mysqli_fetch_array($res2);
     $titleUpdate = $data["title"];  // Obtiene el título para la edición
-    $singerIDfff = $data["singerID"];  // Obtiene el ID del cantante para la edición
+    $singerIDfff = isset($data["singerID"]) ? $data["singerID"] : ''; 
     $formTitle = "Editar Musica"; // Cambiar el título si se está editando
 
 }
@@ -54,15 +54,17 @@ function saveFile($fileInfo)
 // Manejo del formulario al enviar los datos
 if (isset($_POST['submit'])) {
     // Validación de los campos del formulario
-
-    // Validación del campo de título
     if (empty($_POST['title'])) {
         $errors['title'] = "El título no puede estar vacío.";
     } else {
         $title = $_POST['title'];
     }
     // Validación del campo de cantante
-    $singerID = $_POST['singer'];
+    if (empty($_POST['singer'])) {
+        $errors['singer'] = "Debes seleccionar un cantante.";
+    } else {
+        $singerID = $_POST['singer'];
+    }
     // Validación del archivo de música
     if (empty($_FILES["mp3"]["name"])) {
         $errors['mp3'] = "El archivo de música no puede estar vacío";
@@ -77,7 +79,7 @@ if (isset($_POST['submit'])) {
     }
     // Comprobación de errores
     if (array_filter($errors)) {
-        echo 'Formulario no válido';
+        
     } else {
         // Insertar o actualizar en la base de datos
         $mp3Path = saveFile($mp3);         // Guardar la ruta del archivo de música
@@ -93,7 +95,7 @@ if (isset($_POST['submit'])) {
             $insertSong = "INSERT INTO songs(title, filePath, imgPath, singerID) 
             VALUES ('$title', '$mp3Path', '$imgPath', $singerID)";
             if (!mysqli_query($conn, $insertSong)) {
-            echo  "Error: " . "<br>" . mysqli_error($conn);
+            
             } else {
              header("Location: editSong.php");
             }
@@ -123,23 +125,30 @@ if (isset($_POST['submit'])) {
         <form class="form-insert" method="POST" enctype="multipart/form-data">
             
             <label>Nombre de la Musica</label>
-            <input type="text" name="title" placeholder="Título" value="<?php echo $titleUpdate; ?>">
+            <input type="text" name="title" placeholder="Título" value="<?php echo htmlspecialchars($titleUpdate); ?>">
             <p class="error"><?php echo $errors['title']; ?></p> <!-- Muestra el error específico debajo del campo de entrada del título -->
             <label>Nombre del Artista</label>
             <select name="singer">
-           <option value="" selected disabled>Seleccionar Artista</option>
-           <?php foreach ($singers as $singer) : ?>
-           <option value='<?php echo $singer['id']; ?>'>
-           <?php echo $singer['name']; ?>
-           </option>
-           <?php endforeach; ?>
+                <option value="" selected disabled>Seleccionar Artista</option>
+                <?php foreach ($singers as $singer) : ?>
+                    <option value='<?php echo $singer['id']; ?>'>
+                        <?php echo $singer['name']; ?>
+                    </option>
+                <?php endforeach; ?>
            </select>
+           <?php if (!empty($errors['singer'])) : ?>
+                <p class="error"><?php echo $errors['singer']; ?></p>
+            <?php endif; ?>
             <label>Subir Archivo</label>
             <input type="file" name="mp3" accept=".mp3, .wav, audio/mpeg, audio/wav"><!--accept="audio/*"--> 
-            <p class="error"><?php echo $errors['mp3']; ?></p>
+            <?php if (!empty($errors['mp3'])) : ?>
+                <p class="error"><?php echo $errors['mp3']; ?></p>
+            <?php endif; ?>
             <label>Subir Imagen</label>
-            <input type="file" name="image" accept="image/*"><br>
-            
+            <input type="file" name="image" accept="image/*">
+            <?php if (!empty($errors['image'])) : ?>
+                <p class="error"><?php echo $errors['image']; ?></p>
+            <?php endif; ?>
             <a href="editSong.php" class="ca">Cancelar</a> <!-- Enlace para volver cancelar -->
             <button type="submit" name="submit" style="cursor: pointer;">Guardar</button> <!-- Botón para guardar el formulario -->
 

@@ -147,19 +147,20 @@
     width: 40%;
 }
 
-#singer a{
-    text-align: center;
-    width: 80px;
-    height: 40px;
-    padding: 10px 20px;
-    background-color: #0a54aa;
-    border-radius: 5px;
-    margin-left: 20px;
+.singerButton{
+    text-align: center !important;
+    width: 80px !important;
+    height: 40px !important;
+    padding: 10px 20px !important;
+    background-color: #0a54aa !important;
+    border-radius: 5px !important;
+    margin-left: 20px !important;
 }
-#singer a:link,
-#singer a:visited,
-#singer a:active,
-#singer a:hover {
-    color: white;
-    text-decoration: none;
+
+.singerButton:link,
+.singerButton:visited,
+.singerButton:active,
+.singerButton:hover {
+    color: white !important;
+    text-decoration: none !important;
 }

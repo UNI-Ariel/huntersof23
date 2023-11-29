@@ -200,12 +200,13 @@ if (isset($_POST['submit'])) {
     <?php endif; ?>
 
     <!-- Mostrar el archivo de música actual al editar -->
-<?php if (isset($_GET['id']) && !empty($data['filePath'])) : ?>
-    <p style="background-color: #0799b6; padding: 10px; margin: 10px 0; border: 1px solid #0799b6; color: #fff;">
-        Archivo de música actual: <?php echo $data['filePath']; ?>
+    <?php if (isset($_GET['id']) && !empty($data['filePath'])) : ?>
+    <p style="padding: 10px; margin: 10px 0; border: 1px solid #0799b6; color: black;">
+        <strong>Archivo de música actual:</strong> <?php echo $data['filePath']; ?>
     </p>
     <input type="hidden" name="current_mp3" value="<?php echo $data['filePath']; ?>">
 <?php endif; ?>
+
 
 
     <label>Subir Imagen</label>
@@ -216,11 +217,12 @@ if (isset($_POST['submit'])) {
 
     <!-- Mostrar la imagen actual al editar -->
     <?php if (isset($_GET['id']) && !empty($data['imgPath'])) : ?>
-        <p style="background-color: #0799b6; padding: 10px; margin: 10px 0; border: 1px solid #0799b6; color: #fff;">
-        Imagen actual: <?php echo $data['imgPath']; ?></p>
-        </p>
-        <input type="hidden" name="current_image" value="<?php echo $data['imgPath']; ?>">
-    <?php endif; ?>
+    <p style="padding: 10px; margin: 10px 0; border: 1px solid #0799b6; color: black;">
+        <strong>Imagen actual:</strong> <?php echo $data['imgPath']; ?>
+    </p>
+    <input type="hidden" name="current_image" value="<?php echo $data['imgPath']; ?>">
+<?php endif; ?>
+
 
 
             <a href="editSong.php" class="ca">Cancelar</a>

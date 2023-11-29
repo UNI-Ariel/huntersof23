@@ -96,10 +96,13 @@ if (isset($_POST['submit'])) {
             // Insertar la canción en la base de datos
             $insertSong = "INSERT INTO songs(title, filePath, imgPath, singerID) 
             VALUES ('$title', '$mp3Path', '$imgPath', $singerID)";
+            
             if (!mysqli_query($conn, $insertSong)) {
                 // Handle insert error
             } else {
-                header("Location: editSong.php");
+                //header("Location: editSong.php");
+                //echo '<script>openSuccessModal();</script>';
+                $success = true;
             }
         }
     }
@@ -116,6 +119,56 @@ if (isset($_POST['submit'])) {
     <title>Cancion</title>
     <link rel="stylesheet" href="./css/song.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+        }
+
+        .modal-buttons {
+            margin-top: 1cm;
+        }
+
+        .modal-button {
+            cursor: pointer;
+            border-radius: 15px;
+            text-decoration: none;
+            padding: 5px;
+            margin: 0 10px;
+        }
+
+        .modal-button-confirm {
+            background-color: #6B0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px; /* Ajustar el padding para aumentar el tamaño */
+            font-size: 14px; /* Cambiar el tamaño del texto del botón */
+        }
+
+        .modal-button-cancel {
+            background-color: #0799B6;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -171,6 +224,42 @@ if (isset($_POST['submit'])) {
             <button type="submit" name="submit" style="cursor: pointer;">Guardar</button>
         </form>
     </div>
+    
+    <!-- Modal de éxito -->
+<div id="successModal" class="modal">
+    <div class="modal-content" style="width: 10cm; height: 4cm; background-color: #28324b; color: white;">
+        <p>¡Guardado exitoso!</p>
+        <div class="modal-buttons" style="margin-top: 1cm;">
+            <button class="modal-button modal-button-confirm" onclick="closeSuccessModal()" style="cursor: pointer; background-color: #6B0000; color: white;">Aceptar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        <?php if(isset($success) && $success === true): ?>
+            openSuccessModal(); // Mostrar el modal solo si se guardó exitosamente
+        <?php endif; ?>
+        
+    });
+
+    
+    // Función para mostrar el modal de éxito
+    function openSuccessModal() {
+        document.getElementById('successModal').style.display = 'block';
+    }
+
+    // Función para cerrar el modal de éxito
+    function closeSuccessModal() {
+        document.getElementById('successModal').style.display = 'none';
+        window.location.href = 'editSong.php'; // Redirigir a la lista de canciones
+    }
+    
+    
+</script>
+
+
+
 </body>
 
 </html>

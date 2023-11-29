@@ -91,7 +91,10 @@ if (isset($_POST['submit'])) {
             // Actualizar la canción en la base de datos
             $updateSong = "UPDATE songs SET title = '$title', filePath = '$mp3Path', imgPath = '$imgPath', singerID = '$singerID' WHERE id =$id";
             $res3 = mysqli_query($conn, $updateSong);
-            header("Location: editSong.php");
+            $success = true;
+            
+            //header("Location: editSong.php");
+            
         } else {
             // Insertar la canción en la base de datos
             $insertSong = "INSERT INTO songs(title, filePath, imgPath, singerID) 

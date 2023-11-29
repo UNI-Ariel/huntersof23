@@ -39,9 +39,9 @@ function saveFile($fileInfo)
     $destinationPath = $folder . $filename;
 
     if (move_uploaded_file($tmpPath, '../' . $destinationPath)) {
-        echo "Successfully uploaded";
+        echo "";
     } else {
-        echo "Upload fail";
+        echo "";
     }
 
     return $destinationPath;

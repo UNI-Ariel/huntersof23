@@ -55,13 +55,29 @@ else {
                 url: 'pages/agregar_a_lista.php',
                 data: { idSong: songId, idPlay: playId },
                 success: function (data) {
-                    alert(data);
+                    //alert(data);
                     $('#myModal').hide();
+                    mostrarMensajeTemporal(data, 3000);
                    
                 },
                 error: function () {
                     alert('Error al agregar la canción a la lista de reproducción.');
                 }
             });
-        }
+    }
+    function mostrarMensajeTemporal(mensaje, tiempo) {
+            var div = document.createElement('div');
+            div.textContent = mensaje;
+            div.className = 'mensaje-temporal';
+            document.body.appendChild(div);
+
+            setTimeout(function () {
+                div.style.opacity = '0';
+                setTimeout(function () {
+                    document.body.removeChild(div);
+                }, 1000);
+            }, tiempo);
+    }
+
+
 </script>

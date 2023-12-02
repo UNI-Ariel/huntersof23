@@ -64,18 +64,28 @@ if (isset($_GET['listID'])) {
                     <h5><?php echo $song['singerName']; ?></h5>
                 </div>
             </div>
-            <div class ="func" data-list="<?php echo $song["idLista"]; ?>">
-            <i class="fa fa-trash"></i>
+            <div class ="func">
+            <i class="fa fa-trash" data-list="<?php echo $song["idLista"]; ?>" onclick="eliminarList(this)"></i>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
 
 <script>
-//const traIc = document.querySelectorAll("#lista .func");
-//console.log(traIc);
-/*traIc.foreach(li=>{
-    removeList(li, li.getAttribute('data-list'));
-});*/
+    function eliminarList(icon){
+        var idLis = icon.getAttribute('data-list');
+        console.log(idLis);
+        document.getElementById('eliminarLista').style.display='block';
+        const aceptar = document.getElementById('btnConfirmarEliminar');
+            aceptar.addEventListener("click", () => {
+                deletLis(idLis);
+                document.getElementById('eliminarLista').style.display='none'; 
+            });
+    }
+    function deletLis(listaID) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "./utils/delLista.php?listaID=" + listaID);
+        xmlhttp.send();  
+    }
 
 </script>   

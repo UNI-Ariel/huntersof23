@@ -4,7 +4,8 @@ session_start();
 
 // Verificar si el usuario está autenticado
 if (!isset($_SESSION['id'])) {
-    echo "Acceso no autorizado. Por favor, inicia sesión.";
+    echo '<link rel="stylesheet" type="text/css" href="css/ocultar.css">';
+    echo "<p style='text-align: center;'>Acceso no autorizado. Por favor, inicia sesión.</p>";
     exit();
 }
 $userId = $_SESSION['id'];
@@ -33,7 +34,7 @@ if ($resultCancion->num_rows > 0) {
     }
 } 
 else{
-    echo "No tienes Listas Creadas";
+    echo "<p style='text-align: center;'>No tienes Listas Creadas.</p>";
 }
 }
 else {

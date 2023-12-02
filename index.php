@@ -136,7 +136,7 @@ foreach ($songs as $song) {
  <div id="myModal" class="modal">
     <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <button class="open-modal-button" onclick="openModal2()">Agregar nuevo</button>
+    <button class="open-modal-button" id="ocultar" onclick="openModal2()">Agregar nuevo</button>
       <div id="modalContent">
       
       </div>
@@ -149,7 +149,7 @@ foreach ($songs as $song) {
     <span class="close" onclick="closeModal2()">&times;</span>
       <div id="modalContent2">
       <form id="formularioP">
-        <label for="nombre">Ponle nombre a tu Lista de Reproduccion</label> 
+        <label for="nombre" class="label">Ponle nombre a tu Lista de Reproduccion</label> 
         <input type="text" id="nombreP" name="nombreP"minlength="2" maxlength="30" pattern="[a-zA-Z0-9]+" title="Solo se permiten caracteres alfanuméricos" required>
         <span style="color: red;" class="error" id="error"></span>
         <!-- Agrega más campos según tus necesidades -->

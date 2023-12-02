@@ -77,7 +77,11 @@
 .song:hover {
     background: var(--hover-bg-color);
 }
-
+/*agregado por mari*/
+.song:hover .open-modal-button{
+    background:rgb(7, 153, 182);
+}
+/*---------------*/
 .song h5 {
     color: rgb(150, 148, 148);
 }

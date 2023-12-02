@@ -18,7 +18,7 @@ if (isset($_POST['idSong']) && isset($_POST['idPlay'])) {
         // Agregar la canción a la lista de reproducción
         $sqlAgregar = "INSERT INTO lista (idSong, idPlay) VALUES ($idSong,$playlistId)";
         if ($conn->query($sqlAgregar) === TRUE) {
-           echo "Canción agregada a la lista de reproducción correctamente.";
+           echo "Canción agregada a la lista de reproducción.";
         } else {
             echo "Error al agregar la canción a la lista de reproducción: ";
         }

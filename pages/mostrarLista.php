@@ -65,19 +65,6 @@ else {
                 }
             });
     }
-    function mostrarMensajeTemporal(mensaje, tiempo) {
-            var div = document.createElement('div');
-            div.textContent = mensaje;
-            div.className = 'mensaje-temporal';
-            document.body.appendChild(div);
-
-            setTimeout(function () {
-                div.style.opacity = '0';
-                setTimeout(function () {
-                    document.body.removeChild(div);
-                }, 1000);
-            }, tiempo);
-    }
-
+   
 
 </script>

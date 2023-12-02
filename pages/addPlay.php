@@ -30,7 +30,7 @@ if ($resultVerificar->num_rows > 0) {
         $sqlAgregar = "INSERT INTO lista (idSong, idPlay) VALUES ($songId,$ultimoId)";
         
         if ($conn->query($sqlAgregar) === TRUE) {
-            echo "Inserción exitosa en ambas tablas";
+            echo "La canción se agrego a una nueva Lista.";
         } else {
             echo "Error al insertar en la segunda tabla: " . $conn->error;
         }

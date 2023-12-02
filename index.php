@@ -218,11 +218,12 @@ foreach ($songs as $song) {
             data: { nombre: nombre, idSong: datoAlmacenado},
             //dataType: 'json',
             success: function(response) {
-                console.log(response);
-                alert(response);
-                updatePlaylists();
+                //console.log(response);
+                //alert(response);
                closeModal2();
                $('#nombreP').val('');
+               mostrarMensajeTemporal(response, 3000);
+               updatePlaylists();
             },
             error: function() {
                 //console.error('Error:', error);
@@ -244,6 +245,24 @@ foreach ($songs as $song) {
     var modal = document.getElementById('eliminarLista');
     modal.style.display = 'none';
   }
+
+//Funcion mostrar mensaje temporal
+  function mostrarMensajeTemporal(mensaje, tiempo) {
+            var div = document.createElement('div');
+            div.textContent = mensaje;
+            div.className = 'mensaje-temporal';
+            document.body.appendChild(div);
+
+            setTimeout(function () {
+                div.style.opacity = '0';
+                setTimeout(function () {
+                    document.body.removeChild(div);
+                }, 1000);
+            }, tiempo);
+    }
+
+
+
 </script>
 
 

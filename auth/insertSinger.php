@@ -11,9 +11,6 @@ if (!$authenticated) {
 }
 
 include("../utils/dbConnection.php");
-
-
-
 $name = $infoSinger = $imgFile = "";
 $formTitle = "Registrar Artista";
 

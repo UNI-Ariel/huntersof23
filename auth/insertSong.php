@@ -176,8 +176,8 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="add-info">
-        <h3 class="notice"><?php echo $formTitle; ?></h3>
         <form class="form-insert" method="POST" enctype="multipart/form-data">
+        <h3 class="notice"><?php echo $formTitle; ?></h3>
             <label>Nombre de la Musica</label>
             <input type="text" name="title" placeholder="Título" value="<?php echo htmlspecialchars($titleUpdate); ?>">
             <p class="error"><?php echo $errors['title']; ?></p>

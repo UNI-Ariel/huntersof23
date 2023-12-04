@@ -25,7 +25,7 @@ body {
 
 /* Estilos de la clase "notice" */
 .notice {
-    color: #fff; /* Color del texto */
+    color: #0799b6; /* Color del texto */
     display: block; /* Muestra el elemento como bloque */
     text-align: center; /* Alineación del texto al centro */
 }
@@ -34,7 +34,7 @@ body {
 .form-insert {
     width: 500px; /* Ancho del formulario */
     border: 2px solid #ccc; /* Borde del formulario */
-    background-color: #e4e5de; /*  */
+    background-color: #fff; /*  */
     border-radius: 15px; /* Borde redondeado */
     padding: 30px; /* Relleno interno del formulario */
 }
@@ -42,7 +42,7 @@ body {
 /* Estilos para los campos de entrada en el formulario */
 .form-insert input {
     display: block; /* Mostrar como bloque */
-    border: 2px solid #ccc; /* Borde del campo de entrada */
+    border: 2px solid #616161;
     width: 95%; /* Ancho del campo de entrada */
     padding: 10px; /* Relleno dentro del campo de entrada */
     margin: 10px auto; /* Márgenes */

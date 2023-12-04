@@ -37,11 +37,11 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <table id="customers" align="center" border="1" style="border-color: #fff; background-color: white;" class="displaySinger">
 
             <tr>
-                <th>Nº</th>
+                <th> Nº </th>
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Información </th>
-                <th colspan="3">Operaciones</th>
+                <th colspan="3">Acciones</th>
             </tr>
 
 

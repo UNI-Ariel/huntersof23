@@ -94,8 +94,8 @@ if (isset($_POST['submit'])) {
     if (empty($_POST['info'])) {
         $errors['info'] = "Información no puede estar vacio";
     } else {
-        if(strlen($info2) < 3 or strlen($info2) > 20) {
-            $errors['info'] = "La Informacion del Artista debe tener en 5 y 100 caracteres";
+        if(strlen($info2) < 5 or strlen($info2) > 400) {
+            $errors['info'] = "La Informacion del Artista debe tener en 5 y 400 caracteres";
         }
         else{
         $info = $_POST['info'];

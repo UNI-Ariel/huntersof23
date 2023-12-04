@@ -220,7 +220,7 @@ function createCardImg(params){
     div.setAttribute('data-idlist', params.id);
     const img = document.createElement('img');
     img.title = 'desc' in params ? params.desc : params.descripcion;
-    if(src.length > 0){
+    if(src && src.length > 0){
         img.src = src;
     }
     else{
@@ -408,12 +408,14 @@ function closeResultBox(){
 }
 
 async function updatePlaylists(){
+    console.log('Callback to update');
     try{
         const pl_container = document.querySelector('.pl-items');
         const url = "./utils/getPlaylists.php";
         const res = await fetch(url);
         const string = await res.text();
         const data =  stringToJson(string);
+        console.log(data);
         pl_container.innerHTML = '';
         data.forEach(d =>{
             addPlaylistItem(d);
@@ -421,5 +423,6 @@ async function updatePlaylists(){
     }
     catch (e){
         console.log(e.message);
+        console.error(e.stack);
     }
 }

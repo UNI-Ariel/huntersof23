@@ -92,7 +92,7 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <h2>Lista de Músicas</h2>
         <table align="center" border="1"  class="displaySong">
             <tr>
-                <th>No</th>
+                <th>Nº </th>
                 <th>Imagenes</th>
                 <th>Nombre</th>
                 <th>Archivo de Música</th>

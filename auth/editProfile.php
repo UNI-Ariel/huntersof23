@@ -168,7 +168,7 @@ if (isset($_POST['submit'])) {
            <br>
             
             <a href="../index.php" class="ca">Cancelar</a>
-            <button type="submit" name="submit">Guardar</button>        
+            <button type="submit" name="submit">Guardarr</button>        
         </form>
     </div>     
 </body>

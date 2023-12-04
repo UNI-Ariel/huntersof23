@@ -38,7 +38,7 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <th colspan="6">Artistas</th>
             </tr>
             <tr>
-                <th>Nº de Registro</th>
+                <th>Nº</th>
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Información </th>

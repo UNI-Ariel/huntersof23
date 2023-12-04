@@ -15,6 +15,8 @@ include("../utils/dbConnection.php");
 
 
 $name = $infoSinger = $imgFile = "";
+$formTitle = "Registrar Artista";
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -24,6 +26,7 @@ if (isset($_GET['id'])) {
     $name = $data["name"];
     $imgFile = "../" . $data["image"];
     $infoSinger = $data["info"];
+    $formTitle = "Editar Artista";
 }
 
 function cleanData($data)
@@ -140,14 +143,20 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Artista</title>
+    <title><?php echo $formTitle; ?></title>
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .notice {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #0799B6;
+        }
+    </style>
 </head>
 
 <body>
     <form method="POST" enctype="multipart/form-data">
-    
-        <h2>Registrar Artista</h2>
+    <h3 class="notice"><?php echo $formTitle; ?></h3>
 
         <label>Nombre</label>
         <input type="text" name="singername" placeholder="Nombre" value="<?php echo $name; ?>">
@@ -158,7 +167,7 @@ if (isset($_POST['submit'])) {
         <textarea style=" margin: 10px; width: 360px; height: 164px; border: 2px solid #ccc; border-radius: 5px;" name="info" type="text" placeholder=" Reseña o Descripción del artista"><?php echo $infoSinger; ?></textarea>
         <p class="error"><?php echo $errors['info']; ?></p>
         <?php if ($imgFile != "") : ?>
-            <label>Currrent Imagen</label>
+            <label>Imagen actual:</label>
             <img style="width: 50px; height: 50px;" src="<?php echo $imgFile; ?>" alt="">
             <br>
         <?php endif; ?>
@@ -166,10 +175,9 @@ if (isset($_POST['submit'])) {
         <input type="file" name="img" accept=".jpg, .jpeg, .png"> 
         <p class="error"><?php echo $errors['img']; ?></p>
 
-        <a href="editSinger.php" class="ca">Atras</a>
+        <a href="editSinger.php" class="ca">Cancelar</a>
 
         <button type="submit" name="submit">Registrar</button>
     </form>
 </body>
-
 </html>

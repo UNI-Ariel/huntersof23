@@ -32,11 +32,10 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="link">
             <a class="ca2" href="adminDashboard.php">Atras</a>
         </div>
+        <h2>Lista de Artistas</h2>
 
         <table id="customers" align="center" border="1" style="border-color: #fff; background-color: white;" class="displaySinger">
-            <tr>
-                <th colspan="6">Artistas</th>
-            </tr>
+
             <tr>
                 <th>Nº</th>
                 <th>Imagen</th>

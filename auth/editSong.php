@@ -183,7 +183,7 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <th colspan="6"></th>
         </tr>
         <tr>
-            <th>No</th>
+            <th>N°</th>
             <th>Imagenes</th>
             <th>Nombre</th>
             <th>Archivo de Música</th>

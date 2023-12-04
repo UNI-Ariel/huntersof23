@@ -54,6 +54,7 @@ function openOptionModal(opt){
         document.querySelector('#pl-del-modal .pl-del-name').innerText = opt.getAttribute('data-name');
         document.querySelector('#pl-del-modal input[name="id"]').value = opt.getAttribute('data-id');
         pl_del_modal_window.showModal();
+        pl_close_menu(opt);
         return;
     }
     if(opt_type === '#edit'){
@@ -65,10 +66,16 @@ function openOptionModal(opt){
         const preview = document.querySelector('#pl-edit-modal #imagenPreview');
         preview.src = img.src;
         pl_edit_modal_window.showModal();
+        pl_close_menu(opt);
         return;
     }
     alert('Bad Opteration');
     return;
+}
+
+function pl_close_menu(opt){
+    const btn = opt.closest('.pl-dropdown-menu').previousElementSibling;
+    toggleMenuVisibility(btn);
 }
 
 /* pl_dropdown_menus.forEach(menu =>{

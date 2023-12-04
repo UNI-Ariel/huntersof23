@@ -153,8 +153,15 @@ function removeList(icon, idL){
         document.getElementById('eliminarLista').style.display='block';
         const aceptar = document.getElementById('btnConfirmarEliminar');
         aceptar.addEventListener("click", () => {
-            icon.closest(".song").remove();
+            const listItem = icon.closest(".song");                                           //Emelento a borrar
+            let index = parseInt(listItem.querySelector("h4").innerText);          //Index a actualizar
+            let next = listItem.nextSibling;
+            while(next){
+                next.querySelector("h4").innerText = index++;
+                next = next.nextSibling;
+            }
             deleList(idL);
+            listItem.remove();
             document.getElementById('eliminarLista').style.display='none'; 
         });
     });

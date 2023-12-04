@@ -415,7 +415,6 @@ async function updatePlaylists(){
         const res = await fetch(url);
         const string = await res.text();
         const data =  stringToJson(string);
-        console.log(data);
         pl_container.innerHTML = '';
         data.forEach(d =>{
             addPlaylistItem(d);

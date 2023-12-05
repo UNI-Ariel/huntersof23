@@ -16,7 +16,7 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -32,17 +32,16 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="link">
             <a class="ca2" href="adminDashboard.php">Atras</a>
         </div>
+        <h2>Lista de Artistas</h2>
 
         <table id="customers" align="center" border="1" style="border-color: #fff; background-color: white;" class="displaySinger">
+
             <tr>
-                <th colspan="6">Artistas</th>
-            </tr>
-            <tr>
-                <th>Nº de Registro</th>
+                <th> Nº </th>
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Información </th>
-                <th colspan="3">Operaciones</th>
+                <th colspan="3">Acciones</th>
             </tr>
 
 

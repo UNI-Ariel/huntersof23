@@ -20,7 +20,7 @@ const pl_edit_submit_btn = document.querySelector('#pl-edit-modal button[value="
 pl_add_input_name.addEventListener('keyup', checkAddInputs);
 pl_add_input_desc.addEventListener('keyup', checkAddInputs);
 
-pl_result_btn.addEventListener('click', closeResultBox);
+pl_result_btn.addEventListener('click', pl_close_message);
 
 pl_add_page_btn.addEventListener('click', () =>{
     pl_add_modal_window.showModal();
@@ -54,6 +54,7 @@ function openOptionModal(opt){
         document.querySelector('#pl-del-modal .pl-del-name').innerText = opt.getAttribute('data-name');
         document.querySelector('#pl-del-modal input[name="id"]').value = opt.getAttribute('data-id');
         pl_del_modal_window.showModal();
+        pl_close_menu(opt);
         return;
     }
     if(opt_type === '#edit'){
@@ -65,10 +66,16 @@ function openOptionModal(opt){
         const preview = document.querySelector('#pl-edit-modal #imagenPreview');
         preview.src = img.src;
         pl_edit_modal_window.showModal();
+        pl_close_menu(opt);
         return;
     }
     alert('Bad Opteration');
     return;
+}
+
+function pl_close_menu(opt){
+    const btn = opt.closest('.pl-dropdown-menu').previousElementSibling;
+    toggleMenuVisibility(btn);
 }
 
 /* pl_dropdown_menus.forEach(menu =>{
@@ -177,8 +184,7 @@ pl_add_form.addEventListener('submit', async (ev)=>{
         const res = await getServerData({url, form});
         if(res.msg === 'Success'){
             pl_close_modal_window(pl_add_modal_window);
-            setResultMsg('Lista de reproduccion guardado');
-            displayResultBox();
+            pl_show_message('Lista de reproduccion guardado');
             addPlaylistItem(res);
         }
         else{
@@ -213,7 +219,7 @@ function createCardImg(params){
     div.setAttribute('data-idlist', params.id);
     const img = document.createElement('img');
     img.title = 'desc' in params ? params.desc : params.descripcion;
-    if(src.length > 0){
+    if(src && src.length > 0){
         img.src = src;
     }
     else{
@@ -301,8 +307,7 @@ pl_del_form.addEventListener('submit', async (ev)=>{
         const res = await getServerData({url, form});
         if(res.msg === 'Success'){
             pl_close_modal_window(pl_del_modal_window);
-            setResultMsg('Lista de reproduccion eliminada');
-            displayResultBox();
+            pl_show_message('Lista de reproduccion eliminada');
             deletePlaylistItem(res.id);
         }
         else{
@@ -324,12 +329,17 @@ pl_edit_form.addEventListener('submit', async (ev)=>{
         const res = await getServerData({url, form});
         if(res.msg === 'Success'){
             pl_edit_modal_window.close();
-            setResultMsg('Se actualizo la lista de reproduccion');
-            displayResultBox();
+            pl_show_message('Se actualizo la lista de reproduccion');
             updateCardItem(res);
         }
         else{
+            const name = document.querySelector('#pl-edit-modal .pl-err-name');
+            const desc = document.querySelector('#pl-edit-modal .pl-err-desc');
+            const img  = document.querySelector('#pl-edit-modal .pl-err-img');
             const err = document.querySelector('#pl-edit-modal .pl-edit-err');
+            name.innerText = res.name;
+            desc.innerText = res.desc;
+            img.innerText = res.img;
             err.innerText = res.id;
         }
     }
@@ -349,10 +359,11 @@ function clear_error_msgs(){
 
 function updateCardItem(params){
     const card = getCardRoot(document.querySelector('a[data-id="' + params.id + '"]'));
-    if(params.img !== ''){
+    if(params.img && params.img !== ''){
         card.querySelector('img').src = params.img;
     }
     card.querySelector('h5').innerText = params.name;
+    card.querySelector('img').title = params.desc;
 
     const edit = card.querySelector('a[data-target="#edit"]');
     edit.setAttribute('data-name', params.name);
@@ -378,26 +389,25 @@ function deletePlaylistItem(id){
     getCardRoot(element).remove();
 }
 
-function setResultMsg(msg){
+function pl_show_message(msg){
+    pl_set_message(msg);
+    const box = pl_result_btn.parentElement;
+    if(box.classList.contains('hide')){
+        box.classList.toggle('hide');
+        setTimeout(pl_close_message , 4000);
+    }
+}
+
+function pl_set_message(msg){
     pl_result_msg.innerText = msg;
 }
 
-function displayResultBox(){
+function pl_close_message(){
     const box = pl_result_btn.parentElement;
     if(!box.classList.contains('hide')){
+        pl_set_message('');
         box.classList.toggle('hide');
     }
-    setTimeout( () =>{
-        if(!box.classList.contains('hide')){
-            box.classList.toggle('hide');
-            box.classList.toggle('slide-in');
-        }
-    }, 5000);
-}
-
-function closeResultBox(){
-    setResultMsg('');
-    pl_result_btn.parentElement.classList.toggle('hide');
 }
 
 async function updatePlaylists(){
@@ -414,5 +424,6 @@ async function updatePlaylists(){
     }
     catch (e){
         console.log(e.message);
+        console.error(e.stack);
     }
 }

@@ -27,8 +27,8 @@
 
     if(isset($_POST['nombre']) && $_POST['nombre'] !== ''){
         $pl_name = trim($_POST['nombre']);
-        if( !p_valid_length($pl_name, 1, 30) ){
-            $errors['name'] = 'Nombre debe tener entre 1 y 30 caracteres';
+        if( !p_valid_length($pl_name, 2, 30) ){
+            $errors['name'] = 'Nombre debe tener entre 2 y 30 caracteres';
         }
         elseif($current_data['nombre'] !== $pl_name){
             if (q_playlist_name_exists($conn, $uid, $pl_name)) {

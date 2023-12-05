@@ -90,9 +90,9 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         
         <h2>Lista de Músicas</h2>
-        <table align="center" border="1"  class="displaySong">
+        <table  align="center" border="1"  class="displaySong" >
             <tr>
-                <th>No</th>
+                <th>Nº </th>
                 <th>Imagenes</th>
                 <th>Nombre</th>
                 <th>Archivo de Música</th>
@@ -105,8 +105,8 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <td><img style="width: 50px; height: 50px;" src="<?php echo '../' . $song['imgPath'] ?>"></td>
                     <td><?php echo $song['title']; ?></td>
                     <td><?php echo $song['filePath']; ?></td>
-                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #fff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=<?php echo $song['id']; ?>">Editar</a></td>
-                    <td><a style="padding: 5px; background-color: #6B0000; color: #fff; cursor: pointer; border-radius: 15px; text-decoration: none;" onclick="openModal(<?php echo $song['id']; ?>)" >Eliminar</a></td>
+                    <td><a style="padding: 5px; background-color:rgb(7, 153, 182); color: #ffff; border-radius: 15px; text-decoration: none;" href="insertSong.php?id=<?php echo $song['id']; ?>">Editar</a></td>
+                    <td><a style="padding: 5px; background-color: #e3242b; color: #fff; cursor: pointer; border-radius: 15px; text-decoration: none;" onclick="openModal(<?php echo $song['id']; ?>)" >Eliminar</a></td>
 
 
                 </tr>
@@ -183,7 +183,7 @@ $songs = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <th colspan="6"></th>
         </tr>
         <tr>
-            <th>No</th>
+            <th>N°</th>
             <th>Imagenes</th>
             <th>Nombre</th>
             <th>Archivo de Música</th>

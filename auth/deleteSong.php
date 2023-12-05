@@ -15,3 +15,4 @@ if (!$authenticated) {
         if ($result) header("Location: editSong.php");
     }
 }
+?>

@@ -134,7 +134,7 @@ INSERT INTO `songs` (`id`, `title`, `filePath`, `imgPath`, `dateAdded`, `singerI
 (6, 'Rather Be-12', 'music/Rather Be-12.mp3', 'images/ratherbe.jpg', '2023-10-26 01:55:03', 2),
 (7, 'Fallingdown', 'music/fallingdown.mp3', 'images/fallingdown.jpg', '2023-10-26 01:56:07', 8),
 (8, 'Stay', 'music/stay.mp3', 'images/stay.png', '2023-10-26 01:57:33', 5),
-(9, 'Up&Up', 'music/Up&Up.mp3', ' images/magic.jpg', '2023-11-21 06:38:55', 11),
+(9, 'Up&Up', 'music/Up&Up.mp3', 'images/magic.jpg', '2023-11-21 06:38:55', 11),
 (10, 'A Sky Full of Stars', 'music/A Sky Full of Stars.mp3', 'images/magic.jpg', '2023-11-21 06:38:55', 11),
 (11, 'Speed Of Sound', 'music/Speed Of Sound.mp3', 'images/magic.jpg', '2023-11-21 06:39:28', 11),
 (12, 'Enemy', 'music/Enemy.mp3', 'images/bones.jpg', '2023-11-21 06:54:11', 10);

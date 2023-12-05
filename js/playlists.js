@@ -333,7 +333,13 @@ pl_edit_form.addEventListener('submit', async (ev)=>{
             updateCardItem(res);
         }
         else{
+            const name = document.querySelector('#pl-edit-modal .pl-err-name');
+            const desc = document.querySelector('#pl-edit-modal .pl-err-desc');
+            const img  = document.querySelector('#pl-edit-modal .pl-err-img');
             const err = document.querySelector('#pl-edit-modal .pl-edit-err');
+            name.innerText = res.name;
+            desc.innerText = res.desc;
+            img.innerText = res.img;
             err.innerText = res.id;
         }
     }

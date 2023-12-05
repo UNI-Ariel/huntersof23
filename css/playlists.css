@@ -168,6 +168,7 @@
     opacity: 0.7;
 }
 
+#pl-edit-modal img,
 #pl-add-modal img{
     margin: auto;
     max-width: 100%;

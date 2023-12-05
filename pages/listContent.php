@@ -38,10 +38,6 @@ if (isset($_GET['listID'])) {
     }
 }
 ?>
-<body var idSong;></body>
-
-
-
     <div class="cover1">
         <img src="<?php echo $listImg; ?>" alt="" />
         
@@ -65,27 +61,25 @@ if (isset($_GET['listID'])) {
                 </div>
             </div>
             <div class ="func">
-            <i class="fa fa-trash" data-list="<?php echo $song["idLista"]; ?>" onclick="eliminarList(this)"></i>
+            <i class="fa fa-trash" data-list="<?php echo $song["idLista"]; ?>" ></i>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
 
 <script>
-    function eliminarList(icon){
-        var idLis = icon.getAttribute('data-list');
-        console.log(idLis);
-        document.getElementById('eliminarLista').style.display='block';
-        const aceptar = document.getElementById('btnConfirmarEliminar');
-            aceptar.addEventListener("click", () => {
-                deletLis(idLis);
-                document.getElementById('eliminarLista').style.display='none'; 
-            });
-    }
-    function deletLis(listaID) {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "./utils/delLista.php?listaID=" + listaID);
-        xmlhttp.send();  
-    }
+    window.addEventListener('load', () =>{
+        const listItems = document.querySelectorAll("#lista .song");
+        listItems.forEach(item =>{
+            const icon = item.querySelector("i");
+            const trashE = icon.cloneNode(true);
+            icon.parentNode.replaceChild(trashE, icon);
+            removeList(trashE, trashE.getAttribute('data-list'));
+        });
 
+        const pulseBtn = document.querySelector("#lista .pulse");
+        const newPulseBtn = pulseBtn.cloneNode(true);
+        pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
+        newPulseBtn.addEventListener("click", playCurrentPlaylist);
+    });
 </script>   

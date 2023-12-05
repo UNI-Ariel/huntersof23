@@ -117,7 +117,6 @@ function goToListaPage() {
     listaLinks.forEach((link) => {
         link.addEventListener("click", () => {
             const listID = link.getAttribute("data-idlist");
-            const listasongs = [];
             console.log(listID);
             // update url
             window.history.pushState(
@@ -156,7 +155,6 @@ function goToListaPage() {
                     const allSingerSongs = listUI.querySelector(".products");
                     allSingerSongs.innerHTML = "";
                     dato["songs"].forEach((song, index) => {
-                        listasongs.push(songDetails[song['id']]);
                         const newTitle = makeSongPlay(index, song);
                         allSingerSongs.appendChild(newTitle);
                     });
@@ -165,10 +163,7 @@ function goToListaPage() {
                     const pulseBtn = document.querySelector("#lista .pulse");
                     const newPulseBtn = pulseBtn.cloneNode(true);
                     pulseBtn.parentNode.replaceChild(newPulseBtn, pulseBtn);
-                    newPulseBtn.addEventListener("click", () => {
-                        playingQueue = listasongs;
-                        playQueue();
-                    });
+                    newPulseBtn.addEventListener("click", playCurrentPlaylist);
                 }
             }
         };

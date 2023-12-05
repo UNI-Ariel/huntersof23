@@ -129,25 +129,16 @@ const makeSongPlay = (index, song) => {
     });
 
     var idLis = trashE.getAttribute('data-id');
-//---------------------------------------------------------------
-  /* trashE.addEventListener("click", () => {
-        document.getElementById('eliminarLista').style.display='block';
-        const aceptar = document.getElementById('btnConfirmarEliminar');
-        aceptar.addEventListener("click", () => {
-            trashE.closest(".song").remove();
-            deleList(idLis);
-            document.getElementById('eliminarLista').style.display='none'; 
-        });
-    });*/
     removeList(trashE, idLis);
     return titleContainer; // Devuelve el elemento de título de canción
-    };
+}
+
 function deleList(listaID) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "./utils/delLista.php?listaID=" + listaID);
-    xmlhttp.send();
-    
+    xmlhttp.send();    
 }
+
 function removeList(icon, idL){
     icon.addEventListener("click", () => {
         document.getElementById('eliminarLista').style.display='block';
@@ -155,10 +146,10 @@ function removeList(icon, idL){
         aceptar.addEventListener("click", () => {
             const listItem = icon.closest(".song");                                           //Emelento a borrar
             let index = parseInt(listItem.querySelector("h4").innerText);          //Index a actualizar
-            let next = listItem.nextSibling;
+            let next = listItem.nextElementSibling;
             while(next){
                 next.querySelector("h4").innerText = index++;
-                next = next.nextSibling;
+                next = next.nextElementSibling;
             }
             deleList(idL);
             listItem.remove();
@@ -168,6 +159,20 @@ function removeList(icon, idL){
 }
 //------------------------------------------------------------
 
+function playCurrentPlaylist(){
+    const playlistSongs = document.querySelectorAll('#lista .song');
+    const songs = [];
+    playlistSongs.forEach(song =>{
+        songs.push(songDetails[song.getAttribute('data')]);
+    });
+    if(songs.length){
+        playingQueue = songs;
+        playQueue();
+    }
+    else{
+        alert('No hay canciones en la lista');
+    }
+}
 
 
 // Función para crear un elemento de título de canción en la sección de favoritos

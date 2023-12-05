@@ -165,8 +165,13 @@ function playCurrentPlaylist(){
     playlistSongs.forEach(song =>{
         songs.push(songDetails[song.getAttribute('data')]);
     });
-    playingQueue = songs;
-    playQueue();
+    if(songs.length){
+        playingQueue = songs;
+        playQueue();
+    }
+    else{
+        alert('No hay canciones en la lista');
+    }
 }
 
 

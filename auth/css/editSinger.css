@@ -118,7 +118,6 @@ body {
   .ca2 {
     font-size: 14px;
     padding: 10px;
-    display: inline-block;
     text-decoration: none;
     color:  rgb(242, 242, 242);
     padding: 10px 10px;
@@ -130,10 +129,11 @@ body {
   .c3{
     width : 130px;
     background-color: #0799B6;
-    margin: 0 auto;
-    margin-top: 5px;
+    margin-top: -40px;
+    margin-right: 40px;
     border-radius: 15px;
     padding: 10px;
+    float: right;
     }
     
   .c3 > a{

@@ -29,10 +29,16 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 <body>
     <div class="container">
+
         <div class="link">
             <a class="ca2" href="adminDashboard.php">Atras</a>
         </div>
+        <div class="c3">
+            <a href=insertSinger.php>Agregar Artista</a>
+        </div>
+
         <h2>Lista de Artistas</h2>
+
 
         <table id="customers" align="center" border="1" style="border-color: #fff; background-color: white;" class="displaySinger">
 
@@ -57,7 +63,6 @@ $singers = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <?php endforeach; ?>
 
         </table>
-        <div class="c3"><a href=insertSinger.php>Agregar Artista</a></div>
         
     </div>
 
